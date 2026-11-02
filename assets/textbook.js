@@ -177,8 +177,8 @@
     courseLink('../../08/textbook/08-1.html', '08-1', '수행평가 2 안내', '实践考核 2 说明'),
     courseLink('../../08/textbook/08-2.html', '08-2', '수행평가 2 · PRD 완성·제출', '实践考核 2 · 完成并提交 PRD'),
     '<div class="toc-part"><span class="ko">4부 · AI와 서비스 개발</span><span class="zh">第 4 部 · 与 AI 开发服务</span></div>',
-    courseLink('../../09/textbook/09-1.html', '09-1', '서비스 사용자 흐름(Flow) 설계', '设计服务用户流程（Flow）'),
-    courseLink('../../09/textbook/09-2.html', '09-2', 'AI와 사용자 흐름·개발 계획 확정', '与 AI 确定用户流程和开发计划'),
+    courseLink('../../09/textbook/09-1.html', '09-1', '만들기 전에 점검하기', '动手之前先检查'),
+    courseLink('../../09/textbook/09-2.html', '09-2', '현실적인 목표와 구체화', '现实的目标与具体化'),
     courseLink('../../10/textbook/10-1.html', '10-1', 'API와 요청·응답, 그리고 저장', 'API、请求·响应与保存'),
     courseLink('../../10/textbook/10-2.html', '10-2', 'AI와 API·저장 연결하기', '与 AI 一起接上 API 与保存'),
     courseLink('../../11/textbook/11.html', '11', '서비스 개발하기', '开发服务'),
@@ -187,7 +187,6 @@
     courseLink('../../13/textbook/13-1.html', '13-1', '수행평가 3 · 결과 반영과 가다듬기', '实践考核 3 · 根据结果完善作品'),
     courseLink('../../13/textbook/13-2.html', '13-2', '수행평가 3 · 실행·설명·최종 제출', '实践考核 3 · 运行、说明与最终提交'),
     '<div class="toc-part"><span class="ko">별도 자료</span><span class="zh">单独资料</span></div>',
-    courseLink('../../09/textbook/09-0.html', '09-0', 'AI 개발 조건', 'AI 开发条件'),
     '<a href="../../appendix/textbook/glossary.html"><span class="n">' + langPair('부록', '附录') + '</span>' + langPair('프로그램 뒤편의 이야기', '程序背后的故事') + '</a>'
   ].join('');
 

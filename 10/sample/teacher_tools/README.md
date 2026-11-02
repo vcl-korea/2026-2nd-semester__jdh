@@ -16,4 +16,4 @@
 - [ ] `npm install` 이 학교 네트워크에서 끝나는가, 걸리는 시간.
 - [ ] `npm run pack` 의 tar 가 ZIP을 만들고, 한글 파일 이름(AI대화기록.md)이 탐색기에서 깨지지 않는가.
 - [ ] VS Code 확장 SQLite Viewer(qwtel.sqlite-viewer)로 data/app.db 가 열리는가.
-- [ ] 9-1에서 9회 ZIP의 파일을 `06`에 붙여 넣을 때 뜨는 창의 단추 이름이 「대상 폴더의 파일 덮어쓰기」인가. 교과서 9-1과 9회 README.txt가 이 이름을 부른다. 다르면 두 곳을 고친다.
+- [ ] 10-1에서 `06`의 `PRD.md` · `09_development_plan.md` · `mockup` 폴더를 `10\docs`로 복사할 때 문제없이 붙는가. (2026-11-02부터 9회 ZIP은 없고, `00_course_rules.md`는 10회 ZIP의 `docs`에 처음부터 들어 있다.)

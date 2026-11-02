@@ -4,8 +4,8 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <link rel="icon" href="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%2096%2096'%3E%3Cg%20fill='none'%20stroke='%23FF5C00'%20stroke-width='12'%3E%3Cpath%20d='M48%2012%20A36%2036%200%200%201%2048%2084'/%3E%3Cpath%20d='M48%2084%20A36%2036%200%200%201%2048%2012'/%3E%3C/g%3E%3Cpath%20d='M48%200%20L48%2024%20L68%2012%20Z'%20fill='%23FF5C00'/%3E%3Cpath%20d='M48%2072%20L48%2096%20L28%2084%20Z'%20fill='%23FF5C00'/%3E%3Cpath%20d='M65%2031%20L57%2057%20L39%2039%20Z'%20fill='%231B1D21'/%3E%3Cpath%20d='M31%2065%20L39%2039%20L57%2057%20Z'%20fill='%23A7ACB3'/%3E%3C/svg%3E" />
-<title>9-1. 서비스 사용자 흐름(Flow) 설계 · 정보와 디지털 문해력</title>
-<meta name="description" content="정보와 디지털 문해력 교과서 9-1 — PRD의 대표 사용 흐름을 사용자가 보는 것·행동·서비스 반응·남는 정보로 펼쳐 09_user_flow.md에 적는다. 코드는 만들지 않는다." />
+<title>9-1. 만들기 전에 점검하기 · 정보와 디지털 문해력</title>
+<meta name="description" content="정보와 디지털 문해력 교과서 9-1 — 10회부터 만들기 전에, AI에게 내 PRD와 목업을 세 관점(지금 상태 · 처음 쓰는 사람 · 만들 수 있나)에서 점검하게 하고, 그 결과를 PRD.md 항목 아래 [점검] 줄로 남겨 내가 직접 확인한다. 코드는 만들지 않는다." />
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;700;800;900&family=IBM+Plex+Sans+KR:wght@300;400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
@@ -16,225 +16,278 @@
   <button class="menu" onclick="tbToggleToc()">☰ <span class="ko">목차</span><span class="zh">目录</span></button>
   <button id="modeBtn" onclick="tbToggleMode()" aria-pressed="false"><span class="ko">한 장씩 보기</span><span class="zh">逐页查看</span></button>
   <button class="lng" onclick="tbToggleLang()" aria-pressed="false">中文</button>
-  <div class="brand"><em>9-1</em> <span class="lesson"><span class="ko">서비스 사용자 흐름(Flow) 설계</span><span class="zh">服务用户流程（Flow）设计</span></span></div>
+  <div class="brand"><em>9-1</em> <span class="lesson"><span class="ko">만들기 전에 점검하기</span><span class="zh">动手之前先检查</span></span></div>
   <div class="spacer"></div>
   <div class="pct" id="count">1 / 1</div>
   <button class="pbtn" onclick="window.print()"><span class="ko">인쇄</span><span class="zh">打印</span></button>
 </div>
 <div id="prog"></div>
-<nav id="toc"><div class="h"><span class="ko">이 차시 — 9-1</span><span class="zh">本课时 — 9-1</span></div><a href="#opener"><span class="n">·</span><span class="ko">차시 표지</span><span class="zh">课时首页</span></a><a href="#s0"><span class="n">0</span><span class="ko">들어가며</span><span class="zh">开始之前</span></a><a href="#s1"><span class="n">1</span><span class="ko">06 폴더에 더하기</span><span class="zh">加进 06 文件夹</span></a><a href="#s2"><span class="n">2</span><span class="ko">사용자 흐름</span><span class="zh">用户流程</span></a><a href="#s3"><span class="n">·</span><span class="ko">흐름과 개발 순서</span><span class="zh">流程与开发顺序</span></a><a href="#s4"><span class="n">3</span><span class="ko">시작과 완료</span><span class="zh">开始与完成</span></a><a href="#s5"><span class="n">4</span><span class="ko">한 단계의 다섯 칸</span><span class="zh">一个步骤的五格</span></a><a href="#s6"><span class="n">·</span><span class="ko">예: 할 일 정리</span><span class="zh">例：待办整理</span></a><a href="#s7"><span class="n">5</span><span class="ko">정상과 예외</span><span class="zh">正常与例外</span></a><a href="#s8"><span class="n">6</span><span class="ko">목록과 흐름</span><span class="zh">清单与流程</span></a><a href="#s9"><span class="n">7</span><span class="ko">지금 적는다 ①</span><span class="zh">现在就写 ①</span></a><a href="#s10"><span class="n">8</span><span class="ko">만들 수 있나</span><span class="zh">能做出来吗</span></a><a href="#s11"><span class="n">9</span><span class="ko">AI에게 묻기</span><span class="zh">问 AI</span></a><a href="#s12"><span class="n">10</span><span class="ko">오해와 사실</span><span class="zh">误解与事实</span></a><a href="#s13"><span class="n">11</span><span class="ko">확인 문제</span><span class="zh">确认题</span></a><a href="#s14"><span class="n">12</span><span class="ko">정리와 다음 차시</span><span class="zh">小结与下一课时</span></a><a href="#s15"><span class="n">+</span><span class="ko">막힐 때</span><span class="zh">卡住时</span></a><div class="h"><span class="ko">전체 차시</span><span class="zh">全部课时</span></div><a href="../../index.html"><span class="n"><span class="ko">표지</span><span class="zh">首页</span></span><span class="ko">전체 목차</span><span class="zh">全部目录</span></a></nav><div id="scrim" onclick="tbToggleToc(false)"></div>
+<nav id="toc"><div class="h"><span class="ko">이 차시 — 9-1</span><span class="zh">本课时 — 9-1</span></div><a href="#opener"><span class="n">·</span><span class="ko">차시 표지</span><span class="zh">课时首页</span></a><a href="#s0_kn"><span class="n">0</span><span class="ko">들어가며</span><span class="zh">开始之前</span></a><a href="#s1"><span class="n">1</span><span class="ko">오늘 할 일</span><span class="zh">今天要做的事</span></a><a href="#s2"><span class="n">2</span><span class="ko">시작</span><span class="zh">开始</span></a><a href="#s3"><span class="n">3</span><span class="ko">요청 ① 지금 상태</span><span class="zh">请求 ① 现在的状态</span></a><a href="#s4"><span class="n">4</span><span class="ko">요청 ② 처음 쓰는 사람</span><span class="zh">请求 ② 第一次使用的人</span></a><a href="#s5"><span class="n">5</span><span class="ko">세 가지 판정</span><span class="zh">三种判定</span></a><a href="#s6"><span class="n">6</span><span class="ko">요청 ③ 실제로 만들 수 있나</span><span class="zh">请求 ③ 技术上做得出来吗</span></a><a href="#s7"><span class="n">7</span><span class="ko">정리와 다음 차시</span><span class="zh">小结与下一课时</span></a><a href="#s8"><span class="n">+</span><span class="ko">막힐 때</span><span class="zh">卡住时</span></a><div class="h"><span class="ko">전체 차시</span><span class="zh">全部课时</span></div><a href="../../index.html"><span class="n"><span class="ko">표지</span><span class="zh">首页</span></span><span class="ko">전체 목차</span><span class="zh">全部目录</span></a></nav><div id="scrim" onclick="tbToggleToc(false)"></div>
 <main>
 <section class="page opener" id="opener"><div class="onum"><span class="ko">9회 · 첫째 차시</span><span class="zh">第 9 次课 · 第 1 课时</span></div>
-<h1><span class="ko">서비스 사용자 흐름<br/>(Flow) 설계</span><span class="zh">服务用户流程<br/>（Flow）设计</span></h1>
-<div class="osub"><span class="ko">사용자가 서비스를 처음 열어 결과를 얻고<br/>저장된 기록을 다시 보기까지를 <b>차례대로</b> 적습니다.</span><span class="zh">把用户从第一次打开服务、拿到结果，<br/>到再次查看已保存记录的过程<b>按顺序</b>写下来。</span></div>
+<h1><span class="ko">만들기 전에<br/>점검하기</span><span class="zh">动手之前<br/>先检查</span></h1>
+<div class="osub"><span class="ko">10회부터 만듭니다. 그 전에 AI에게 내 PRD를 <b>점검</b>하게 하고,<br/>그 결과를 내 눈과 손으로 확인합니다.</span><span class="zh">第 10 次课起开始动手做。在那之前，先让 AI <b>检查</b>自己的 PRD，<br/>再用自己的眼睛和手确认结果。</span></div>
 <div class="abar"></div>
-<div class="ometa"><span class="ko"><b>이전 차시</b> · 8-2. 수행평가 2 · PRD 완성·제출<br/><b>다음 차시</b> · 9-2. AI와 사용자 흐름·개발 계획 확정하기<br/><b>오늘 쓰는 파일</b> · <code>06</code> 폴더의 <code>09_user_flow.md</code></span><span class="zh"><b>上一课时</b> · 8-2. 实践考核 2 · 完成并提交 PRD<br/><b>下一课时</b> · 9-2. 与 AI 一起确定用户流程与开发计划<br/><b>今天写的文件</b> · <code>06</code> 文件夹里的 <code>09_user_flow.md</code></span></div></section>
+<div class="ometa"><span class="ko"><b>이전 차시</b> · 8-2. 수행평가 2 · PRD 완성·제출<br/><b>다음 차시</b> · 9-2. 현실적인 목표와 구체화 (4교시에 이어서)<br/><b>오늘 쓰는 파일</b> · <code>06</code> 폴더의 <code>PRD.md</code> · 항목마다 <code>[점검]</code> 줄</span><span class="zh"><b>上一课时</b> · 8-2. 实践考核 2 · 完成并提交 PRD<br/><b>下一课时</b> · 9-2. 现实的目标与具体化（第 4 节课接着上）<br/><b>今天用的文件</b> · <code>06</code> 文件夹里的 <code>PRD.md</code> · 每一项下面的 <code>[<b class="keep-ko">점검</b>]</code>（检查）行</span></div></section>
+
+<section class="page" id="s0_kn">
+<div class="kick"><span class="ko">들어가며</span><span class="zh">开始之前</span><b>9-1</b></div>
+<h2 class="title"><span class="ko">구상은 있었지만, 기술이 따라오는 데 수십 년이 걸렸다</span><span class="zh">构想早就有了，技术却花了几十年才追上</span></h2>
+<p class="lead"><span class="ko">10회부터는 AI와 진짜 서비스를 만듭니다. 만들기 전에 「이걸 정말 만들 수 있나」를 왜 묻는지 세 이야기로 봅니다. 첫째는 1987년 애플의 영상 「나리지 내비게이터(Knowledge Navigator)」입니다.</span><span class="zh">第 10 次课起要和 AI 一起做真正的服务。动手之前为什么要问“这个真的做得出来吗”，用三个故事来看。第一个是 1987 年苹果的影片《知识领航员（Knowledge Navigator）》。</span></p>
+<!-- [기존 자산] 09-1-01-knowledge-navigator
+     · 상태 : 완료 (2026-11-03 받음 · 502×303)
+     · 무엇 : Apple 콘셉트 영상 「Knowledge Navigator」(1987, 존 스컬리 EDUCOM 기조연설) 장면 캡처.
+     · 출처 : Wikimedia Commons File:Knowledge_Navigator.jpg (KenwoodSF, CC BY-SA 3.0)
+     · 확인한 사실 : 1987년 10월 EDUCOM 존 스컬리 기조연설에서 첫 공개(Bud Colligan 회고, dubberly.com) · 각본·구성 Hugh Dubberly·Doris Mitsch(Apple Creative Services), 제작 The Kenwood Group, 6주 · 바탕은 스컬리의 책 『Odyssey』(1987) · 영상 속 날짜 2011년 9월, Siri 2011년 10월(Wikipedia) · 「애플이 1987년에 예견했다」 보도(The Register 2011-10-05).
+     · 영상 : youtube.com/watch?v=umJsITGzXd0 「Apple Knowledge Navigator Video (1987)」 Mac History 5:46 · 대사 있음 · 퍼가기 허용(2026-11-03 선생님 지정) · PPT는 장면 사진에 링크(youtu.be/umJsITGzXd0?t=25) · 0:25–1:44.
+-->
+<figure class="fig narrow"><img class="figimg" src="../../assets/img/09-1-01-knowledge-navigator.png" alt="1987년 애플 콘셉트 영상의 한 장면. 책상 위 납작한 화면 기기에 나비넥타이를 맨 AI 비서가 떠 있다." data-id="09-1-01-knowledge-navigator" data-spec="가로 5:3 · 실제 영상 장면" onerror="window.imgPlaceholder&amp;&amp;imgPlaceholder(this)"><figcaption><span class="ko">그림 9-1-1. 「나리지 내비게이터」(Apple, 1987) 한 장면. (출처: Wikimedia Commons, CC BY-SA 3.0) 영상: <a href="https://www.youtube.com/watch?v=umJsITGzXd0">youtube.com/watch?v=umJsITGzXd0</a></span><span class="zh">图 9-1-1.《知识领航员》（Apple，1987）中的一个画面。（来源：Wikimedia Commons，CC BY-SA 3.0）影片：<a href="https://www.youtube.com/watch?v=umJsITGzXd0">youtube.com/watch?v=umJsITGzXd0</a></span></figcaption></figure>
+<ul class="blist"><li><span class="ko"><b>어떤 영상</b> · 애플 CEO 존 스컬리가 1987년 대학 교육 학회(EDUCOM) 연설에서 「애플이 그리는 미래 컴퓨터」로 보여 준 5분짜리 영상이다.</span><span class="zh"><b>是什么影片</b> · 苹果 CEO 约翰·斯卡利 1987 年在大学教育会议（EDUCOM）的演讲上，作为“苹果设想的未来电脑”播放的 5 分钟影片。</span></li><li><span class="ko"><b>누가 만들었나</b> · 애플 디자이너 휴 더벌리와 도리스 미치가 짜고, 외부 영상 회사와 6주 만에 만들었다.</span><span class="zh"><b>谁做的</b> · 苹果的设计师休·达伯利和多丽丝·米奇构思，和外部影像公司用 6 周做成。</span></li><li><span class="ko"><b>무엇이 나오나</b> · 교수가 납작한 화면 기기에 말로 부탁하면 AI 비서가 자료를 찾고 일정을 잡고 영상 전화를 건다.</span><span class="zh"><b>里面有什么</b> · 教授对着扁平的屏幕设备说话，AI 助手就查资料、排日程、打视频电话。</span></li><li><span class="ko">1987년에는 그런 화면도, 배터리도, 말을 알아듣는 AI도 없어서 영상으로만 그렸다.</span><span class="zh">1987 年还没有那样的屏幕、电池和听得懂话的 AI，所以只能拍成影片。</span></li><li><span class="ko">영상 속 날짜는 2011년 9월, 실제 Siri는 2011년 10월에 나왔다. 영상처럼 대화하는 AI는 2020년대에야 나왔다.</span><span class="zh">影片里的日期是 2011 年 9 月，真正的 Siri 在 2011 年 10 月推出。像影片里那样能对话的 AI，到 2020 年代才出现。</span></li></ul>
+</section>
 
 <section class="page" id="s0">
 <div class="kick"><span class="ko">들어가며</span><span class="zh">开始之前</span><b>9-1</b></div>
-<h2 class="title"><span class="ko">문을 열었는데 아무 말이 없다</span><span class="zh">推开门，却没人告诉你该怎么走</span></h2>
-<p class="lead"><span class="ko">8회에 낸 PRD에는 서비스가 할 일이 적혀 있습니다. 오늘은 그 서비스를 <b>처음 쓰는 사람의 걸음</b>으로 다시 읽습니다. 기능이 다 있어도 사용자가 어디서 시작해 어디로 가야 하는지 모르면 서비스는 쓰이지 않습니다. 먼저 이런 장면을 떠올려 봅니다.</span><span class="zh">第 8 次课交的 PRD 里写着服务要做的事。今天要用<b>第一次使用的人的脚步</b>重新读它。就算功能都有，如果用户不知道从哪里开始、往哪里走，服务也不会被用起来。先想象一下这样的场景。</span></p>
-<div class="scene"><div class="st"><span class="ko">이런 장면</span><span class="zh">这样的场景</span></div><p><span class="ko">처음 가 보는 관공서에 들어갔습니다. 안내 데스크도, 번호표 기계도, 안내문도 보이지 않습니다. 창구가 다섯 개 있는데 어디로 가야 하는지 알 수 없습니다.</span><span class="zh">你走进一个第一次去的办事大厅。没有咨询台，没有取号机，也没有指示牌。窗口有五个，可你不知道该去哪一个。</span></p><p><span class="ko">이 건물에 <b>기능이 없는 것이 아닙니다.</b> 창구도 있고 직원도 있습니다. 없는 것은 <b>사용자가 처음부터 끝까지 지나갈 길</b>입니다.</span><span class="zh">这栋楼<b>不是没有功能</b>。窗口有，工作人员也有。缺的是<b>让人从头走到尾的那条路</b>。</span></p></div>
-<div class="bigq"><div class="qt"><span class="ko">핵심 질문</span><span class="zh">核心问题</span></div><p><span class="ko">사용자가 이 서비스를 처음 열었을 때부터 원하는 결과를 얻을 때까지<br/>어떤 일을 <b>차례대로</b> 겪게 될까?</span><span class="zh">用户从第一次打开这个服务，到拿到想要的结果，<br/>会<b>依次</b>经历些什么？</span></p></div>
+<h2 class="title"><span class="ko">설계한 약속이 그 기기를 넘었고, 너무 늦게 알았다</span><span class="zh">设计的承诺超出了那台设备，而且发现得太晚</span> <span class="cont"><span class="ko">(이어서)</span><span class="zh">（续）</span></span></h2>
+<p class="lead"><span class="ko">둘째는 반대 경우입니다. 기술은 있었는데, 설계한 약속이 그것을 돌릴 기기의 힘을 넘었습니다. 2020년에 나온 사이버펑크 2077은 몇 년 동안 큰 약속으로 기대를 모았고, 성능이 낮은 예전 콘솔에서도 돌아가게 하겠다고 정했습니다.</span><span class="zh">第二个是相反的情况。技术是有的，可设计的承诺超出了运行它的设备的能力。2020 年推出的《赛博朋克 2077》多年来许下大承诺、备受期待，还决定要在性能较低的旧主机上也能运行。</span></p>
+<!-- [기존 자산] 09-1-02-cyberpunk-keyart
+     · 상태 : 완료 (2026-11-03 받음 · 1200×680)
+     · 무엇 : 사이버펑크 2077 공식 홍보 이미지(CD PROJEKT RED). 출시 전 기대를 보여 주는 그림.
+     · 출처 : Tom's Guide 기사 「Cyberpunk 2077 is a disaster on PS4 and Xbox One — and it gets worse」의 대표 이미지
+              https://cdn.mos.cms.futurecdn.net/wLqGGyNEpbkC6PGcZa2L2V.jpg
+     · 확인한 사실 : 2020-12-18 소니가 PlayStation 스토어에서 내리고 환불 · 개발사 사과(VGC · GameSpot · Engadget 등 2020-12-18 보도).
+-->
+<figure class="fig narrow"><img class="figimg" src="../../assets/img/09-1-02-cyberpunk-keyart.png" alt="사이버펑크 2077 공식 홍보 이미지. 선글라스를 쓴 인물이 미래 도시 앞에 서 있다." data-id="09-1-02-cyberpunk-keyart" data-spec="가로 16:9 · 공식 홍보 이미지" onerror="window.imgPlaceholder&amp;&amp;imgPlaceholder(this)"><figcaption><span class="ko">그림 9-1-2. 사이버펑크 2077 공식 홍보 이미지. 출시 전 몇 년 동안 큰 기대를 모았다. (출처: CD PROJEKT RED · Tom's Guide)</span><span class="zh">图 9-1-2.《赛博朋克 2077》官方宣传图。发售前多年来备受期待。（来源：CD PROJEKT RED · Tom's Guide）</span></figcaption></figure>
+<ul class="blist"><li><span class="ko">2020년 12월 나오자마자 예전 콘솔(PS4 · Xbox One)에서 버그와 멈춤이 쏟아졌다.</span><span class="zh">2020 年 12 月一发售，在旧主机（PS4 · Xbox One）上就接连出现漏洞和卡死。</span></li><li><span class="ko">12월 18일 소니가 PlayStation 스토어에서 내리고 환불해 주었다.</span><span class="zh">12 月 18 日，索尼把它从 PlayStation 商店下架，并给玩家退款。</span></li></ul>
+<div class="note warn"><div class="nt"><span class="ko">설계의 어긋남은 만들기 전에 찾는다</span><span class="zh">设计上的错位，要在动手之前找出来</span></div><p><span class="ko">개발사도 예전 기기에서 잘 돌게 하는 데 더 신경 썼어야 했다며 사과했습니다. 만들 실력이 없었던 것이 아니라, 약속한 것과 그것을 돌릴 기기가 맞지 않았고 그걸 너무 늦게 알았습니다. 이런 어긋남을 만들기 전에 찾아내는 것이 오늘의 점검입니다.</span><span class="zh">开发商也道歉说，本该更用心让它在旧设备上运行好。不是没有做的实力，而是承诺的东西和运行它的设备对不上，而且发现得太晚。在动手之前找出这种错位，就是今天的检查。</span></p></div>
 </section>
 
 <section class="page" id="s0_2">
 <div class="kick"><span class="ko">들어가며</span><span class="zh">开始之前</span><b>9-1</b></div>
-<h2 class="title"><span class="ko">문을 열었는데 아무 말이 없다</span><span class="zh">推开门，却没人告诉你该怎么走</span> <span class="cont"><span class="ko">(이어서)</span><span class="zh">（续）</span></span></h2>
-<p class="lead"><span class="ko">그림 속 사람은 창구 앞에 서 있지만 한 걸음도 움직이지 못합니다. 서비스도 같습니다. 오늘은 PRD의 3항 「대표 사용 흐름」을 펼쳐서, 사용자가 무엇을 보고 무엇을 하고 서비스가 어떻게 답하는지를 한 단계씩 적습니다. 코드는 만들지 않습니다.</span><span class="zh">图里的人站在窗口前，却一步也迈不出去。服务也一样。今天把 PRD 第 3 项“代表性使用流程”展开，一步一步写下用户看到什么、做什么、服务怎样回应。不写代码。</span></p>
+<h2 class="title"><span class="ko">작은 핵심 하나부터 되는지 확인했다</span><span class="zh">先确认一个小小的核心能不能行</span> <span class="cont"><span class="ko">(이어서)</span><span class="zh">（续）</span></span></h2>
+<p class="lead"><span class="ko">셋째는 마인크래프트입니다. 2009년 5월, 만들기 시작한 지 일주일 남짓 만에 처음 공개한 버전은 아래 그림이 전부였습니다. 풀 블록으로 된 평평한 땅에서 블록을 놓고 부수는 것이 할 수 있는 일의 거의 전부였습니다.</span><span class="zh">第三个是《我的世界》。2009 年 5 月，开始制作一周多一点就首次公开的版本，就只有下面这张图。在草方块铺成的平地上放方块、拆方块，几乎就是能做的全部。</span></p>
+<!-- [기존 자산] 09-1-03-minecraft-first
+     · 상태 : 완료 (2026-11-03 받음 · 1024×768)
+     · 무엇 : 마인크래프트 Java Edition pre-Classic rd-132211(2009-05-13) 화면. 풀 블록으로 된 평평한 땅.
+     · 출처 : Minecraft Wiki 「Java Edition pre-Classic rd-132211」 https://minecraft.wiki/images/Pre-Classic_rd-132211.png (CC BY-NC-SA)
+     · 확인한 사실 : 2009년 5월 만들기 시작해 일주일 남짓 만에 공개(TIGSource 2009-05-17).
+-->
+<figure class="fig narrow"><img class="figimg" src="../../assets/img/09-1-03-minecraft-first.png" alt="2009년 마인크래프트 첫 공개 버전 화면. 하늘색 하늘 아래 풀 블록으로 된 평평한 땅만 있다." data-id="09-1-03-minecraft-first" data-spec="가로 4:3 · 실제 게임 화면" onerror="window.imgPlaceholder&amp;&amp;imgPlaceholder(this)"><figcaption><span class="ko">그림 9-1-3. 마인크래프트 첫 공개 버전(2009-05-13, rd-132211). 평평한 풀 블록 땅이 전부였다. (출처: Minecraft Wiki, CC BY-NC-SA)</span><span class="zh">图 9-1-3.《我的世界》首个公开版本（2009-05-13，rd-132211）。只有一片平平的草方块地。（来源：Minecraft Wiki，CC BY-NC-SA）</span></figcaption></figure>
+<div class="note"><div class="nt"><span class="ko">차이는 실력이 아니라 순서입니다</span><span class="zh">差别不在实力，而在顺序</span></div><p><span class="ko">핵심 하나가 재미있다는 것을 확인한 뒤 하나씩 붙여 지금은 세계에서 가장 많이 팔린 게임 가운데 하나가 되었습니다. 세 이야기 모두 「지금 무엇이 되고, 무엇이 아직 안 되는가」를 아는 것이 갈림길이었습니다.</span><span class="zh">确认一个核心玩法好玩之后，再一样一样往上加，现在成了世界上卖得最多的游戏之一。三个故事的分岔口，都在于知不知道“现在什么能做到、什么还做不到”。</span></p></div>
+</section>
+
+<section class="page" id="s0_3">
+<div class="kick"><span class="ko">들어가며</span><span class="zh">开始之前</span><b>9-1</b></div>
+<h2 class="title"><span class="ko">지난주 우리 교실에서도 같은 일이 있었다</span><span class="zh">上周我们教室里也发生过同样的事</span> <span class="cont"><span class="ko">(이어서)</span><span class="zh">（续）</span></span></h2>
+<p class="lead"><span class="ko">8회 수행평가 때 여러분이 AI와 주고받은 대화 기록을 선생님이 모두 읽었습니다. 계획 없이 달리다 막힌 장면도 있었고, 이미 점검을 하고 있던 장면도 있었습니다. 둘 다 오늘 할 일과 이어집니다.</span><span class="zh">第 8 次课实践考核时，大家和 AI 往来的对话记录，老师全部读过了。有没有计划就往前冲、结果卡住的场景，也有已经在做检查的场景。两种都和今天要做的事连在一起。</span></p>
+<div class="tablewrap"><table class="kv"><thead><tr><th style="width:64%"><span class="ko">지난주에 있었던 일</span><span class="zh">上周发生的事</span></th><th><span class="ko">그래서</span><span class="zh">所以</span></th></tr></thead><tbody><tr><td><span class="ko">목업에 기능을 계속 붙이다가 채팅·프로필 화면이 열리지 않았다. 버튼만 있고 화면은 없었다</span><span class="zh">在模型上不停加功能，结果聊天·个人资料画面打不开了。只有按钮，没有画面</span></td><td><span class="ko">붙일수록 연결이 끊긴다</span><span class="zh">加得越多，连接越容易断</span></td></tr><tr><td><span class="ko">「과감하게 디자인을 바꿔 줘」를 몇 번 하다 수업이 끝났다. PRD 앞부분은 비어 있었다</span><span class="zh">说了好几次“大胆改设计”，课就结束了。PRD 前面几项还是空的</span></td><td><span class="ko">무엇을 만들지 정하기 전에 꾸미면 시간만 간다</span><span class="zh">还没定好做什么就先装饰，只会耗时间</span></td></tr><tr><td><span class="ko">「질문하지 말고 완성해 줘」 → AI가 PRD를 통째로 다시 쓰면서 원하지 않은 기능(여러 기기에서 이어 쓰기)이 들어왔다</span><span class="zh">“别问了，直接帮我完成” → AI 把 PRD 整个重写，加进了不想要的功能（多台设备接着用）</span></td><td><span class="ko">통째로 맡기면 원하지 않은 범위가 들어온다</span><span class="zh">整个交出去，就会混进不想要的范围</span></td></tr><tr><td><span class="ko">목업은 게임처럼 움직이는데, 저장하고 이어 하는 기능은 아직 없다</span><span class="zh">模型像游戏一样动起来了，但保存、接着玩的功能还没有</span></td><td><span class="ko">뼈대보다 살을 먼저 붙였다</span><span class="zh">先加了肉，还没搭好骨架</span></td></tr></tbody></table></div>
+<div class="note ok"><div class="nt"><span class="ko">이미 점검을 하던 질문도 있었습니다</span><span class="zh">也有人已经在问检查的问题</span></div><p><span class="ko">「근데 내가 사진을 올리지도 않았는데 뭘 인식하고 표를 만든 거야?」는 목업에서 진짜로 되는지를, 「내가 휴대폰으로 지금 이 시스템을 사용할 수 있나?」는 이 환경에서 되는지를 물은 질문입니다. 오늘은 AI에게 이런 질문을 모든 기능에 하게 합니다.</span><span class="zh">“<b class="keep-ko">근데 내가 사진을 올리지도 않았는데 뭘 인식하고 표를 만든 거야?</b>”（我都没上传照片，你识别了什么、做出的表？）问的是模型里是不是真的能做到；“<b class="keep-ko">내가 휴대폰으로 지금 이 시스템을 사용할 수 있나?</b>”（我现在能用手机用这个系统吗？）问的是在这个环境里能不能做到。今天让 AI 对每个功能都问这样的问题。</span></p></div>
+</section>
+
+<section class="page" id="s0_4">
+<div class="kick"><span class="ko">들어가며</span><span class="zh">开始之前</span><b>9-1</b></div>
+<h2 class="title"><span class="ko">스케이트보드부터 만든다</span><span class="zh">先做滑板</span> <span class="cont"><span class="ko">(이어서)</span><span class="zh">（续）</span></span></h2>
+<p class="lead"><span class="ko">자동차를 바퀴부터 만들면 마지막 날까지 탈 것이 없습니다. 스케이트보드부터 만들면 첫날부터 탈 수 있고, 하나씩 바꿔 가며 더 좋은 탈것이 됩니다. 10회에는 내 서비스의 스케이트보드, 곧 <b>핵심 기능 하나</b>부터 만들고 그 뒤에 살을 붙여 갑니다.</span><span class="zh">如果从轮子开始造汽车，直到最后一天都没有能骑的东西。如果从滑板开始，第一天就能骑，再一样一样换，变成更好的交通工具。第 10 次课先做自己服务的“滑板”，也就是<b>一个核心功能</b>，然后再慢慢加肉。</span></p>
 <!-- ═══════════════════════════════════════════════════════════════════════
-     [이미지 생성 요청] 09-1-01-no-signpost
-     · 영역   : 이 주석 바로 아래 figure — 브라우저에 점선 자리로 보인다
-     · 규격   : 가로 16:9 · 개념 삽화 · assets/img/09-1-01-no-signpost.png
+     [이미지 생성 요청] 09-1-04-skateboard-first
+     · 상태   : 완료 (2026-11-03 Codex 이미지 생성 · 받은 뒤 확인 ①~④ 통과 · 1600×900 · 256색)
+     · 영역   : 이 주석 바로 아래 figure
+     · 규격   : 가로 16:9 · 1600×900 · 개념 삽화 · assets/img/09-1-04-skateboard-first.png
+     · 갈래   : ② 개념 삽화 — 글자 없이 장면만으로 뜻이 서는 그림
      ───────────────────────────────────────────────────────────────────────
 
      ── 맥락 (모델에게 그대로 넘겨도 된다) ────────────────────────────
-     장대현중고등학교 「정보와 디지털 문해력」 9회 첫째 차시(9-1) 도입에 쓸 그림이다.
-     학생은 중3~고2 여덟 명. 8회에 PRD 를 제출했고, 오늘 사용자 흐름을 처음 설계한다.
-     교과서 도입은 이런 장면으로 시작한다 — 처음 가 본 관공서에 들어갔는데
-     안내 데스크도 번호표 기계도 안내문도 없다. 창구는 여러 개인데 어디로 가야 할지 모른다.
-     요점은 「기능이 없는 것이 아니다. 없는 것은 지나갈 길이다」이다.
-     교과서 인쇄물과 교실 스크린 양쪽에 같은 파일이 들어간다.
+     장대현중고등학교 「정보와 디지털 문해력」 9회 첫째 차시(9-1) 도입 마지막 쪽에 쓸 그림이다.
+     학생은 중3~고2 여덟 명이고 코딩이 처음이다. 8회까지 서비스 계획서(PRD)와 목업을 만들었고,
+     10회부터 AI와 진짜 서비스를 만든다. 9회는 만들기 전에 점검하고 계획을 세우는 날이다.
+     이 그림은 「핵심 기능 하나부터 만들어 쓸 수 있게 하고, 그다음 하나씩 붙인다」를 보여 준다.
+     개발 쪽에서 잘 알려진 비유 — 자동차를 바퀴부터 만들면 끝날 때까지 탈 것이 없고,
+     스케이트보드부터 만들면 매 단계 탈 것이 있다 — 를 사실적인 장면으로 그린다.
+     교과서와 교실 스크린 양쪽에 같은 파일이 들어간다.
 
      ── 그릴 것 ────────────────────────────────────────────────────
-     조용하고 텅 빈 공공기관 로비를 뒤쪽에서 본 장면. 안쪽 벽을 따라 접수 창구가
-     네댓 개 나란히 있고, 로비 한가운데에 사람 한 명이 등을 보인 채 멈춰 서 있다.
+     가로로 긴 화면을 위아래 두 줄로 나눈다. 각 줄은 왼쪽에서 오른쪽으로 네 칸이다.
+     같은 사람 한 명(10대 학생, 같은 옷)이 두 줄 모두에 나온다.
 
-     · 안내판·번호표 기계·화살표·바닥 유도선이 **하나도 없다.** 이것이 이 그림의 요점이다.
-     · 창구 위나 벽에 간판·표지판·게시물을 그리지 않는다. 모델이 거기에 글자를 넣는다.
-     · 사람은 **뒷모습 한 명**뿐이다. 얼굴을 넣지 않고, 다른 사람도 넣지 않는다.
-       빈 로비여야 「물어볼 데가 없다」가 보인다.
-     · 주황(#FF5C00)은 서 있는 사람의 옷이나 가방 한 점에만 아주 조금 쓴다.
-       그림에서 주황은 그 한 군데뿐이다.
-     · 창구는 **여러 개**다. 10-1 의 「약속된 창구」 그림은 창구 하나를 옆에서 크게 본
-       것이고, 이 그림은 로비 전체를 뒤에서 본 것이다. 둘이 헷갈리지 않게 시점과
-       거리를 분명히 다르게 둔다.
+     · 위 줄: 자동차를 부품부터 만드는 길.
+       ① 바퀴 하나만 바닥에 놓여 있고 사람은 옆에 서서 기다린다
+       ② 바퀴 네 개와 뼈대만 있고 사람은 여전히 서서 기다린다
+       ③ 차체까지 생겼지만 아직 엔진·의자가 없어 사람은 팔짱 끼고 서 있다
+       ④ 완성된 작은 자동차에 사람이 탔다
+       — 앞의 세 칸에서 사람은 **한 번도 타지 못한다.** 표정은 지루하거나 기다리는 얼굴.
+     · 아래 줄: 작은 탈것부터 키워 가는 길.
+       ① 스케이트보드를 타고 웃는다 ② 킥보드를 탄다 ③ 자전거를 탄다 ④ 같은 작은 자동차에 탄다
+       — **네 칸 모두 사람이 타고 움직이고 있다.** 표정은 즐겁다.
+     · 두 줄의 네 번째 칸 자동차는 같은 모양·같은 색이다(결과는 같다는 뜻).
+     · 주황(#FF5C00)은 아래 줄의 탈것(보드·킥보드·자전거·자동차)에만 쓴다. 위 줄 부품은 회색·은색.
 
      ── 지킬 것 ────────────────────────────────────────────────────
-     · 공통 스타일 **A(사실적 삽화)** 를 앞에 붙인다. B(플랫 벡터)를 같이 붙이지 않는다.
-       → 이미지_제작_가이드 「2. 공통 스타일」
-     · 비율 16:9 가로. 밝고 조용한 장면. 인쇄물이라 어두운 배경은 쓰지 않는다.
-     · 쓸쓸하거나 무섭게 만들지 않는다. 그냥 「어디로 가야 할지 모르는」 장면이다.
-     · 받은 뒤 확인 — ① 안내판·번호표·유도선이 정말 하나도 없나 ② 글자가 없나
-       ③ 사람이 뒷모습 한 명뿐인가 ④ 주황이 한 군데뿐인가. 어긋나면 다시 만든다.
+     · 공통 스타일 **A(사실적 삽화)** 를 앞에 붙인다. 밝은 배경, 인쇄물에 맞게 어둡지 않게.
+     · **글자·숫자·화살표 라벨·✓✗ 표시를 넣지 않는다.** 칸 사이 구분은 여백이나 얇은 선으로만.
+     · 사람은 각 칸에 **한 명**뿐이다. 다른 사람을 넣지 않는다.
+     · 칸은 **줄마다 정확히 네 칸**이다. 모델은 칸을 늘리는 쪽으로 흐른다.
+     · 끝에 붙인다: no text, no letters, no numbers, no labels, no watermark.
+
+     ── 받은 뒤 확인 ───────────────────────────────────────────────
+     ① 위 줄 앞의 세 칸에서 사람이 타지 못하고 서 있는가  ② 아래 줄 네 칸 모두 타고 있는가
+     ③ 줄마다 네 칸인가, 네 번째 자동차가 두 줄에서 같은가  ④ 글자·숫자·기호가 없는가
      ═══════════════════════════════════════════════════════════════════════
 -->
-<figure class="fig"><img class="figimg" src="../../assets/img/09-1-01-no-signpost.png" alt="텅 빈 공공기관 로비에서 창구 다섯 개를 바라보며 멈춰 선 학생의 뒷모습. 안내판도 번호표도 없다." data-id="09-1-01-no-signpost" data-spec="가로 16:9 · 개념 삽화 · 로비를 뒤에서 본 장면" onerror="window.imgPlaceholder&amp;&amp;imgPlaceholder(this)"><figcaption><span class="ko">그림 9-1-1. 창구도 직원도 다 있다. 없는 것은 지나갈 길이다.</span><span class="zh">图 9-1-1. 窗口有，工作人员也有。缺的是要走的那条路。</span></figcaption></figure>
-<div class="recall"><div class="rt"><span class="ko">앞 차시에서 가져올 것</span><span class="zh">从前面课时带过来的</span></div><ul class="blist"><li><span class="ko">8-2에 낸 <b>PRD.md</b>의 3항에 대표 사용 흐름이 3~4줄로 적혀 있습니다. 오늘 그것을 펼칩니다.</span><span class="zh">8-2 交的 <b>PRD.md</b> 第 3 项里，代表性使用流程写了 3~4 行。今天把它展开。</span></li><li><span class="ko">6-2부터 다듬은 <b>mockup</b>에는 내 서비스의 화면과 디자인이 있습니다. 오늘 「사용자가 보는 것」을 적을 때 봅니다.</span><span class="zh">从 6-2 起打磨的 <b>mockup</b> 里有自己服务的画面和设计。今天写“用户看到的”时会看它。</span></li><li><span class="ko">7-2에서 정한 <b>기억할 기록</b>과 다시 확인하는 순간이 흐름 안에 자리를 잡습니다.</span><span class="zh">7-2 定下的<b>要记住的记录</b>和再次查看的时刻，会在流程里找到位置。</span></li></ul></div>
+<figure class="fig"><img class="figimg" src="../../assets/img/09-1-04-skateboard-first.png" alt="위 줄은 바퀴 → 뼈대 → 차체 → 자동차 순서로 만들어 앞의 세 칸에서 사람이 서서 기다린다. 아래 줄은 스케이트보드 → 킥보드 → 자전거 → 자동차로, 네 칸 모두 사람이 타고 있다." data-id="09-1-04-skateboard-first" data-spec="가로 16:9 · 개념 삽화 · 두 줄 네 칸" onerror="window.imgPlaceholder&amp;&amp;imgPlaceholder(this)"><figcaption><span class="ko">그림 9-1-4. 위는 끝나야 탈 수 있고, 아래는 처음부터 탈 수 있다. 마지막 자동차는 같다.</span><span class="zh">图 9-1-4. 上面要等做完才能骑，下面从一开始就能骑。最后的汽车是一样的。</span></figcaption></figure>
+<div class="bigq"><div class="qt"><span class="ko">오늘 3·4교시는 이어서 합니다</span><span class="zh">今天第 3、4 节课连着上</span></div><p><span class="ko">3교시 · 9-1 <b>점검</b> — 지금 무엇이 있고, 쓸 수 있고, 만들 수 있는가<br/>4교시 · 9-2 점검 결과로 <b>현실적인 목표</b>를 정하고 계획으로 <b>구체화</b>한다</span><span class="zh">第 3 节 · 9-1 <b>检查</b> — 现在有什么、能不能用、能不能做<br/>第 4 节 · 9-2 用检查结果定下<b>现实的目标</b>，再<b>具体化</b>成计划</span></p></div>
 </section>
 
 <section class="page" id="s1">
-<div class="kick"><span class="ko">1. 06 폴더에 더하기</span><span class="zh">1. 加进 06 文件夹</span><b>9-1</b></div>
-<h2 class="title"><span class="ko">6~8회에 쓴 06 폴더에 9회 자료를 더한다</span><span class="zh">把第 9 次课的资料加进第 6~8 次课用的 06 文件夹</span> <span class="badge lab"><span class="ko">실습</span><span class="zh">实践</span></span></h2>
-<p class="lead"><span class="ko">9회에는 새 폴더를 만들지 않습니다. 6~8회에 쓴 <code>06</code> 폴더에 9회 자료를 더해 그 폴더에서 계속 씁니다. 그 안에는 <code>PRD.md</code>와 내가 디자인까지 다듬은 <code>mockup</code>이 이미 있어서 옮길 것이 없습니다. 8회에 낸 원본은 선생님이 받아 두었습니다.</span><span class="zh">第 9 次课不新建文件夹。把第 9 次课的资料加进第 6~8 次课用的 <code>06</code> 文件夹，接着在里面用。那里已经有 <code>PRD.md</code> 和自己连设计都打磨过的 <code>mockup</code>，没有要搬的东西。第 8 次课交的原件老师已经收好了。</span></p>
-<div class="folder-download-row"><a class="download-cta" href="../../downloads/09_student_files.zip" download><span class="download-icon" aria-hidden="true">↓</span><span><b class="ko">09 학생용 자료 내려받기</b><b class="zh">下载 09 学生资料</b><small>09_student_files.zip</small></span></a><div class="download-note"><span class="ko">압축 파일을 두 번 누르면 안에 <code>09</code> 폴더가 보입니다. 그 안의 파일을 <code>06</code> 폴더로 복사합니다. 9-2에서도 <code>06</code> 폴더를 씁니다.</span><span class="zh">双击压缩文件，里面能看到 <code>09</code> 文件夹。把其中的文件复制到 <code>06</code> 文件夹。9-2 也用 <code>06</code> 文件夹。</span></div></div>
-<div class="steps"><div class="st-h"><span class="ko">지금 하세요</span><span class="zh">现在就做</span></div><ol><li><span class="ko">내려받은 압축 파일을 두 번 눌러 열고, 안의 <code>09</code> 폴더를 연다.</span><span class="zh">双击下载的压缩文件打开，再打开里面的 <code>09</code> 文件夹。</span></li><li><span class="ko"><code>Ctrl+A</code>로 파일을 모두 고르고 <code>Ctrl+C</code>로 복사한다.</span><span class="zh">按 <code>Ctrl+A</code> 选中全部文件，按 <code>Ctrl+C</code> 复制。</span></li><li><span class="ko"><code>JDH_VibeCoding_자기이름</code> 안의 <code>06</code> 폴더를 열고 빈 곳에서 <code>Ctrl+V</code>로 붙여 넣는다. 같은 이름의 파일이 있다는 창이 뜨면 <b>대상 폴더의 파일 덮어쓰기</b>를 누른다.</span><span class="zh">打开 <code class="keep-ko">JDH_VibeCoding_자기이름</code> 里的 <code>06</code> 文件夹，在空白处按 <code>Ctrl+V</code> 粘贴。弹出有同名文件的窗口时，点 <b class="keep-ko">대상 폴더의 파일 덮어쓰기</b>（覆盖目标文件夹中的文件）。</span></li><li><span class="ko">VS Code에서 <b>파일 → 폴더 열기</b>로 <code>06</code> 폴더 자체를 고른다. 탐색기 맨 위에 <code>06</code>이 보이면 된다.</span><span class="zh">在 VS Code 里用 <b class="keep-ko">파일 → 폴더 열기</b>（文件 → 打开文件夹）选中 <code>06</code> 文件夹本身。资源管理器最上面显示 <code>06</code> 就对了。</span></li></ol></div>
+<div class="kick"><span class="ko">1. 오늘 할 일</span><span class="zh">1. 今天要做的事</span><b>9-1</b></div>
+<h2 class="title"><span class="ko">점검은 AI가 하고, 확인은 내가 한다</span><span class="zh">检查交给 AI，确认由我来做</span> <span class="badge core"><span class="ko">핵심</span><span class="zh">核心</span></span></h2>
+<p class="lead"><span class="ko">3교시에는 AI에게 내 PRD와 목업을 세 가지 관점에서 점검하게 합니다. 점검 결과는 새 파일이 아니라 <code>PRD.md</code>의 해당 항목 바로 아래에 「&gt; [점검]」으로 시작하는 줄로 붙습니다. 내가 쓴 문장은 그대로 남습니다. 4교시에는 이 점검을 보며 현실적인 목표를 정하고, 개발 계획서로 따로 구체화합니다.</span><span class="zh">第 3 节课让 AI 从三个角度检查自己的 PRD 和模型。检查结果不放进新文件，而是以“&gt; [<b class="keep-ko">점검</b>]”开头的行，加在 <code>PRD.md</code> 对应项目的正下方。自己写的句子原样保留。第 4 节课看着这些检查定下现实的目标，再另外做成开发计划书，把它具体化。</span></p>
+<div class="tablewrap"><table class="kv"><thead><tr><th style="width:9%"><span class="ko">요청</span><span class="zh">请求</span></th><th style="width:37%"><span class="ko">AI가 보는 관점</span><span class="zh">AI 检查的角度</span></th><th style="width:20%"><span class="ko">붙는 자리</span><span class="zh">加在哪里</span></th><th><span class="ko">내가 확인하는 것</span><span class="zh">我要确认的</span></th></tr></thead><tbody><tr><td><span class="ko">①</span><span class="zh">①</span></td><td><span class="ko">지금 무엇이 있고, 목업에서 진짜로 되는가</span><span class="zh">现在有什么，模型里是不是真的能用</span></td><td><span class="ko">2항 기능 아래</span><span class="zh">第 2 项功能下面</span></td><td><span class="ko">목업을 직접 눌러 본다</span><span class="zh">亲手点一点模型</span></td></tr><tr><td><span class="ko">②</span><span class="zh">②</span></td><td><span class="ko">처음 쓰는 사람이 막히지 않는가</span><span class="zh">第一次用的人会不会卡住</span></td><td><span class="ko">3·4항 아래</span><span class="zh">第 3·4 项下面</span></td><td><span class="ko">「내 판단」을 적는다</span><span class="zh">写“<b class="keep-ko">내 판단</b>”（我的判断）</span></td></tr><tr><td><span class="ko">③</span><span class="zh">③</span></td><td><span class="ko">실제로 만들 수 있는 기술인가</span><span class="zh">在技术上真的做得出来吗</span></td><td><span class="ko">2항 기능 아래</span><span class="zh">第 2 项功能下面</span></td><td><span class="ko">근거를 읽고 검색해 본다</span><span class="zh">读依据，再搜一搜</span></td></tr></tbody></table></div>
+<div class="note ok"><div class="nt"><span class="ko">9회에는 받을 파일이 없습니다</span><span class="zh">第 9 次课没有要下载的文件</span></div><p><span class="ko">6~8회에 쓴 <code>06</code> 폴더를 그대로 엽니다. 8회에 낸 PRD 원본은 선생님이 받아 두었으니, PRD에 점검 줄이 붙어도 괜찮습니다.</span><span class="zh">直接打开第 6~8 次课用过的 <code>06</code> 文件夹。第 8 次课交的 PRD 原件老师已经收好了，所以 PRD 里加上检查行也没关系。</span></p></div>
 </section>
 
 <section class="page" id="s1_2">
-<div class="kick"><span class="ko">1. 06 폴더에 더하기</span><span class="zh">1. 加进 06 文件夹</span><b>9-1</b></div>
-<h2 class="title"><span class="ko">6~8회에 쓴 06 폴더에 9회 자료를 더한다</span><span class="zh">把第 9 次课的资料加进第 6~8 次课用的 06 文件夹</span> <span class="cont"><span class="ko">(이어서)</span><span class="zh">（续）</span></span></h2>
-<p class="lead"><span class="ko">탐색기에 8회까지 쓴 파일과 함께 아래 파일이 보여야 합니다. 그중 오늘 내가 직접 쓰는 파일은 <code>09_user_flow.md</code> 하나입니다. 나머지는 읽기만 하거나 9-2에서 씁니다. 기획 메모처럼 표에 없는 파일은 그대로 둡니다.</span><span class="zh">资源管理器里，除了第 8 次课前用过的文件，还应该能看到下面这些。其中今天自己动手写的只有 <code>09_user_flow.md</code> 一个。其余的只读，或者在 9-2 用。像策划备忘这样表里没有的文件，原样放着。</span></p>
-<div class="tablewrap"><table class="kv"><thead><tr><th style="width:32%"><span class="ko">파일</span><span class="zh">文件</span></th><th><span class="ko">하는 일</span><span class="zh">作用</span></th><th style="width:20%"><span class="ko">언제</span><span class="zh">什么时候</span></th></tr></thead><tbody><tr><td><span class="ko"><code>PRD.md</code></span><span class="zh"><code>PRD.md</code></span></td><td><span class="ko">8회에 낸 서비스 계획서. 고치지 않는다.</span><span class="zh">第 8 次课交的服务计划书。不修改。</span></td><td><span class="ko">오늘 · 9-2</span><span class="zh">今天 · 9-2</span></td></tr><tr><td><span class="ko"><code>mockup</code> 폴더</span><span class="zh"><code>mockup</code> 文件夹</span></td><td><span class="ko">내가 만든 화면 목업과 디자인. 고치지 않고 참고만 한다.</span><span class="zh">自己做的画面模型和设计。不修改，只参考。</span></td><td><span class="ko">오늘 · 9-2 · 10회</span><span class="zh">今天 · 9-2 · 第 10 次课</span></td></tr><tr><td><span class="ko"><code>09_user_flow.md</code></span><span class="zh"><code>09_user_flow.md</code></span></td><td><span class="ko">내 서비스의 사용자 흐름 초안을 적는다.</span><span class="zh">写自己服务的用户流程草稿。</span></td><td><span class="ko">오늘</span><span class="zh">今天</span></td></tr><tr><td><span class="ko"><code>00_course_rules.md</code></span><span class="zh"><code>00_course_rules.md</code></span></td><td><span class="ko">수업에서 만들 수 있는 것과 어려운 것. AI가 먼저 읽는다.</span><span class="zh">课上能做和难做的东西。AI 先读它。</span></td><td><span class="ko">오늘 8절 · 9-2</span><span class="zh">今天第 8 节 · 9-2</span></td></tr><tr><td><span class="ko"><code>09_development_plan.md</code></span><span class="zh"><code>09_development_plan.md</code></span></td><td><span class="ko">AI와 함께 개발 계획을 완성한다.</span><span class="zh">和 AI 一起完成开发计划。</span></td><td><span class="ko">9-2</span><span class="zh">9-2</span></td></tr><tr><td><span class="ko"><code>AGENTS.md</code></span><span class="zh"><code>AGENTS.md</code></span></td><td><span class="ko">OpenCode가 이 폴더에서 켤 때마다 먼저 읽는 규칙.</span><span class="zh">OpenCode 每次在这个文件夹启动时先读的规则。</span></td><td><span class="ko">오늘 · 9-2</span><span class="zh">今天 · 9-2</span></td></tr></tbody></table></div>
-<div class="note ok"><div class="nt"><span class="ko">AGENTS.md는 9회 것으로 바뀌었습니다</span><span class="zh">AGENTS.md 换成了第 9 次课的</span></div><p><span class="ko">8-2에서 OpenCode가 만든 AGENTS.md를 방금 선생님이 만든 9회 것으로 덮어썼습니다. 대화 기록 규칙은 그대로 들어 있고, 「코드와 프로젝트 파일을 만들지 않는다」 「PRD.md와 mockup은 고치지 않는다」가 더해졌습니다.</span><span class="zh">8-2 时 OpenCode 生成的 AGENTS.md，刚才被老师做好的第 9 次课版本覆盖了。对话记录的规则照样在里面，又加上了“不生成代码和项目文件”“不修改 PRD.md 和 mockup”。</span></p></div>
+<div class="kick"><span class="ko">1. 오늘 할 일</span><span class="zh">1. 今天要做的事</span><b>9-1</b></div>
+<h2 class="title"><span class="ko">목업은 완성품이 아니라 모델하우스다</span><span class="zh">模型不是成品，而是样板房</span> <span class="cont"><span class="ko">(이어서)</span><span class="zh">（续）</span></span></h2>
+<p class="lead"><span class="ko">6-2부터 만든 목업에는 화면도 디자인도 있고, 어떤 것은 버튼을 누르면 움직이기까지 합니다. 그래서 거의 다 만들었다고 느끼기 쉽습니다. 하지만 목업은 아파트를 팔 때 보여 주는 <b>모델하우스</b>와 같습니다. 방과 가구는 진짜처럼 보여도 수도와 전기가 이어져 있지 않아 그 집에서 살 수는 없습니다.</span><span class="zh">从 6-2 起做的模型有画面、有设计，有的按下按钮还会动。所以很容易觉得差不多做完了。但模型就像卖房时给人看的<b>样板房</b>。房间和家具看起来像真的，可水电没有接通，没法在里面生活。</span></p>
+<div class="tablewrap"><table class="kv"><thead><tr><th style="width:18%"><span class="ko"></span><span class="zh"></span></th><th style="width:38%"><span class="ko">목업 · 모델하우스</span><span class="zh">模型 · 样板房</span></th><th><span class="ko">10회부터 만들 서비스 · 진짜 집</span><span class="zh">第 10 次课起做的服务 · 真正的房子</span></th></tr></thead><tbody><tr><td><span class="ko">화면</span><span class="zh">画面</span></td><td><span class="ko">있다</span><span class="zh">有</span></td><td><span class="ko">있다</span><span class="zh">有</span></td></tr><tr><td><span class="ko">버튼을 누르면</span><span class="zh">按下按钮</span></td><td><span class="ko">흉내이거나, 이 브라우저 안에서만 움직인다</span><span class="zh">要么是假装，要么只在这个浏览器里动</span></td><td><span class="ko">요청이 서버로 가서 처리된다</span><span class="zh">请求发到服务器去处理</span></td></tr><tr><td><span class="ko">기록</span><span class="zh">记录</span></td><td><span class="ko">새로 고치거나 다른 컴퓨터에서 열면 사라진다</span><span class="zh">刷新或换一台电脑打开就没了</span></td><td><span class="ko">SQLite에 남아 언제든 다시 본다</span><span class="zh">留在 SQLite 里，随时能再看</span></td></tr><tr><td><span class="ko">하는 일</span><span class="zh">作用</span></td><td><span class="ko">내 생각을 보여 주는 견본</span><span class="zh">展示自己想法的样品</span></td><td><span class="ko">사람들이 실제로 쓴다</span><span class="zh">人们真的在用</span></td></tr></tbody></table></div>
+<div class="note warn"><div class="nt"><span class="ko">오늘부터 목업에 기능을 더 붙이지 않습니다</span><span class="zh">从今天起不再往模型上加功能</span></div><p><span class="ko">목업은 10회에 그대로 가져가 서비스의 출발점으로 씁니다. 그때 흉내인 부분과 이 브라우저에만 남는 부분을 진짜(서버와 SQLite)로 잇습니다. 그러니 지금 목업에 기능을 더 붙이기보다, 무엇이 진짜이고 무엇이 흉내인지 아는 것이 먼저입니다.</span><span class="zh">模型第 10 次课会原样带过去，当作服务的起点。那时再把假装的部分、只留在这个浏览器里的部分，接成真的（服务器和 SQLite）。所以现在与其再往模型上加功能，不如先弄清哪些是真的、哪些是假装。</span></p></div>
 </section>
 
 <section class="page" id="s2">
-<div class="kick"><span class="ko">2. 사용자 흐름</span><span class="zh">2. 用户流程</span><b>9-1</b></div>
-<h2 class="title"><span class="ko">사용자 흐름은 사용자가 지나가는 길이다</span><span class="zh">用户流程是用户走过的路</span> <span class="badge core"><span class="ko">핵심</span><span class="zh">核心</span></span></h2>
-<p class="lead"><span class="ko">PRD의 2항은 서비스가 <b>할 수 있는 일</b>을, 4항은 화면에 <b>무엇이 있는지</b>를 적었습니다. 둘 다 순서가 없습니다. 사용자 흐름은 여기에 순서를 붙입니다. 사용자가 처음 화면을 본 순간부터 목적을 이룰 때까지 차례대로 무엇을 겪는지 적는 것입니다.</span><span class="zh">PRD 第 2 项写的是服务<b>能做的事</b>，第 4 项写的是画面上<b>有什么</b>。两者都没有顺序。用户流程就是给它们加上顺序：按先后写下用户从第一次看到画面，到达成目的为止，依次经历了什么。</span></p>
-<div class="term"><div class="term-h"><span class="ko"><span class="w">사용자 흐름</span><span class="en">user flow</span></span><span class="zh"><span class="w">用户流程</span><span class="en">user flow</span></span></div><dl><dt><span class="ko">현상</span><span class="zh">现象</span></dt><dd><span class="ko">지하철역에는 개찰구, 계단, 승강장이 다 있습니다. 그런데 처음 온 사람이 헤매지 않는 역과 헤매는 역이 있습니다. 시설의 개수가 아니라 <b>지나가는 순서가 안내되어 있는가</b>의 차이입니다.</span><span class="zh">地铁站里检票口、楼梯、站台都有。可有的站第一次来的人不会迷路，有的站会。差别不在设施数量，而在<b>有没有把要走的顺序指出来</b>。</span></dd><dt><span class="ko">쉬운 설명</span><span class="zh">通俗说法</span></dt><dd><span class="ko">사용자가 서비스를 <b>처음 열어 목적을 이룰 때까지 지나가는 길</b>입니다.</span><span class="zh">用户<b>从打开服务到达成目的所走的那条路</b>。</span></dd><dt><span class="ko">정확한 정의</span><span class="zh">准确定义</span></dt><dd class="def"><span class="ko">사용자가 목적을 이루기까지 거치는 단계를, 각 단계에서 <b>보는 것 · 하는 행동 · 서비스의 반응</b>으로 이어 붙인 것.</span><span class="zh">把用户达成目的所经过的各个步骤，按每一步的<b>看到什么 · 做什么 · 服务如何回应</b>串起来。</span></dd><dt><span class="ko">경계</span><span class="zh">边界</span></dt><dd><span class="ko">기능 목록과 화면 목록은 순서가 없습니다. 흐름에는 순서가 있습니다.</span><span class="zh">功能清单和画面清单没有顺序。流程有顺序。</span></dd><dt><span class="ko">문장 속 사용</span><span class="zh">句中用法</span></dt><dd><span class="ko">“이 사용자 흐름은 할 일을 입력하는 데서 시작해, 다시 열어 남은 기록을 보는 데서 끝난다.”</span><span class="zh">“这个用户流程从输入待办事项开始，到重新打开后看到留下的记录结束。”</span></dd></dl></div>
+<div class="kick"><span class="ko">2. 시작</span><span class="zh">2. 开始</span><b>9-1</b></div>
+<h2 class="title"><span class="ko">06 폴더를 열고 OpenCode를 켠다</span><span class="zh">打开 06 文件夹，启动 OpenCode</span> <span class="badge lab"><span class="ko">실습</span><span class="zh">实践</span></span></h2>
+<p class="lead"><span class="ko">VS Code에서 <b>파일 → 폴더 열기</b>로 <code>06</code> 폴더 자체를 엽니다. 탐색기 맨 위에 <code>06</code>이 보이고, 그 아래 <code>PRD.md</code>와 <code>mockup</code> 폴더가 있으면 됩니다. 그다음 터미널을 열어 OpenCode를 켭니다.</span><span class="zh">在 VS Code 里用 <b class="keep-ko">파일 → 폴더 열기</b>（文件 → 打开文件夹）打开 <code>06</code> 文件夹本身。资源管理器最上面显示 <code>06</code>，下面有 <code>PRD.md</code> 和 <code>mockup</code> 文件夹就对了。然后打开终端，启动 OpenCode。</span></p>
+<div class="steps"><div class="st-h"><span class="ko">지금 하세요</span><span class="zh">现在就做</span></div><ol><li><span class="ko">탐색기 맨 위가 <code>06</code>인지, <code>PRD.md</code>와 <code>mockup</code>이 보이는지 확인한다.</span><span class="zh">确认资源管理器最上面是 <code>06</code>，并且能看到 <code>PRD.md</code> 和 <code>mockup</code>。</span></li><li><span class="ko"><b>터미널 → 새 터미널</b>을 열고 줄 끝이 <code>…\06&gt;</code>인지 본다.</span><span class="zh">打开 <b class="keep-ko">터미널 → 새 터미널</b>（终端 → 新建终端），看行末是不是 <code>…\06&gt;</code>。</span></li><li><span class="ko"><code>opencode</code>를 입력해 켠다.</span><span class="zh">输入 <code>opencode</code> 启动。</span></li></ol></div>
+<div class="note warn"><div class="nt"><span class="ko">오늘도 코드는 만들지 않습니다</span><span class="zh">今天也不写代码</span></div><p><span class="ko">요청문마다 「내가 쓴 PRD 문장은 고치지 마」 「mockup은 고치지 마」가 들어 있습니다. AI가 HTML이나 코드를 보여 주기 시작하면 「코드는 만들지 마. 점검만 해 줘」를 보냅니다.</span><span class="zh">每个请求里都有“不要改我写的 PRD 句子”“不要修改 mockup”。如果 AI 开始给出 HTML 或代码，就发“不要写代码，只做检查”。</span></p></div>
 </section>
 
 <section class="page" id="s3">
-<div class="kick"><span class="ko">2. 사용자 흐름</span><span class="zh">2. 用户流程</span><b>9-1</b></div>
-<h2 class="title"><span class="ko">사용자 흐름과 개발 순서는 다르다</span><span class="zh">用户流程与开发顺序不一样</span></h2>
-<p class="lead"><span class="ko">흐름을 정하지 않고 바로 개발 계획을 세우면 「무엇부터 만들까」에 마음이 먼저 갑니다. 그러면 만들기 쉬운 것부터 만들고, 정작 사용자가 목적을 이루는 길은 마지막까지 비어 있게 됩니다. 그래서 9회에는 사용자 흐름을 먼저 정하고, 개발 순서는 9-2 마지막에 만듭니다.</span><span class="zh">如果不先定流程就直接做开发计划，心思会先跑到“先做什么”上。结果就是先做容易做的，而用户达成目的的那条路到最后还是空的。所以第 9 次课先定用户流程，开发顺序放到 9-2 最后再做。</span></p>
-<div class="row"><div class="pane accent"><div class="pt"><span class="ko">사용자 흐름 · 사용자가 겪는 순서</span><span class="zh">用户流程 · 用户经历的顺序</span></div><ul class="blist"><li><span class="ko">서비스를 열고 안내를 본다</span><span class="zh">打开服务，看到说明</span></li><li><span class="ko">값을 입력하거나 고른다</span><span class="zh">输入或选择</span></li><li><span class="ko">버튼을 누른다</span><span class="zh">按下按钮</span></li><li><span class="ko">결과를 확인한다</span><span class="zh">确认结果</span></li><li><span class="ko">기록이 남는다</span><span class="zh">留下记录</span></li><li><span class="ko">다시 열어 기록을 본다</span><span class="zh">重新打开，查看记录</span></li></ul></div><div class="pane"><div class="pt"><span class="ko">개발 순서 · 만드는 사람이 일하는 순서</span><span class="zh">开发顺序 · 做的人工作的顺序</span></div><ul class="blist"><li><span class="ko">첫 화면을 만든다</span><span class="zh">做出第一个画面</span></li><li><span class="ko">핵심 기능을 작동시킨다</span><span class="zh">让核心功能跑起来</span></li><li><span class="ko">기록 저장과 다시 보기를 연결한다</span><span class="zh">接上记录的保存与再次查看</span></li><li><span class="ko">테스트하고 고친다</span><span class="zh">测试并修改</span></li></ul></div></div>
-<div class="note"><div class="nt"><span class="ko">주인공이 다릅니다</span><span class="zh">主角不一样</span></div><p><span class="ko">왼쪽의 주인공은 <b>사용자</b>이고 오른쪽의 주인공은 <b>만드는 사람</b>입니다. 오늘 쓰는 것은 왼쪽입니다.</span><span class="zh">左边的主角是<b>用户</b>，右边的主角是<b>做的人</b>。今天写的是左边。</span></p></div>
+<div class="kick"><span class="ko">3. 요청 ① · 점검 1</span><span class="zh">3. 请求 ① · 检查 1</span><b>9-1</b></div>
+<h2 class="title"><span class="ko">지금 무엇이 있고, 목업에서 진짜로 되는가</span><span class="zh">现在有什么，模型里是不是真的能用</span> <span class="badge core"><span class="ko">핵심</span><span class="zh">核心</span></span></h2>
+<p class="lead"><span class="ko">첫 점검은 지금 상태입니다. PRD 2항에 적은 기능마다 목업에서 정말 동작하는지 가리게 합니다. 목업에는 예시 값을 미리 넣어 두었거나, 이 브라우저에만 저장되거나, 버튼만 있는 기능이 많습니다. 된 것처럼 보이는 것과 진짜를 먼저 나눠야 계획이 섭니다.</span><span class="zh">第一项检查是现在的状态。让 AI 对 PRD 第 2 项写的每个功能，分辨在模型里是不是真的能运行。模型里有很多功能是预先放了示例值、只存在这个浏览器里、或者只有按钮。先把看起来像做好了的和真的分开，计划才立得住。</span></p>
+<div class="code"><div class="chd"><span class="fn"><span class="ko">요청 ① — 점검 1. 지금 상태</span><span class="zh">请求 ① — 检查 1. 现在的状态</span></span><button class="cp" onclick="copyCode(this)"><span class="ko">복사</span><span class="zh">复制</span></button></div><pre class="ko blk">PRD.md와 mockup 폴더를 모두 읽고, 「지금 무엇이 있고, 목업에서 진짜로 되는가」라는 관점에서 내 PRD를 점검해 줘.
+PRD.md 2항의 기능마다 그 줄 바로 아래에 「&gt; [점검 1] …」을 한 줄씩 덧붙여 줘.
+- 목업에서 진짜 / 이 브라우저에만 / 흉내 / 버튼만 / 목업에 없음 가운데 하나를 고르고, 목업 코드에서 본 근거를 짧게 적어 줘.
+  예시 값을 미리 넣어 둔 것은 흉내야.
+- 목업에만 있고 PRD에 없는 기능은 2항 끝에 「&gt; [점검 1] PRD에 없음: ○○」으로 적어 줘.
+내가 쓴 PRD 문장은 한 글자도 고치거나 지우지 말고, 「&gt;」로 시작하는 줄만 덧붙여. mockup은 고치지 마.</pre><pre class="zh blk">请把 PRD.md 和 mockup 文件夹全部读一遍，从“现在有什么、模型里是不是真的能用”这个角度检查我的 PRD。
+在 PRD.md 第 2 项的每个功能那一行正下方，各加一行“&gt; [<span class="keep-ko">점검</span> 1] …”。
+- 从 真的 / 只在这个浏览器里 / 假装 / 只有按钮 / 模型里没有 中选一个，并简短写出在模型代码里看到的依据。
+  预先放了示例值的算假装。
+- 只在模型里有、PRD 里没有的功能，在第 2 项末尾写“&gt; [<span class="keep-ko">점검</span> 1] PRD 里没有：○○”。
+我写的 PRD 句子一个字都不要改、不要删，只加以“&gt;”开头的行。不要修改 mockup。</pre></div>
+</section>
+
+<section class="page" id="s3_2">
+<div class="kick"><span class="ko">3. 요청 ① · 점검 1</span><span class="zh">3. 请求 ① · 检查 1</span><b>9-1</b></div>
+<h2 class="title"><span class="ko">AI의 판단을 목업에서 직접 눌러 확인한다</span><span class="zh">在模型上亲手点一点，确认 AI 的判断</span> <span class="cont"><span class="ko">(이어서)</span><span class="zh">（续）</span></span></h2>
+<p class="lead"><span class="ko">AI는 목업 코드를 읽고 짐작한 것입니다. 실제로 눌러 봐야 압니다. 먼저 <code>PRD.md</code>를 <code>Ctrl+Shift+V</code> 미리 보기로 열면 점검 줄이 회색 인용 상자로 보입니다. 그중 「진짜」나 「이 브라우저에만」이라고 한 기능 두 개를 목업에서 직접 해 보고 <code>F5</code>로 새로 고쳐 봅니다.</span><span class="zh">AI 是读了模型代码之后推测的。真的点一点才知道。先用 <code>Ctrl+Shift+V</code> 预览打开 <code>PRD.md</code>，检查行会显示成灰色的引用框。从中挑两个写成“真的”或“只在这个浏览器里”的功能，在模型上亲手试一试，再按 <code>F5</code> 刷新。</span></p>
+<div class="steps"><div class="st-h"><span class="ko">지금 하세요</span><span class="zh">现在就做</span></div><ol><li><span class="ko"><code>mockup</code> 폴더의 <code>index.html</code>을 오른쪽 클릭 → <b>Open with Live Server</b>.</span><span class="zh">右键点 <code>mockup</code> 文件夹里的 <code>index.html</code> → <b>Open with Live Server</b>。</span></li><li><span class="ko">고른 기능 두 개를 직접 해 본다.</span><span class="zh">亲手试一试挑出的两个功能。</span></li><li><span class="ko"><code>F5</code>를 누른 뒤에도 방금 넣은 것이 남아 있는지 본다.</span><span class="zh">按 <code>F5</code> 之后，看刚才输入的东西还在不在。</span></li><li><span class="ko">점검 줄과 다르면 「○○는 새로 고치면 사라져. 그 [점검 1] 줄을 고쳐 줘」처럼 내가 본 것을 그대로 말한다.</span><span class="zh">和检查行不一样，就像“○○ 一刷新就没了，请改一下那行 [<b class="keep-ko">점검</b> 1]”这样，把自己看到的照实说出来。</span></li></ol></div>
+<div class="note ok"><div class="nt"><span class="ko">「이 브라우저에만」은 10회에 옮길 기능입니다</span><span class="zh">“只在这个浏览器里”是第 10 次课要搬走的功能</span></div><p><span class="ko">목업은 이 컴퓨터의 이 브라우저 안에만 기록을 남깁니다(7-1의 오른쪽 칸과 같습니다). 다른 컴퓨터나 다른 브라우저에서는 보이지 않습니다. 10회에 이 기록을 SQLite로 옮깁니다.</span><span class="zh">模型只把记录留在这台电脑的这个浏览器里（和 7-1 右边那一栏一样）。换一台电脑或换一个浏览器就看不到。第 10 次课会把这些记录搬到 SQLite 里。</span></p></div>
 </section>
 
 <section class="page" id="s4">
-<div class="kick"><span class="ko">3. 시작과 완료</span><span class="zh">3. 开始与完成</span><b>9-1</b></div>
-<h2 class="title"><span class="ko">흐름의 시작과 완료를 먼저 한 줄씩 정한다</span><span class="zh">先用一句话分别定下流程的开始与完成</span> <span class="badge core"><span class="ko">핵심</span><span class="zh">核心</span></span></h2>
-<p class="lead"><span class="ko">흐름을 쓸 때는 가운데 단계보다 <b>시작과 완료</b>를 먼저 정합니다. 시작은 사용자가 서비스를 처음 열었을 때 보는 것이고, 완료는 사용자가 목적을 이뤘다고 느끼는 순간입니다. 이 두 줄이 정해져야 그 사이를 채울 수 있습니다.</span><span class="zh">写流程时，先定<b>开始与完成</b>，再写中间的步骤。开始是用户第一次打开服务时看到的东西，完成是用户觉得目的达成的那一刻。这两句定下来，中间才填得进去。</span></p>
-<div class="code"><div class="chd"><span class="fn"><span class="ko">09_user_flow.md · 1. 시작과 완료의 틀</span><span class="zh">09_user_flow.md · “1. <b class="keep-ko">시작과 완료</b>”（开始与完成）的格式</span></span></div><pre class="ko blk">- 시작: 사용자가 서비스를 처음 열고 ___을 본다.
-- 완료: 사용자가 ___을 하고 ___ 결과와 저장된 기록을 확인한다.</pre><pre class="zh blk">- <span class="keep-ko">시작</span>（开始）: 用户第一次打开服务，看到 ___。
-- <span class="keep-ko">완료</span>（完成）: 用户做了 ___，确认 ___ 结果和已保存的记录。</pre></div>
-<div class="code"><div class="chd"><span class="fn"><span class="ko">채워 넣은 예 — 할 일 정리 서비스</span><span class="zh">填好的例子 — 待办整理服务</span></span></div><pre class="ko blk">- 시작: 사용자가 할 일 정리 서비스를 열고 입력 안내를 본다.
-- 완료: 사용자가 할 일을 추가하고, 다시 열어도 목록에 남은 기록을 확인한다.</pre><pre class="zh blk">- <span class="keep-ko">시작</span>（开始）: 用户打开待办整理服务，看到输入说明。
-- <span class="keep-ko">완료</span>（完成）: 用户添加待办事项，重新打开后也能在列表里看到留下的记录。</pre></div>
-<div class="note ok"><div class="nt"><span class="ko">완료 문장에 「다시 보는 순간」이 들어갑니다</span><span class="zh">完成那句里要有“再次查看的时刻”</span></div><p><span class="ko">예의 완료 문장에는 「다시 열어도 목록에 남은」이 있습니다. 7-2에서 정한 기록을 다시 확인하는 순간입니다. 결과를 한 번 보여 주고 끝나면 아직 완료가 아닙니다.</span><span class="zh">例子的完成那句里有“重新打开后也能在列表里看到”。这就是 7-2 定下的再次查看记录的时刻。只把结果显示一次就结束，还不算完成。</span></p></div>
+<div class="kick"><span class="ko">4. 요청 ② · 점검 2</span><span class="zh">4. 请求 ② · 检查 2</span><b>9-1</b></div>
+<h2 class="title"><span class="ko">처음 쓰는 사람이 되어 걸어 본다</span><span class="zh">当作第一次使用的人走一遍</span> <span class="badge core"><span class="ko">핵심</span><span class="zh">核心</span></span></h2>
+<p class="lead"><span class="ko">두 번째 점검은 사용하는 사람의 눈입니다. 만든 사람은 어디를 눌러야 하는지 다 알기 때문에 막히는 곳을 못 봅니다. 그래서 AI에게 이 서비스를 처음 쓰는 사람이 되어 PRD 3항의 흐름대로 목업을 따라가 보게 합니다. 점검 줄 끝의 「내 판단」은 비워 두게 합니다.</span><span class="zh">第二项检查用的是使用者的眼光。做的人知道该点哪里，所以看不到会卡住的地方。于是让 AI 当作第一次用这个服务的人，照 PRD 第 3 项的流程走一遍模型。让它把检查行末尾的“<b class="keep-ko">내 판단</b>”（我的判断）空着。</span></p>
+<div class="code"><div class="chd"><span class="fn"><span class="ko">요청 ② — 점검 2. 처음 쓰는 사람</span><span class="zh">请求 ② — 检查 2. 第一次使用的人</span></span><button class="cp" onclick="copyCode(this)"><span class="ko">복사</span><span class="zh">复制</span></button></div><pre class="ko blk">이번에는 「이 서비스를 처음 쓰는 사람」의 관점에서 내 PRD를 점검해 줘.
+mockup의 첫 화면부터 PRD.md 3항의 흐름대로 한 단계씩 따라가 보고,
+막히거나 헷갈리는 곳을 PRD.md 3항·4항의 해당 줄 바로 아래에 「&gt; [점검 2] …」로 덧붙여 줘.
+아래 다섯 가지는 꼭 살펴봐 줘.
+- 처음 열었을 때 무엇을 해야 하는지 보이는가
+- 핵심 기능까지 몇 번 눌러야 가는가
+- 잘못 넣거나 비워 두면 무엇이 보이는가
+- 다시 열면 내 기록이 남아 있는가
+- 핵심 기능을 가리는 화면이나 기능이 있는가
+줄마다 끝에 「내 판단: 」을 비워 둬. 내가 쓴 PRD 문장은 고치거나 지우지 마. mockup은 고치지 마.</pre><pre class="zh blk">这次请从“第一次用这个服务的人”的角度检查我的 PRD。
+从 mockup 的第一个画面开始，照 PRD.md 第 3 项的流程一步一步走，
+把卡住或让人困惑的地方，用“&gt; [<span class="keep-ko">점검</span> 2] …”加在 PRD.md 第 3·4 项对应那一行的正下方。
+下面五点一定要看。
+- 第一次打开时，看得出要做什么吗
+- 要点几次才能到核心功能
+- 输错或空着时，会显示什么
+- 重新打开，我的记录还在吗
+- 有没有挡住核心功能的画面或功能
+每行末尾留一个空的“<span class="keep-ko">내 판단</span>:”。我写的 PRD 句子不要改、不要删。不要修改 mockup。</pre></div>
+</section>
+
+<section class="page" id="s4_2">
+<div class="kick"><span class="ko">4. 요청 ② · 점검 2</span><span class="zh">4. 请求 ② · 检查 2</span><b>9-1</b></div>
+<h2 class="title"><span class="ko">점검 줄 끝에 「내 판단」을 적는다</span><span class="zh">在检查行末尾写“我的判断”</span> <span class="cont"><span class="ko">(이어서)</span><span class="zh">（续）</span></span></h2>
+<p class="lead"><span class="ko">AI가 붙인 점검 2 줄을 하나씩 읽고, 목업에서 같은 순서로 직접 해 봅니다. 맞으면 「동의」, 다르면 「아님」과 내가 본 것을 한마디로 적습니다. 오늘 내가 직접 쓰는 곳은 여기뿐입니다. 이 판단이 4교시에 현실적인 목표를 정할 때 근거가 됩니다.</span><span class="zh">把 AI 加上的检查 2 行一行一行读，在模型上按同样的顺序亲手做一遍。对的写“同意”，不对的写“不是”，再用一句话写下自己看到的。今天自己动手写的只有这里。这些判断会成为第 4 节课定下现实目标时的依据。</span></p>
+<div class="code"><div class="chd"><span class="fn"><span class="ko">PRD.md 미리 보기 — 예 · 영어 단어장 서비스</span><span class="zh">PRD.md 预览 — 例 · 英语单词本服务</span></span></div><pre class="ko blk">## 3. 대표 사용 흐름
+1. 사용자가 서비스를 연다.
+&gt; [점검 2] 소개 화면 3장을 넘기고 로그인해야 해서 핵심 기능까지 다섯 번 눌러야 한다.
+&gt; 내 판단: 동의 · 소개는 나중에 보게 해도 된다
+2. 단어와 뜻을 넣고 저장한다.
+&gt; [점검 2] 다시 열면 기록이 남는다(브라우저 저장).
+&gt; 내 판단: 아님 · 다른 브라우저로 여니 비어 있었다</pre><pre class="zh blk">## 3. <span class="keep-ko">대표 사용 흐름</span>
+1. <span class="keep-ko">사용자가 서비스를 연다.</span>
+&gt; [<span class="keep-ko">점검</span> 2] 要翻过 3 张介绍画面再登录，到核心功能要点五次。
+&gt; <span class="keep-ko">내 판단</span>: 同意 · 介绍可以以后再看
+2. <span class="keep-ko">단어와 뜻을 넣고 저장한다.</span>
+&gt; [<span class="keep-ko">점검</span> 2] 重新打开记录还在（存在浏览器里）。
+&gt; <span class="keep-ko">내 판단</span>: 不是 · 用别的浏览器打开是空的</pre></div>
+<div class="note"><div class="nt"><span class="ko">모르면 AI에게 다시 묻습니다</span><span class="zh">不明白就再问 AI</span></div><p><span class="ko">점검 줄이 무슨 뜻인지 모르겠으면 「이 [점검 2] 줄을 쉬운 말로 다시 설명해 줘. 어느 화면의 어떤 버튼이야?」를 보냅니다. 내가 이해한 뒤에 동의할지 정합니다.</span><span class="zh">看不懂检查行是什么意思，就发“请用简单的话重新解释这行 [<b class="keep-ko">점검</b> 2]。是哪个画面的哪个按钮？”。自己理解之后再决定同不同意。</span></p></div>
 </section>
 
 <section class="page" id="s5">
-<div class="kick"><span class="ko">4. 한 단계</span><span class="zh">4. 一个步骤</span><b>9-1</b></div>
-<h2 class="title"><span class="ko">한 단계에는 다섯 가지를 적는다</span><span class="zh">一个步骤写五样东西</span> <span class="badge core"><span class="ko">핵심</span><span class="zh">核心</span></span></h2>
-<p class="lead"><span class="ko">시작과 완료 사이를 단계로 나눕니다. 한 단계마다 아래 다섯 가지를 적으면, 사용자가 무엇을 보고 하는지와 서비스가 무엇을 돌려주는지가 빠짐없이 드러납니다. 네 번째 칸은 11회에 SQLite에 저장할 기록의 재료가 되고, 다섯 번째 칸은 12회 테스트에서 그대로 시험합니다.</span><span class="zh">把开始与完成之间分成几步。每一步都写下面五样，用户看到什么、做什么，服务回给什么，就都不会漏。第四格是第 11 次课存进 SQLite 的记录的材料，第五格会在第 12 次课测试时照着试。</span></p>
-<div class="tablewrap"><table class="kv"><thead><tr><th style="width:32%"><span class="ko">칸</span><span class="zh">格</span></th><th><span class="ko">확인할 질문</span><span class="zh">要问的问题</span></th></tr></thead><tbody><tr><td><span class="ko">사용자가 보는 것</span><span class="zh">用户看到的</span></td><td><span class="ko">이 단계에서 화면에 무엇이 보이는가?</span><span class="zh">这一步画面上能看到什么？</span></td></tr><tr><td><span class="ko">사용자의 행동</span><span class="zh">用户的动作</span></td><td><span class="ko">무엇을 입력하거나 고르거나 누르는가?</span><span class="zh">输入、选择或按下什么？</span></td></tr><tr><td><span class="ko">서비스의 반응</span><span class="zh">服务的回应</span></td><td><span class="ko">행동 뒤에 화면에서 무엇이 바뀌거나 나타나는가?</span><span class="zh">动作之后画面上什么变了、出现了什么？</span></td></tr><tr><td><span class="ko">이어지거나 저장되는 정보</span><span class="zh">接下去或被保存的信息</span></td><td><span class="ko">다음 단계에서 쓰거나 기록으로 남길 정보가 있는가?</span><span class="zh">有没有下一步要用、或要作为记录留下的信息？</span></td></tr><tr><td><span class="ko">예외 상황</span><span class="zh">例外情况</span></td><td><span class="ko">값이 없거나 잘못되면 무엇을 안내하는가?</span><span class="zh">没有值或值不对时，提示什么？</span></td></tr></tbody></table></div>
-<div class="note"><div class="nt"><span class="ko">아직 정하지 않는 것</span><span class="zh">现在还不定的</span></div><p><span class="ko">화면의 색과 정확한 배치, 파일 이름과 코드는 정하지 않습니다. 6-2에서 화면을 글로만 설명했던 것과 같은 이유입니다. 만들면서 대부분 바뀝니다.</span><span class="zh">画面的颜色和准确位置、文件名和代码都不定。和 6-2 只用文字描述画面是同一个理由：做的过程中大多会变。</span></p></div>
+<div class="kick"><span class="ko">5. 판정</span><span class="zh">5. 判定</span><b>9-1</b></div>
+<h2 class="title"><span class="ko">실제로 만들 수 있는 기술인지는 세 가지로 본다</span><span class="zh">技术上能不能做出来，分三种来看</span> <span class="badge core"><span class="ko">핵심</span><span class="zh">核心</span></span></h2>
+<p class="lead"><span class="ko">마지막 점검은 「이 기능을 실제로 만들 수 있는 기술이 지금 세상에 있는가」입니다. 웹 서비스라서, 이 PC라서, 이 수업이라서 안 되는 것은 기술의 한계가 아닙니다. 그건 4교시에 따로 봅니다. 3교시에는 기술만 봅니다.</span><span class="zh">最后一项检查是“现在世界上有没有能真的做出这个功能的技术”。因为是网页服务、因为是这台电脑、因为是这门课而做不了的，不是技术的极限。那个第 4 节课另外看。第 3 节课只看技术。</span></p>
+<div class="tablewrap"><table class="kv"><thead><tr><th style="width:24%"><span class="ko">판정</span><span class="zh">判定</span></th><th style="width:30%"><span class="ko">뜻</span><span class="zh">意思</span></th><th><span class="ko">예</span><span class="zh">例</span></th></tr></thead><tbody><tr><td><span class="ko">지금 기술로 만들 수 있다</span><span class="zh">现在的技术就能做</span></td><td><span class="ko">이미 그 일을 하는 제품이나 도구가 흔하다</span><span class="zh">已经有很多做这件事的产品或工具</span></td><td><span class="ko">일정·기록 저장과 다시 보기 · 타이머 · 퀴즈 · 3D 게임 · 사진 속 글자 읽기</span><span class="zh">保存并再次查看日程·记录 · 计时器 · 测验 · 3D 游戏 · 读照片里的文字</span></td></tr><tr><td><span class="ko">조건이 갖춰지면 가능하다</span><span class="zh">条件齐了就能做</span></td><td><span class="ko">기술은 있지만 따로 필요한 것이 있다</span><span class="zh">技术是有的，但另外需要一些东西</span></td><td><span class="ko">AI가 대답하기 → AI 서비스 계정 · 여러 기기에서 이어 쓰기 → 서버 · 휴대폰 위젯 → 앱 개발</span><span class="zh">让 AI 回答 → AI 服务账号 · 多台设备接着用 → 服务器 · 手机小组件 → 开发 App</span></td></tr><tr><td><span class="ko">지금 기술로도 어렵다</span><span class="zh">以现在的技术也很难</span></td><td><span class="ko">전문가도 아직 초안 수준까지만 된다</span><span class="zh">专家也只能做到草稿水平</span></td><td><span class="ko">커버 영상을 듣고 타브 악보를 자동으로 쓰기 — 음 높이는 뽑지만 어느 줄 몇 프렛인지와 주법은 사람이 고친다</span><span class="zh">听翻弹视频自动写吉他六线谱 — 音高能提取，但哪根弦第几品、弹奏技巧还要靠人改</span></td></tr></tbody></table></div>
+<div class="note"><div class="nt"><span class="ko">「어렵다」도 「언젠가」가 될 수 있습니다</span><span class="zh">“很难”也可能变成“总有一天”</span></div><p><span class="ko">나리지 내비게이터의 AI 비서도 1987년에는 「지금 기술로도 어렵다」였습니다. 판정은 지금 기술이 어디까지 왔는지를 아는 일이지, 꿈을 지우는 일이 아닙니다.</span><span class="zh">《知识领航员》里的 AI 助手，在 1987 年也是“以现在的技术也很难”。判定是为了知道现在的技术走到了哪一步，不是为了抹掉梦想。</span></p></div>
 </section>
 
 <section class="page" id="s6">
-<div class="kick"><span class="ko">4. 한 단계</span><span class="zh">4. 一个步骤</span><b>9-1</b></div>
-<h2 class="title"><span class="ko">예 — 할 일 정리 서비스의 대표 흐름</span><span class="zh">例子 — 待办整理服务的代表流程</span></h2>
-<p class="lead"><span class="ko">앞 쪽의 다섯 칸 가운데 네 칸으로 할 일 정리 서비스의 흐름을 적으면 아래 표가 됩니다. 네 단계가 모두 <b>같은 화면</b>에서 일어난다는 점을 봅니다. 화면이 바뀌지 않아도 사용자의 행동과 서비스의 반응이 바뀌면 다음 단계입니다.</span><span class="zh">用前一页五格中的四格写待办整理服务的流程，就是下面这张表。注意四步都发生在<b>同一个画面</b>里。画面不换，只要用户的动作和服务的回应变了，就是下一步。</span></p>
-<div class="tablewrap"><table class="kv"><thead><tr><th style="width:9%"><span class="ko">단계</span><span class="zh">步骤</span></th><th style="width:19%"><span class="ko">보는 것</span><span class="zh">看到的</span></th><th style="width:22%"><span class="ko">행동</span><span class="zh">动作</span></th><th style="width:26%"><span class="ko">서비스의 반응</span><span class="zh">服务的回应</span></th><th><span class="ko">이어지거나 저장되는 정보</span><span class="zh">接下去或被保存的信息</span></th></tr></thead><tbody><tr><td><span class="ko">1</span><span class="zh">1</span></td><td><span class="ko">서비스 설명과 입력칸</span><span class="zh">服务说明和输入框</span></td><td><span class="ko">입력칸을 본다</span><span class="zh">看输入框</span></td><td><span class="ko">무엇을 입력할지 안내한다</span><span class="zh">提示要输入什么</span></td><td><span class="ko">없음</span><span class="zh">无</span></td></tr><tr><td><span class="ko">2</span><span class="zh">2</span></td><td><span class="ko">입력칸과 추가 버튼</span><span class="zh">输入框和添加按钮</span></td><td><span class="ko">할 일을 쓰고 추가를 누른다</span><span class="zh">写下待办，按添加</span></td><td><span class="ko">빈칸인지 확인한다</span><span class="zh">检查是不是空的</span></td><td><span class="ko">입력한 할 일</span><span class="zh">输入的待办</span></td></tr><tr><td><span class="ko">3</span><span class="zh">3</span></td><td><span class="ko">할 일 목록</span><span class="zh">待办列表</span></td><td><span class="ko">추가된 줄을 본다</span><span class="zh">看新加的那行</span></td><td><span class="ko">새 할 일을 목록 맨 위에 보여 준다</span><span class="zh">把新待办显示在列表最上面</span></td><td><span class="ko"><b>할 일 기록</b></span><span class="zh"><b>待办记录</b></span></td></tr><tr><td><span class="ko">4</span><span class="zh">4</span></td><td><span class="ko">다시 연 화면</span><span class="zh">重新打开的画面</span></td><td><span class="ko">다음 날 서비스를 다시 연다</span><span class="zh">第二天重新打开服务</span></td><td><span class="ko">어제 추가한 할 일을 그대로 보여 준다</span><span class="zh">照样显示昨天加的待办</span></td><td><span class="ko">저장된 할 일 기록</span><span class="zh">已保存的待办记录</span></td></tr></tbody></table></div>
-<div class="note ok"><div class="nt"><span class="ko">3단계의 「할 일 기록」이 11회로 이어집니다</span><span class="zh">第 3 步的“待办记录”会接到第 11 次课</span></div><p><span class="ko">마지막 칸에 굵게 적힌 기록이 11회에 SQLite에 저장할 기록입니다. 4단계는 그 기록을 다시 보는 순간입니다.</span><span class="zh">最后一格里加粗的记录，就是第 11 次课要存进 SQLite 的记录。第 4 步是再次查看这条记录的时刻。</span></p></div>
+<div class="kick"><span class="ko">6. 요청 ③ · 점검 3</span><span class="zh">6. 请求 ③ · 检查 3</span><b>9-1</b></div>
+<h2 class="title"><span class="ko">실제로 만들 수 있는 기술인가</span><span class="zh">在技术上真的做得出来吗</span> <span class="badge core"><span class="ko">핵심</span><span class="zh">核心</span></span></h2>
+<p class="lead"><span class="ko">점검 1·2를 거치면 핵심 기능과 걱정되는 기능이 보입니다. 모든 기능을 다 보지 않고 <b>네 개까지만</b> 깊게 보게 합니다. 수업 조건은 넣지 않고 기술만 묻습니다. AI가 「됩니다」라고만 하지 않게, 그 일을 실제로 하는 제품이나 기술 이름을 근거로 대게 하고, 이 서비스에 잘 맞는 틀(프레임워크·도구)도 함께 묻습니다.</span><span class="zh">做完检查 1·2，核心功能和让人担心的功能就看出来了。不看全部功能，只让它<b>最多挑四个</b>深入看。不放课堂条件，只问技术。为了不让 AI 只说“能做到”，要它拿真正在做这件事的产品或技术名称当依据，还要一起问适合这个服务的框架或工具。</span></p>
+<div class="code"><div class="chd"><span class="fn"><span class="ko">요청 ③ — 점검 3. 실제로 만들 수 있나</span><span class="zh">请求 ③ — 检查 3. 技术上做得出来吗</span></span><button class="cp" onclick="copyCode(this)"><span class="ko">복사</span><span class="zh">复制</span></button></div><pre class="ko blk">PRD.md의 [점검 1]·[점검 2]를 다시 읽고, 「지금 세상의 기술로 이 기능을 실제로 만들 수 있는가」라는 관점에서 점검해 줘.
+이 수업의 조건이나 웹 서비스인지는 생각하지 말고, 기술로 되는지만 봐 줘.
+핵심 기능 하나와 걱정되는 기능을 모두 4개까지 골라, PRD.md 2항의 그 기능 아래에 「&gt; [점검 3] 판정 · 근거」를 덧붙여 줘.
+판정은 지금 기술로 만들 수 있다 / 조건이 갖춰지면 가능하다 / 지금 기술로도 어렵다 가운데 하나야.
+- 조건이 갖춰지면 가능하다면, 무엇이 필요한지 적어 줘.
+- 지금 기술로도 어렵다면, 어디까지는 되고 무엇이 아직 안 되는지 적어 줘.
+근거에는 그 일을 실제로 하는 제품이나 기술 이름을 적고, 모르면 모른다고 적어 줘.
+마지막으로 2항 끝에 「&gt; [점검 3] 맞는 틀: ○○ — 이유」로, 이 서비스를 만들기에 잘 맞는 프레임워크나 도구를 두세 개 적어 줘.
+내가 쓴 PRD 문장은 고치거나 지우지 마. mockup은 고치지 마.</pre><pre class="zh blk">请重新读 PRD.md 的 [<span class="keep-ko">점검</span> 1]·[<span class="keep-ko">점검</span> 2]，从“以现在世界上的技术，这个功能真的做得出来吗”的角度检查。
+不要考虑这门课的条件，也不要管是不是网页服务，只看技术上行不行。
+挑出一个核心功能和让人担心的功能，一共最多 4 个，在 PRD.md 第 2 项那个功能下面加上“&gt; [<span class="keep-ko">점검</span> 3] 判定 · 依据”。
+判定从 <span class="keep-ko">지금 기술로 만들 수 있다</span> / <span class="keep-ko">조건이 갖춰지면 가능하다</span> / <span class="keep-ko">지금 기술로도 어렵다</span> 里选一个。
+- 如果是条件齐了就能做，请写出需要什么。
+- 如果是以现在的技术也很难，请写出哪些能做到、哪些还做不到。
+依据里写上真正在做这件事的产品或技术名称；不知道就写不知道。
+最后在第 2 项末尾，用“&gt; [<span class="keep-ko">점검</span> 3] 合适的框架：○○ — 理由”写两三个适合做这个服务的框架或工具。
+我写的 PRD 句子不要改、不要删。不要修改 mockup。</pre></div>
+</section>
+
+<section class="page" id="s6_2">
+<div class="kick"><span class="ko">6. 요청 ③ · 점검 3</span><span class="zh">6. 请求 ③ · 检查 3</span><b>9-1</b></div>
+<h2 class="title"><span class="ko">판정의 근거가 말이 되는지 확인한다</span><span class="zh">确认判定的依据说不说得通</span> <span class="cont"><span class="ko">(이어서)</span><span class="zh">（续）</span></span></h2>
+<p class="lead"><span class="ko">AI는 근거 없이 「됩니다」라고 쉽게 말합니다. 그래서 판정보다 근거를 먼저 읽습니다. 서비스나 기술 이름이 적혀 있으면 그중 하나를 검색해 정말 있는지 봅니다. 이름이 없거나 「가능합니다」만 있으면 다시 묻습니다. 「맞는 틀」에 나온 이름들은 10회에 다시 봅니다.</span><span class="zh">AI 很容易不给依据就说“能做到”。所以要先读依据，再看判定。写了服务或技术名称的，就挑一个搜一搜，看是不是真的存在。没有名称、只写着“可以”的，就再问一遍。“合适的框架”里出现的名字，第 10 次课会再看。</span></p>
+<div class="code"><div class="chd"><span class="fn"><span class="ko">다시 묻는 요청 — 빈칸을 채워 보내기</span><span class="zh">再问的请求 — 填好空格再发送</span></span><button class="cp" onclick="copyCode(this)"><span class="ko">복사</span><span class="zh">复制</span></button></div><pre class="ko blk">___ 기능의 판정 근거를 다시 알려 줘.
+그 일을 실제로 하는 서비스나 기술 이름은 뭐야? 거기서도 어느 정도까지 되는지,
+가장 어려운 부분이 뭔지 쉬운 말로 적어 줘. 모르면 모른다고 해 줘.</pre><pre class="zh blk">请重新告诉我 ___ 功能的判定依据。
+真正在做这件事的服务或技术叫什么？那里能做到什么程度、
+最难的部分是什么，请用简单的话写出来。不知道就说不知道。</pre></div>
+<div class="tablewrap"><table class="kv"><thead><tr><th style="width:30%"><span class="ko">기능 (예)</span><span class="zh">功能（例）</span></th><th style="width:22%"><span class="ko">판정</span><span class="zh">判定</span></th><th><span class="ko">근거</span><span class="zh">依据</span></th></tr></thead><tbody><tr><td><span class="ko">커버 영상을 듣고 타브 악보를 자동으로 쓰기</span><span class="zh">听翻弹视频自动写吉他六线谱</span></td><td><span class="ko">지금 기술로도 어렵다</span><span class="zh">以现在的技术也很难</span></td><td><span class="ko">음 높이는 공개 모델로 어느 정도 뽑지만, 같은 음을 어느 줄 몇 프렛에서 칠지와 벤딩 같은 주법은 전문 서비스도 사람이 고친다</span><span class="zh">音高用公开模型能提取到一定程度，但同一个音在哪根弦第几品弹、推弦这类技巧，连专业服务也要靠人来改</span></td></tr></tbody></table></div>
+<div class="note ok"><div class="nt"><span class="ko">어렵다는 판정은 실패가 아닙니다</span><span class="zh">“很难”的判定不是失败</span></div><p><span class="ko">「지금 기술로도 어렵다」는 좋은 문제를 골랐다는 뜻이기도 합니다. 실제 서비스들도 AI가 초안을 내고 사람이 고치는 방식으로 이 문제를 피합니다. 어떻게 바꿀지는 4교시 9-2에서 정합니다.</span><span class="zh">“以现在的技术也很难”也说明你挑了个好问题。真实的服务也是用“AI 出草稿、人来修改”的方式绕开这个问题。怎么调整，在第 4 节课的 9-2 决定。</span></p></div>
 </section>
 
 <section class="page" id="s7">
-<div class="kick"><span class="ko">5. 정상과 예외</span><span class="zh">5. 正常与例外</span><b>9-1</b></div>
-<h2 class="title"><span class="ko">정상 흐름 하나, 예외 흐름 하나부터 정한다</span><span class="zh">先定一条正常流程、一条例外流程</span> <span class="badge core"><span class="ko">핵심</span><span class="zh">核心</span></span></h2>
-<p class="lead"><span class="ko">가장 자주 일어날 <b>정상 흐름</b> 한 개를 먼저 완성합니다. 그다음 핵심 행동을 막을 수 있는 <b>예외 흐름</b> 한 개를 정합니다. PRD 4항에 적어 둔 「입력이 없거나 잘못되었을 때의 안내」가 바로 예외 흐름의 재료입니다.</span><span class="zh">先把最常发生的<b>正常流程</b>写完整一条。然后定一条可能挡住核心动作的<b>例外流程</b>。PRD 第 4 项里写的“没有输入或输入错误时的提示”，正是例外流程的材料。</span></p>
-<div class="row"><div class="pane accent"><div class="pt"><span class="ko">정상 흐름</span><span class="zh">正常流程</span></div><ul class="blist"><li><span class="ko">할 일을 쓴다</span><span class="zh">写下待办</span></li><li><span class="ko">추가를 누른다</span><span class="zh">按添加</span></li><li><span class="ko">목록에서 확인한다</span><span class="zh">在列表里确认</span></li><li><span class="ko">다시 열어 남은 기록을 본다</span><span class="zh">重新打开，看留下的记录</span></li></ul></div><div class="pane"><div class="pt"><span class="ko">예외 흐름</span><span class="zh">例外流程</span></div><ul class="blist"><li><span class="ko">아무것도 쓰지 않고 추가를 누른다</span><span class="zh">什么都没写就按添加</span></li><li><span class="ko">서비스가 저장하지 않는다</span><span class="zh">服务不保存</span></li><li><span class="ko">「할 일을 입력하세요」를 보여 준다</span><span class="zh">显示“请输入待办事项”</span></li><li><span class="ko">입력칸으로 돌아가 다시 쓴다</span><span class="zh">回到输入框重新写</span></li></ul></div></div>
-<div class="note"><div class="nt"><span class="ko">모든 오류를 적지 않습니다</span><span class="zh">不用把所有错误都写下来</span></div><p><span class="ko">인터넷이 끊기는 경우 같은 것은 지금 다루지 않습니다. 핵심 행동과 직접 관계있는 예외 하나면 됩니다. 나머지는 12회 테스트에서 찾아 고칩니다.</span><span class="zh">断网之类的情况现在不处理。和核心动作直接相关的一条例外就够了。其余的到第 12 次课测试时再找、再改。</span></p></div>
+<div class="kick"><span class="ko">7. 정리</span><span class="zh">7. 小结</span><b>9-1</b></div>
+<h2 class="title"><span class="ko">PRD 항목마다 점검이 붙었다</span><span class="zh">PRD 的每一项下面都有了检查</span></h2>
+<p class="lead"><span class="ko">3교시에는 AI에게 내 PRD를 지금 상태 · 처음 쓰는 사람 · 만들 수 있나의 세 관점에서 점검하게 하고, 목업을 직접 눌러 보며 맞는지 확인했습니다. <code>PRD.md</code>를 저장하고 미리 보기로 [점검 1·2·3] 줄이 있는지, 내가 쓴 문장이 그대로인지 봅니다.</span><span class="zh">第 3 节课让 AI 从现在的状态 · 第一次使用的人 · 能不能做三个角度检查自己的 PRD，又亲手点了模型确认对不对。保存 <code>PRD.md</code>，用预览看是不是有 [<b class="keep-ko">점검</b> 1·2·3] 行，自己写的句子是不是原样还在。</span></p>
+<div class="recap"><div class="rt"><span class="ko">이번 차시에서 남길 것</span><span class="zh">本课时要记住的</span></div><ul class="blist"><li><span class="ko">만들기 전에 <b>점검</b>한다 — 지금 무엇이 있고, 쓸 수 있고, 만들 수 있는가.</span><span class="zh">动手之前先<b>检查</b> — 现在有什么、能不能用、能不能做。</span></li><li><span class="ko">점검은 AI가 하고, 나는 목업을 <b>직접 눌러</b> 맞는지 확인한다.</span><span class="zh">检查交给 AI，我<b>亲手点一点</b>模型来确认对不对。</span></li><li><span class="ko">목업은 모델하우스다 — 된 것처럼 보여도 흉내이거나 이 브라우저에만 남는 것이 있다.</span><span class="zh">模型是样板房 — 看起来做好了的，也可能是假装，或只留在这个浏览器里。</span></li><li><span class="ko">점검 3은 <b>기술</b>만 본다 — 수업이라서 안 되는 것은 4교시에 따로 정한다.</span><span class="zh">检查 3 只看<b>技术</b> — 因为是这门课而做不了的，第 4 节课另外决定。</span></li></ul></div>
+<div class="bridge"><div class="bt"><span class="ko">다음 차시로</span><span class="zh">进入下一课时</span></div><p><span class="ko">4교시에는 바로 이어서 이 점검과 수업 조건(이 PC 한 대 · 기록은 SQLite 등)을 함께 놓고 현실적인 목표를 정한 뒤, 메인 기능부터 계획으로 구체화합니다. 계획은 OpenCode의 plan 모드에서 세우고, 계획서는 새 파일로 따로 만듭니다. 같은 OpenCode 창을 그대로 써도 됩니다.</span><span class="zh">第 4 节课接着把这些检查和课堂条件（这一台电脑 · 记录存在 SQLite 等）放在一起，定下现实的目标，再从主要功能开始具体化成计划。计划在 OpenCode 的 plan 模式里制订，计划书另外做成一个新文件。可以接着用同一个 OpenCode 窗口。</span></p><a class="next" href="09-2.html"><span class="ko">9-2. 현실적인 목표와 구체화 →</span><span class="zh">9-2. 现实的目标与具体化 →</span></a></div>
+<div class="lessonnav"><a href="../../08/textbook/08-2.html"><span class="d"><span class="ko">← 이전</span><span class="zh">← 上一课时</span></span><span class="t"><span class="ko">8-2. 수행평가 2 · PRD 완성·제출</span><span class="zh">8-2. 实践考核 2 · 完成并提交 PRD</span></span></a><a href="../../index.html"><span class="d"><span class="ko">목차</span><span class="zh">目录</span></span><span class="t"><span class="ko">전체 목차로</span><span class="zh">回到总目录</span></span></a><a href="09-2.html"><span class="d"><span class="ko">다음 →</span><span class="zh">下一课时 →</span></span><span class="t"><span class="ko">9-2. 현실적인 목표와 구체화</span><span class="zh">9-2. 现实的目标与具体化</span></span></a></div>
 </section>
 
 <section class="page" id="s8">
-<div class="kick"><span class="ko">6. 목록과 흐름</span><span class="zh">6. 清单与流程</span><b>9-1</b></div>
-<h2 class="title"><span class="ko">화면 이름만 적으면 흐름이 아니다</span><span class="zh">只写画面名称不算流程</span> <span class="badge core"><span class="ko">핵심</span><span class="zh">核心</span></span></h2>
-<p class="lead"><span class="ko">흐름을 쓰다 보면 화면 이름만 늘어놓기 쉽습니다. 그러면 사용자가 무엇을 하고 서비스가 어떻게 반응하는지 알 수 없습니다. 각 줄을 읽고 「누가 무엇을 했는가?」를 물어 답이 나오면 흐름이고, 답이 안 나오면 목록입니다.</span><span class="zh">写流程时很容易只把画面名称排一排。那样就看不出用户做了什么、服务怎么回应。读每一行时问“谁做了什么？”，答得出来就是流程，答不出来就是清单。</span></p>
-<div class="row"><div class="pane"><div class="pt"><span class="ko">이것은 화면 목록</span><span class="zh">这是画面清单</span></div><ul class="blist"><li><span class="ko">메인 화면</span><span class="zh">主画面</span></li><li><span class="ko">입력 화면</span><span class="zh">输入画面</span></li><li><span class="ko">결과 화면</span><span class="zh">结果画面</span></li></ul></div><div class="pane accent"><div class="pt"><span class="ko">이것이 흐름</span><span class="zh">这才是流程</span></div><ul class="blist"><li><span class="ko">메인 화면에서 설명을 확인한다</span><span class="zh">在主画面确认说明</span></li><li><span class="ko">값을 입력하고 실행을 누른다</span><span class="zh">输入值，按执行</span></li><li><span class="ko">서비스가 입력을 확인한다</span><span class="zh">服务检查输入</span></li><li><span class="ko">결과 또는 고칠 곳을 보여 준다</span><span class="zh">显示结果，或显示要改的地方</span></li></ul></div></div>
-<div class="note ok"><div class="nt"><span class="ko">「누가 무엇을 했는가?」</span><span class="zh">“谁做了什么？”</span></div><p><span class="ko">「메인 화면」에는 답할 수 없지만 「설명을 확인한다」에는 답할 수 있습니다. 사용자가 했습니다. 오늘 쓰는 흐름의 모든 줄이 이 질문에 답해야 합니다.</span><span class="zh">“主画面”回答不了，“确认说明”回答得了：是用户做的。今天写的流程，每一行都要答得出这个问题。</span></p></div>
-</section>
-
-<section class="page" id="s9">
-<div class="kick"><span class="ko">7. 지금 적는다</span><span class="zh">7. 现在就写</span><b>9-1</b></div>
-<h2 class="title"><span class="ko">09_user_flow.md에 시작과 완료, 정상 흐름을 적는다</span><span class="zh">在 09_user_flow.md 里写开始与完成、正常流程</span> <span class="badge lab"><span class="ko">실습</span><span class="zh">实践</span></span></h2>
-<p class="lead"><span class="ko">이제 내 서비스로 씁니다. VS Code에서 <code>PRD.md</code>와 <code>09_user_flow.md</code>를 나란히 엽니다. PRD 3항의 흐름 한 줄 한 줄을 표의 한 단계로 옮기고, 각 단계에 보는 것·반응·남는 정보를 채웁니다. 표에 적은 것이 다음 차시에 AI가 읽을 재료입니다.</span><span class="zh">现在用自己的服务来写。在 VS Code 里把 <code>PRD.md</code> 和 <code>09_user_flow.md</code> 并排打开。把 PRD 第 3 项流程的每一行搬到表里的一个步骤，再给每一步填上看到的、回应、留下的信息。表里写的，就是下一课时 AI 要读的材料。</span></p>
-<div class="steps"><div class="st-h"><span class="ko">순서</span><span class="zh">顺序</span></div><ol><li><span class="ko"><code>09_user_flow.md</code> 맨 위에 학생 ID·이름·서비스 이름을 적는다.</span><span class="zh">在 <code>09_user_flow.md</code> 最上面写学生 ID、姓名、服务名称。</span></li><li><span class="ko"><code>PRD.md</code>를 마우스 오른쪽 단추로 눌러 <b>측면에서 열기</b>를 고른다. 두 파일이 나란히 보인다.</span><span class="zh">右键单击 <code>PRD.md</code>，选择 <b class="keep-ko">측면에서 열기</b>（在侧边打开）。两个文件会并排显示。</span></li><li><span class="ko"><code>mockup</code>의 <code>index.html</code>을 마우스 오른쪽 단추로 눌러 <b>Open with Live Server</b>로 띄워 둔다. 「사용자가 보는 것」 칸은 이 화면을 보며 쓴다.</span><span class="zh">右键单击 <code>mockup</code> 里的 <code>index.html</code>，用 <b>Open with Live Server</b> 打开放着。“用户看到的”那一栏，看着这个画面来写。</span></li><li><span class="ko"><b>1. 시작과 완료</b>의 빈칸 두 줄을 채운다. 완료 줄에 다시 보는 순간이 있는지 본다.</span><span class="zh">填好 <b>1. <b class="keep-ko">시작과 완료</b></b>（开始与完成）的两行空格。看看完成那行里有没有再次查看的时刻。</span></li><li><span class="ko"><b>2. 정상 흐름</b> 표에 PRD 3항의 흐름을 한 줄씩 옮긴다. 단계는 3~6개로 맞춘다.</span><span class="zh">把 PRD 第 3 项的流程一行一行搬进 <b>2. <b class="keep-ko">정상 흐름</b></b>（正常流程）表。步骤控制在 3~6 个。</span></li><li><span class="ko"><code>Ctrl+S</code>로 저장한다. 탭 옆의 ●가 없어졌는지 본다.</span><span class="zh">按 <code>Ctrl+S</code> 保存。看标签旁边的 ● 有没有消失。</span></li></ol></div>
-<div class="note warn"><div class="nt"><span class="ko">PRD 3항이 비어 있다면</span><span class="zh">PRD 第 3 项是空的话</span></div><p><span class="ko">PRD의 1~3항이 비어 있으면 흐름을 옮길 수 없습니다. <code>PRD.md</code>는 고치지 말고, <code>09_user_flow.md</code>에 내가 생각한 흐름을 처음부터 적습니다. 어떤 사용자가 무엇을 하려고 여는지 한 줄부터 씁니다.</span><span class="zh">PRD 第 1~3 项是空的，就没法搬流程。不要改 <code>PRD.md</code>，直接在 <code>09_user_flow.md</code> 里从头写自己想的流程。先写一句：什么样的用户、为了做什么打开它。</span></p></div>
-</section>
-
-<section class="page" id="s9_2">
-<div class="kick"><span class="ko">7. 지금 적는다</span><span class="zh">7. 现在就写</span><b>9-1</b></div>
-<h2 class="title"><span class="ko">09_user_flow.md에 시작과 완료, 정상 흐름을 적는다</span><span class="zh">在 09_user_flow.md 里写开始与完成、正常流程</span> <span class="cont"><span class="ko">(이어서)</span><span class="zh">（续）</span></span></h2>
-<p class="lead"><span class="ko">표를 다 채웠으면 아래 질문으로 한 번 훑어봅니다. 「아니요」가 나오는 줄은 지금 고칩니다. 그다음 같은 파일의 <b>3. 예외 흐름</b>에 핵심 행동을 막는 경우 하나를 적습니다. 정상 흐름의 어느 단계에서 생기는지, 서비스가 무엇을 보여 주고 어디로 돌아가게 하는지까지 씁니다.</span><span class="zh">表填完后，用下面的问题过一遍。答“否”的行现在就改。然后在同一个文件的 <b>3. <b class="keep-ko">예외 흐름</b></b>（例外流程）里写一种挡住核心动作的情况：发生在正常流程的哪一步、服务显示什么、让用户回到哪里，都要写。</span></p>
-<ul class="blist"><li><span class="ko">모든 줄이 「누가 무엇을 했는가?」에 답하는가?</span><span class="zh">每一行都答得出“谁做了什么？”吗？</span></li><li><span class="ko">행동 다음에 서비스의 반응이 적혀 있는가?</span><span class="zh">动作后面写了服务的回应吗？</span></li><li><span class="ko">기록이 생기는 단계와 그 기록을 <b>다시 보는 단계</b>가 둘 다 있는가?</span><span class="zh">产生记录的步骤和<b>再次查看</b>那条记录的步骤都有吗？</span></li><li><span class="ko">PRD 2항에 없는 기능이 흐름에 갑자기 나오지 않는가?</span><span class="zh">流程里有没有突然冒出 PRD 第 2 项里没有的功能？</span></li></ul>
-<div class="note ok"><div class="nt"><span class="ko">예외는 정상 흐름으로 돌아가며 끝납니다</span><span class="zh">例外以回到正常流程结束</span></div><p><span class="ko">「아무것도 쓰지 않고 추가를 누른다 → 안내를 보여 준다」에서 멈추면 사용자는 다음에 무엇을 할지 모릅니다. 「입력칸으로 돌아가 다시 쓴다」까지 적어야 예외 흐름이 끝납니다.</span><span class="zh">停在“什么都没写就按添加 → 显示提示”的话，用户不知道接下来做什么。写到“回到输入框重新写”，例外流程才算完整。</span></p></div>
-</section>
-
-<section class="page" id="s10">
-<div class="kick"><span class="ko">8. 만들 수 있나</span><span class="zh">8. 能做出来吗</span><b>9-1</b></div>
-<h2 class="title"><span class="ko">내 흐름의 기능을 이 PC에서 만들 수 있는지 미리 본다</span><span class="zh">先看看自己流程里的功能能不能在这台电脑上做</span> <span class="badge core"><span class="ko">핵심</span><span class="zh">核心</span></span></h2>
-<p class="lead"><span class="ko">내가 원한 기능은 되도록 수업에서 만듭니다. 기준은 <b>이 PC의 Next.js에서 돌릴 수 있는가</b>입니다. 다만 외부 AI는 흉내만 내고, 휴대폰 위젯처럼 다른 실행 환경이 필요한 것은 13회 뒤에 스스로 합니다. <code>00_course_rules.md</code>를 열어 내 흐름의 기능이 어디에 해당하는지 봅니다. 다음 차시에 AI와 함께 다시 판정합니다.</span><span class="zh">自己想要的功能，尽量在课上做。标准是<b>能不能在这台电脑的 Next.js 上跑起来</b>。不过外部 AI 只做模拟，像手机小组件这样需要别的运行环境的，到第 13 次课之后自己做。打开 <code>00_course_rules.md</code>，看看自己流程里的功能属于哪一类。下一课时会和 AI 一起再判定一次。</span></p>
-<div class="tablewrap"><table class="kv"><thead><tr><th style="width:30%"><span class="ko">판정</span><span class="zh">判定</span></th><th><span class="ko">뜻</span><span class="zh">意思</span></th></tr></thead><tbody><tr><td><span class="ko">바로 구현 가능</span><span class="zh">马上可以实现</span></td><td><span class="ko">표준 프로젝트에 있는 것만으로 만든다.</span><span class="zh">只用标准项目里已有的东西来做。</span></td></tr><tr><td><span class="ko">준비하면 구현 가능</span><span class="zh">准备后可以实现</span></td><td><span class="ko">이 PC에서 된다. 패키지·파일·자료를 준비한다. 예: 로그인, 사진 올리기, 3D</span><span class="zh">这台电脑上能做。要准备包·文件·资料。例：登录、上传照片、3D</span></td></tr><tr><td><span class="ko">수업용 프로토타입</span><span class="zh">课堂用原型</span></td><td><span class="ko">외부 AI가 필요하다. 수업에서는 규칙·예시 답으로 흉내 낸다.</span><span class="zh">需要外部 AI。课上用规则·示例回答来模拟。</span></td></tr><tr><td><span class="ko">13회 뒤 스스로</span><span class="zh">第 13 次课后自己做</span></td><td><span class="ko">휴대폰 앱·위젯, 여러 기기처럼 다른 실행 환경이 필요하다.</span><span class="zh">像手机 App·小组件、多台设备这样，需要别的运行环境。</span></td></tr></tbody></table></div>
-<div class="note warn"><div class="nt"><span class="ko">숨기고 시작하지 않습니다</span><span class="zh">不要藏着开工</span></div><p><span class="ko">새 패키지나 외부 AI, 다른 기기가 꼭 필요한 기능인데 그 사실을 숨기고 개발을 시작하면, 10회에 가서 작동하지 않습니다. 이런 기능은 <code>09_user_flow.md</code>의 <b>4. 확인이 필요한 기능</b>에 적어 둡니다.</span><span class="zh">明明离不开新的包、外部 AI 或别的设备，却把这件事藏起来就开工，到第 10 次课就跑不起来。这类功能写进 <code>09_user_flow.md</code> 的 <b>4. <b class="keep-ko">확인이 필요한 기능</b></b>（需要确认的功能）。</span></p></div>
-</section>
-
-<section class="page" id="s10_2">
-<div class="kick"><span class="ko">8. 만들 수 있나</span><span class="zh">8. 能做出来吗</span><b>9-1</b></div>
-<h2 class="title"><span class="ko">내 흐름의 기능을 이 PC에서 만들 수 있는지 미리 본다</span><span class="zh">先看看自己流程里的功能能不能在这台电脑上做</span> <span class="cont"><span class="ko">(이어서)</span><span class="zh">（续）</span></span></h2>
-<p class="lead"><span class="ko">확인이 필요한 기능을 적을 때는 <b>사용자가 그 기능으로 얻으려던 결과</b>를 꼭 함께 적습니다. 이 PC에서 되는 부분은 만들고, 안 되는 부분만 흉내 내거나 13회 뒤로 남기기 때문입니다. 아래는 <code>00_course_rules.md</code>에 있는 예입니다.</span><span class="zh">写需要确认的功能时，一定要同时写<b>用户想通过它得到的结果</b>。因为这台电脑上能做的部分要做，做不了的部分才模拟，或留到第 13 次课之后。下面是 <code>00_course_rules.md</code> 里的例子。</span></p>
-<div class="tablewrap"><table class="kv"><thead><tr><th style="width:28%"><span class="ko">원래 아이디어</span><span class="zh">原来的点子</span></th><th style="width:28%"><span class="ko">사용자가 얻으려던 결과</span><span class="zh">用户想得到的结果</span></th><th><span class="ko">수업에서 만드는 방법</span><span class="zh">课上的做法</span></th></tr></thead><tbody><tr><td><span class="ko">AI가 사진 속 단어를 읽는다</span><span class="zh">AI 读出照片里的单词</span></td><td><span class="ko">모르는 단어를 표로 모은다</span><span class="zh">把不认识的单词整理成表</span></td><td><span class="ko">사진 올리기와 글자 읽기는 준비해서 만든다. 모르는 단어는 내가 고른다</span><span class="zh">上传照片和读文字准备好就做。不认识的词由我来挑</span></td></tr><tr><td><span class="ko">로그인해서 여러 기기에서 쓴다</span><span class="zh">登录后在多台设备上用</span></td><td><span class="ko">내 기록이 사라지지 않는다</span><span class="zh">自己的记录不会消失</span></td><td><span class="ko">이 PC 안의 로그인까지 만든다. 여러 기기는 13회 뒤</span><span class="zh">做到这台电脑内的登录。多设备放到第 13 次课后</span></td></tr><tr><td><span class="ko">친구와 실시간으로 대결한다</span><span class="zh">和朋友实时对战</span></td><td><span class="ko">누가 더 잘했는지 비교한다</span><span class="zh">比较谁做得更好</span></td><td><span class="ko">같은 PC의 창 두 개로 대결하고 기록을 순위로 본다</span><span class="zh">同一台电脑开两个窗口对战，按排名看记录</span></td></tr><tr><td><span class="ko">잠금화면 위젯으로 알려 준다</span><span class="zh">用锁屏小组件提醒</span></td><td><span class="ko">오늘 할 일을 잊지 않는다</span><span class="zh">不忘记今天要做的事</span></td><td><span class="ko">첫 화면의 오늘 카드와 브라우저 알림. 위젯은 13회 뒤</span><span class="zh">首页的今日卡片和浏览器通知。小组件放到第 13 次课后</span></td></tr></tbody></table></div>
-<div class="note"><div class="nt"><span class="ko">AI 기능을 규칙으로 바꿨다면</span><span class="zh">如果把 AI 功能换成了规则</span></div><p><span class="ko">진짜 AI 기능이라고 말하지 않고 <b>수업용 프로토타입</b>이라고 적습니다. 1-1에서 약속한 정직한 설명이 여기에도 적용됩니다.</span><span class="zh">不要说成是真的 AI 功能，要写成<b>课堂用原型</b>。1-1 约定的如实说明，在这里同样适用。</span></p></div>
-</section>
-
-<section class="page" id="s11">
-<div class="kick"><span class="ko">9. AI에게 묻기</span><span class="zh">9. 问 AI</span><b>9-1</b></div>
-<h2 class="title"><span class="ko">AI에게 「목록처럼 적힌 줄」만 찾게 한다</span><span class="zh">让 AI 只找出“写得像清单的行”</span> <span class="badge lab"><span class="ko">실습</span><span class="zh">实践</span></span></h2>
-<p class="lead"><span class="ko">다 적었으면 OpenCode에게 한 번 봐 달라고 합니다. 오늘 AI가 할 일은 내 흐름을 대신 쓰는 것이 아니라, <b>화면 목록처럼 적혀 행동과 반응이 빠진 줄</b>을 찾아 주는 것입니다. 터미널 줄 끝이 <code>…\06&gt;</code>인지 보고 <code>opencode</code>를 켠 뒤 아래 요청문을 보냅니다.</span><span class="zh">写完后请 OpenCode 看一遍。今天 AI 要做的不是替你写流程，而是找出<b>写得像画面清单、缺了动作和回应的行</b>。看终端行末是不是 <code>…\06&gt;</code>，打开 <code>opencode</code>，发送下面的请求。</span></p>
-<div class="code"><div class="chd"><span class="fn"><span class="ko">OpenCode에 보낼 요청문 — 고치지 않고 찾기만</span><span class="zh">发给 OpenCode 的请求 — 只找不改</span></span><button class="cp" onclick="copyCode(this)"><span class="ko">복사</span><span class="zh">复制</span></button></div><pre class="ko blk">09_user_flow.md를 읽어 줘.
-2. 정상 흐름 표에서 「누가 무엇을 했는가」에 답할 수 없는 줄,
-행동 다음에 서비스의 반응이 빠진 줄,
-기록을 다시 보는 단계가 없는지만 찾아서 번호를 붙여 대화창에 알려 줘.
-파일은 고치지 말고, 새 기능도 제안하지 마.</pre><pre class="zh blk">请读 09_user_flow.md。
-在“2. <span class="keep-ko">정상 흐름</span>”（正常流程）表里，只找出：答不出“谁做了什么”的行、
-动作后面缺了服务回应的行、
-以及有没有再次查看记录的步骤，编上号在对话框里告诉我。
-不要改文件，也不要提新功能。</pre></div>
-<div class="note ok"><div class="nt"><span class="ko">고치는 것은 내가 합니다</span><span class="zh">改由我自己来</span></div><p><span class="ko">AI가 찾은 줄을 읽고, 맞다고 생각하면 <code>09_user_flow.md</code>를 내가 고칩니다. 동의하지 않으면 그대로 둡니다. 요청문에 「고치지 마」를 넣은 것은 이 판단을 내가 하기 위해서입니다.</span><span class="zh">读 AI 找出的行，觉得对就自己改 <code>09_user_flow.md</code>。不同意就保持原样。请求里写“不要改”，就是为了让这个判断由我来做。</span></p></div>
-</section>
-
-<section class="page" id="s12">
-<div class="kick"><span class="ko">10. 오해</span><span class="zh">10. 误解</span><b>9-1</b></div>
-<h2 class="title"><span class="ko">흔한 오해와 사실</span><span class="zh">常见误解与事实</span></h2>
-<p class="lead"><span class="ko">흐름을 처음 쓸 때 자주 하는 생각이 세 가지 있습니다. 내 흐름을 다시 보면서 같은 생각을 하지 않았는지 확인합니다. 특히 마지막 오해는 10회부터 AI와 개발할 때 그대로 문제가 됩니다.</span><span class="zh">第一次写流程时，常有三种想法。回头看自己的流程，确认有没有这样想。尤其是最后一个误解，从第 10 次课和 AI 一起开发时就会直接变成问题。</span></p>
-<div class="myth"><div class="m x"><div class="tag"><span class="ko">오해</span><span class="zh">误解</span></div><div class="txt"><span class="ko">“흐름은 화면이 여러 개일 때만 필요하다.”</span><span class="zh">“只有画面有好几个时才需要流程。”</span></div></div><div class="m o"><div class="tag"><span class="ko">사실</span><span class="zh">事实</span></div><div class="txt"><span class="ko">화면이 <b>하나여도</b> 흐름은 있습니다. 할 일 정리의 네 단계는 모두 같은 화면에서 일어납니다. 흐름을 만드는 것은 <b>행동과 반응의 변화</b>입니다.</span><span class="zh">哪怕<b>只有一个画面</b>，流程也存在。待办整理的四步都在同一个画面里。构成流程的是<b>动作与回应的变化</b>。</span></div></div><div class="m x"><div class="tag"><span class="ko">오해</span><span class="zh">误解</span></div><div class="txt"><span class="ko">“예외 상황을 많이 적을수록 꼼꼼한 설계다.”</span><span class="zh">“例外情况写得越多，设计越细致。”</span></div></div><div class="m o"><div class="tag"><span class="ko">사실</span><span class="zh">事实</span></div><div class="txt"><span class="ko">지금은 <b>핵심 행동을 막는 예외 하나</b>면 충분합니다. 나머지는 12회 테스트에서 찾아 고칩니다.</span><span class="zh">现在<b>一条挡住核心动作的例外</b>就够了。其余的到第 12 次课测试时再找、再改。</span></div></div><div class="m x"><div class="tag"><span class="ko">오해</span><span class="zh">误解</span></div><div class="txt"><span class="ko">“어차피 AI가 만들 테니 흐름은 대충 적어도 된다.”</span><span class="zh">“反正 AI 会做，流程随便写写就行。”</span></div></div><div class="m o"><div class="tag"><span class="ko">사실</span><span class="zh">事实</span></div><div class="txt"><span class="ko">AI는 적힌 대로 만듭니다. 흐름이 비어 있으면 AI가 <b>자기 생각으로</b> 채우고, 그 결과가 내 서비스와 달라도 알아채기 어렵습니다.</span><span class="zh">AI 照着写的去做。流程空着，AI 就会<b>按自己的想法</b>去填，结果和自己的服务不一样也很难发现。</span></div></div></div>
-</section>
-
-<section class="page" id="s13">
-<div class="kick"><span class="ko">11. 확인</span><span class="zh">11. 确认</span><b>9-1</b></div>
-<h2 class="title"><span class="ko">확인 문제</span><span class="zh">确认题</span> <span class="badge core"><span class="ko">확인</span><span class="zh">确认</span></span></h2>
-<p class="lead"><span class="ko">오늘 배운 것을 세 문제로 확인합니다. 답을 먼저 말해 보고 해설을 엽니다. 답이 막히는 문제가 있으면 그 절로 돌아가 다시 읽습니다. 해설은 인쇄하면 펼쳐진 채로 나옵니다.</span><span class="zh">用三道题确认今天学的内容。先说出答案，再打开解析。答不上来的题，就回到那一节再读一遍。打印时解析会是展开的。</span></p>
-<div class="quiz"><div class="q"><div class="qq"><span class="ko">사용자 흐름과 개발 순서의 차이는 무엇인가?</span><span class="zh">用户流程与开发顺序有什么不同？</span></div><details><summary><span class="ko">해설 보기</span><span class="zh">查看解析</span></summary><div class="a"><p><span class="ko"><b>주인공이 다릅니다.</b> 사용자 흐름은 사용자가 겪는 순서이고, 개발 순서는 만드는 사람이 일하는 순서입니다. 사용자 흐름을 먼저 정하고 개발 순서는 그 뒤에 만듭니다.</span><span class="zh"><b>主角不同。</b>用户流程是用户经历的顺序，开发顺序是做的人工作的顺序。先定用户流程，开发顺序在那之后再做。</span></p></div></details></div><div class="q"><div class="qq"><span class="ko">「메인 화면 → 입력 화면 → 결과 화면」이 흐름이 아닌 이유는?</span><span class="zh">为什么“主画面 → 输入画面 → 结果画面”不算流程？</span></div><details><summary><span class="ko">해설 보기</span><span class="zh">查看解析</span></summary><div class="a"><p><span class="ko"><b>행동과 반응이 빠져 있기 때문</b>입니다. 각 줄에 「누가 무엇을 했는가?」를 물으면 답이 나오지 않습니다.</span><span class="zh">因为<b>缺了动作与回应</b>。对每一行问“谁做了什么？”，答不出来。</span></p></div></details></div><div class="q"><div class="qq"><span class="ko">흐름에 외부 AI가 꼭 필요한 기능이 있다면 개발 전에 무엇을 하는가?</span><span class="zh">如果流程里有离不开外部 AI 的功能，开发前要做什么？</span></div><details><summary><span class="ko">해설 보기</span><span class="zh">查看解析</span></summary><div class="a"><p><span class="ko">사용자가 그 기능으로 <b>얻으려던 결과</b>를 적고, 수업에서는 규칙이나 예시 답으로 흉내 낸 <b>수업용 프로토타입</b>으로 만듭니다. 진짜 AI 연결은 13회 뒤 스스로 할 것으로 남깁니다. 숨기고 시작하지 않습니다.</span><span class="zh">写下用户想通过这个功能<b>得到的结果</b>，课上用规则或示例回答模拟，做成<b>课堂用原型</b>。接上真 AI 留作第 13 次课后自己做的事。不要藏着开工。</span></p></div></details></div></div>
-</section>
-
-<section class="page" id="s14">
-<div class="kick"><span class="ko">12. 정리</span><span class="zh">12. 小结</span><b>9-1</b></div>
-<h2 class="title"><span class="ko">내 서비스의 길이 한 장에 적혔다</span><span class="zh">自己服务的那条路写在了一页上</span></h2>
-<p class="lead"><span class="ko">오늘은 PRD의 대표 사용 흐름을 펼쳐, 사용자가 보는 것·행동·서비스의 반응·남는 정보로 <code>09_user_flow.md</code>에 적었습니다. 예외 흐름 하나와 확인이 필요한 기능도 적었습니다. 이 파일은 다음 차시에 AI가 읽을 자료이니 <code>06</code> 폴더에 그대로 둡니다.</span><span class="zh">今天把 PRD 的代表性使用流程展开，按看到的、动作、服务的回应、留下的信息写进了 <code>09_user_flow.md</code>。还写了一条例外流程和需要确认的功能。这个文件是下一课时 AI 要读的资料，原样放在 <code>06</code> 文件夹里。</span></p>
-<div class="recap"><div class="rt"><span class="ko">이번 차시에서 남길 것</span><span class="zh">本课时要记住的</span></div><ul class="blist"><li><span class="ko">사용자 흐름은 <b>사용자가 겪는 순서</b>이고, 개발 순서보다 먼저 정한다.</span><span class="zh">用户流程是<b>用户经历的顺序</b>，要比开发顺序先定。</span></li><li><span class="ko">한 단계에는 <b>보는 것 · 행동 · 반응 · 남는 정보 · 예외</b>를 적는다.</span><span class="zh">一个步骤写<b>看到的 · 动作 · 回应 · 留下的信息 · 例外</b>。</span></li><li><span class="ko">완료에는 <b>기록을 다시 보는 순간</b>이 들어간다.</span><span class="zh">完成里要有<b>再次查看记录的时刻</b>。</span></li><li><span class="ko">이 PC에서 되는 기능은 만든다. 외부 AI는 흉내 내고, 다른 실행 환경이 필요한 것은 13회 뒤로 남긴다.</span><span class="zh">这台电脑上能做的功能就做。外部 AI 先模拟，需要别的运行环境的留到第 13 次课后。</span></li></ul></div>
-<div class="bridge"><div class="bt"><span class="ko">다음 차시로</span><span class="zh">进入下一课时</span></div><p><span class="ko">다음 차시에는 <code>PRD.md</code> · <code>00_course_rules.md</code> · <code>09_user_flow.md</code> 세 파일과 <code>mockup</code>을 AI에게 읽힙니다. AI와 함께 흐름을 다듬고, 걸리는 기능을 판정하고, 10~13회에 무엇을 만들지 개발 계획을 확정합니다.</span><span class="zh">下一课时，让 AI 读 <code>PRD.md</code> · <code>00_course_rules.md</code> · <code>09_user_flow.md</code> 三个文件和 <code>mockup</code>。和 AI 一起打磨流程、判定卡住的功能，确定第 10~13 次课要做什么的开发计划。</span></p><a class="next" href="../../09/textbook/09-2.html"><span class="ko">9-2. AI와 사용자 흐름·개발 계획 확정하기 →</span><span class="zh">9-2. 与 AI 一起确定用户流程与开发计划 →</span></a></div>
-<div class="lessonnav"><a href="../../08/textbook/08-2.html"><span class="d"><span class="ko">← 이전</span><span class="zh">← 上一课时</span></span><span class="t"><span class="ko">8-2. 수행평가 2 · PRD 완성·제출</span><span class="zh">8-2. 实践考核 2 · 完成并提交 PRD</span></span></a><a href="../../index.html"><span class="d"><span class="ko">목차</span><span class="zh">目录</span></span><span class="t"><span class="ko">전체 목차로</span><span class="zh">回到总目录</span></span></a><a href="../../09/textbook/09-2.html"><span class="d"><span class="ko">다음 →</span><span class="zh">下一课时 →</span></span><span class="t"><span class="ko">9-2. AI와 사용자 흐름·개발 계획 확정하기</span><span class="zh">9-2. 与 AI 一起确定用户流程与开发计划</span></span></a></div>
-</section>
-
-<section class="page" id="s15">
 <div class="kick"><span class="ko">부록 · 막힐 때</span><span class="zh">附录 · 卡住时</span><b>9-1</b></div>
 <h2 class="title"><span class="ko">이럴 때는 이렇게 한다</span><span class="zh">遇到这些情况就这样做</span> <span class="badge ext"><span class="ko">필요할 때</span><span class="zh">需要时</span></span></h2>
-<p class="lead"><span class="ko">오늘 막히는 자리는 대개 폴더와 파일 쪽입니다. 내 상황과 같은 줄을 찾아 오른쪽대로 해 봅니다. 그래도 안 되면 손을 듭니다. 9-2에서도 같은 폴더를 쓰니 여기서 정리해 두면 다음 차시가 편합니다.</span><span class="zh">今天卡住的地方，大多和文件夹、文件有关。找到和自己情况一样的那行，照右边做。还不行就举手。9-2 也用同一个文件夹，这里理顺了，下一课时会轻松很多。</span></p>
-<div class="trouble"><div class="th"><span class="ko">이런 상황이라면</span><span class="zh">如果是这些情况</span></div><table><tr><td><span class="ko"><code>06</code> 폴더나 <code>PRD.md</code>가 없다</span><span class="zh">没有 <code>06</code> 文件夹或 <code>PRD.md</code></span></td><td><span class="ko">손을 듭니다. 선생님이 제출한 ZIP에서 꺼내 줍니다. 그동안 <code>09_user_flow.md</code>에 기억나는 흐름부터 적습니다.</span><span class="zh">举手。老师会从你提交的 ZIP 里取出来给你。这段时间先在 <code>09_user_flow.md</code> 里写记得的流程。</span></td></tr><tr><td><span class="ko">탐색기 맨 위에 <code>06</code>이 아니라 다른 이름이 보인다</span><span class="zh">资源管理器最上面显示的不是 <code>06</code></span></td><td><span class="ko"><b>파일 → 폴더 열기</b>로 <code>06</code> 폴더 자체를 다시 고릅니다. 그 안의 <code>mockup</code> 폴더나 파일을 고르면 안 됩니다.</span><span class="zh">用 <b class="keep-ko">파일 → 폴더 열기</b>（文件 → 打开文件夹）重新选中 <code>06</code> 文件夹本身。不要选里面的 <code>mockup</code> 文件夹或文件。</span></td></tr><tr><td><span class="ko">덮어쓰기 창에서 <b>건너뛰기</b>를 눌렀다</span><span class="zh">在覆盖窗口里点了<b class="keep-ko">건너뛰기</b>（跳过）</span></td><td><span class="ko"><code>AGENTS.md</code>가 8회 것으로 남아 있습니다. 압축 파일에서 <code>AGENTS.md</code>만 다시 복사해 <code>06</code>에 붙여 넣고 덮어씁니다.</span><span class="zh"><code>AGENTS.md</code> 还是第 8 次课的。从压缩文件里只把 <code>AGENTS.md</code> 再复制一次，粘贴到 <code>06</code> 并覆盖。</span></td></tr><tr><td><span class="ko">AI가 <code>09_user_flow.md</code>를 고쳤다</span><span class="zh">AI 改了 <code>09_user_flow.md</code></span></td><td><span class="ko"><code>Ctrl+Z</code>로 되돌리거나, 「방금 고친 곳을 모두 원래대로 되돌려 줘」를 보냅니다. 고칠지는 내가 정합니다.</span><span class="zh">用 <code>Ctrl+Z</code> 撤销，或者发“把刚才改的地方全部改回原样”。改不改由我决定。</span></td></tr><tr><td><span class="ko"><code>FreeUsageLimitError</code>나 <code>429</code>가 나온다</span><span class="zh">出现 <code>FreeUsageLimitError</code> 或 <code>429</code></span></td><td><span class="ko">무료 모델 사용량이 잠깐 찬 것입니다. 1~2분 기다렸다가 같은 요청을 다시 보냅니다.</span><span class="zh">免费模型的用量暂时满了。等 1~2 分钟再发同样的请求。</span></td></tr></table></div>
+<p class="lead"><span class="ko">AI와 여러 번 주고받다 보면 막히는 자리가 비슷하게 나옵니다. 내 상황과 같은 줄을 찾아 오른쪽대로 해 봅니다. 그래도 안 되면 손을 듭니다. 시간이 모자라면 점검 3을 먼저 끝냅니다. 4교시에 현실적인 목표를 정할 때 가장 많이 쓰는 줄입니다.</span><span class="zh">和 AI 来回多次，卡住的地方大多相似。找到和自己情况一样的那行，照右边做。还不行就举手。时间不够的话，先做完检查 3。第 4 节课定下现实目标时用得最多的就是这些行。</span></p>
+<div class="trouble"><div class="th"><span class="ko">이런 상황이라면</span><span class="zh">如果是这些情况</span></div><table><tr><td><span class="ko">탐색기에 <code>PRD.md</code>나 <code>mockup</code>이 없다</span><span class="zh">资源管理器里没有 <code>PRD.md</code> 或 <code>mockup</code></span></td><td><span class="ko"><code>06</code> 폴더 자체를 열었는지 봅니다. 폴더 이름을 바꿨거나 한 겹 안에 있으면 손을 듭니다. 선생님이 8회 제출본과 대 봅니다.</span><span class="zh">看是不是打开了 <code>06</code> 文件夹本身。如果改过文件夹名，或者它在另一层文件夹里面，就举手。老师会和第 8 次课的提交版本对照。</span></td></tr><tr><td><span class="ko">AI가 내 PRD 문장을 고치거나 지웠다</span><span class="zh">AI 改了或删了我写的 PRD 句子</span></td><td><span class="ko">「방금 바꾼 내 PRD 문장을 모두 원래대로 되돌리고, 「>」로 시작하는 점검 줄만 남겨 줘」를 보냅니다. 되돌아오지 않으면 손을 듭니다.</span><span class="zh">发“把刚才改过的我的 PRD 句子全部改回原样，只留下以“>”开头的检查行”。改不回来就举手。</span></td></tr><tr><td><span class="ko">점검이 대화창에만 나오고 PRD에는 없다</span><span class="zh">检查只出现在对话框，PRD 里没有</span></td><td><span class="ko">「대화창에 보여 주지 말고 PRD.md의 해당 항목 아래에 「>」 줄로 저장해」를 보냅니다.</span><span class="zh">发“不要显示在对话框，用“>”行保存在 PRD.md 对应项目下面”。</span></td></tr><tr><td><span class="ko">AI가 <code>mockup</code>을 고쳤다</span><span class="zh">AI 改了 <code>mockup</code></span></td><td><span class="ko">「방금 mockup에서 고친 곳을 모두 원래대로 되돌려 줘」를 보냅니다.</span><span class="zh">发“把刚才在 mockup 里改的地方全部改回原样”。</span></td></tr><tr><td><span class="ko">Live Server로 열어도 목업이 안 보인다</span><span class="zh">用 Live Server 打开也看不到模型</span></td><td><span class="ko"><code>06</code> 폴더가 아니라 <code>mockup</code> 안의 <code>index.html</code>을 오른쪽 클릭했는지 봅니다. 파일 목록만 보이면 그 목록에서 <code>mockup</code>을 누릅니다.</span><span class="zh">看是不是右键点了 <code>mockup</code> 里的 <code>index.html</code>，而不是 <code>06</code> 文件夹。只显示文件列表的话，就在列表里点 <code>mockup</code>。</span></td></tr><tr><td><span class="ko"><code>FreeUsageLimitError</code>나 <code>429</code>가 나온다</span><span class="zh">出现 <code>FreeUsageLimitError</code> 或 <code>429</code></span></td><td><span class="ko">1~2분 기다렸다가 같은 요청을 다시 보냅니다. 그동안 점검 2의 「내 판단」을 씁니다.</span><span class="zh">等 1~2 分钟再发同样的请求。这段时间先写检查 2 的“<b class="keep-ko">내 판단</b>”。</span></td></tr></table></div>
 </section>
 
 </main>

@@ -7,7 +7,7 @@
 
 ## 1. 테스트할 사용자 흐름
 
-09_development_plan.md의 3·4항에서 옮겨 온다.
+09_development_plan.md의 2·3·4항(대표 흐름 · 기억할 기록과 표 · 예외 흐름)에서 옮겨 온다.
 
 - 흐름의 시작:
 - 사용자의 핵심 행동:
@@ -59,7 +59,7 @@
 ## 6. 계획과 실제 결과 비교
 
 - PRD와 일치하는 부분:
-- 9회 사용자 흐름과 일치하는 부분:
+- 9회 개발 계획의 대표 흐름(2항)과 일치하는 부분:
 - 줄이거나 바꾼 부분:
 - 바꾼 이유:
 - 핵심 목적이 유지되는가? 예 / 아니요
@@ -86,7 +86,7 @@
 
 - `npm run pack`으로 만든 ZIP의 크기:
 - ZIP 안에 `node_modules`가 없는가? 예 / 아니요
-- ZIP 안에 `docs`의 문서 다섯 개(`00_course_rules.md` · `PRD.md` · `09_development_plan.md` · `10_api_promise.md` · `12_test_record.md`)와 `data/app.db`가 있는가? 예 / 아니요
+- ZIP 안에 `docs`의 문서 다섯 개(`00_course_rules.md` · `PRD.md` · `09_development_plan.md` · `10_api_promise.md` · `12_test_record.md`)와 `mockup` 폴더, `data/app.db`가 있는가? 예 / 아니요
 - ZIP 안에 비밀번호·API 키·실제 개인정보가 없는가? 예 / 아니요
 
 ## 9. AI 사용과 학생 판단
