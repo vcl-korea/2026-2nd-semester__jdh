@@ -4,8 +4,8 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <link rel="icon" href="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%2096%2096'%3E%3Cg%20fill='none'%20stroke='%23FF5C00'%20stroke-width='12'%3E%3Cpath%20d='M48%2012%20A36%2036%200%200%201%2048%2084'/%3E%3Cpath%20d='M48%2084%20A36%2036%200%200%201%2048%2012'/%3E%3C/g%3E%3Cpath%20d='M48%200%20L48%2024%20L68%2012%20Z'%20fill='%23FF5C00'/%3E%3Cpath%20d='M48%2072%20L48%2096%20L28%2084%20Z'%20fill='%23FF5C00'/%3E%3Cpath%20d='M65%2031%20L57%2057%20L39%2039%20Z'%20fill='%231B1D21'/%3E%3Cpath%20d='M31%2065%20L39%2039%20L57%2057%20Z'%20fill='%23A7ACB3'/%3E%3C/svg%3E" />
-<title>10-1. API와 요청·응답, 그리고 저장 · 정보와 디지털 문해력</title>
-<meta name="description" content="정보와 디지털 문해력 교과서 10-1 — 표준 프로젝트 10을 받아 설치를 시작하고, 프로젝트 지도(화면 · API · 저장 · docs)를 본 뒤 예시 「할 일 정리」로 화면 → API → SQLite → 다시 불러오기를 직접 본 뒤(SQLite Viewer 설치) 내 서비스의 API·저장 약속표를 쓴다." />
+<title>10-1. 프레임워크란? · 정보와 디지털 문해력</title>
+<meta name="description" content="정보와 디지털 문해력 교과서 10-1 — VS Code에 Codex를 설치해 API 키로 로그인하고(Windows 설정 · 권한), 프레임워크가 무엇인지 본 뒤, 읽고 보내는 짧은 변환 요청으로 Codex가 지금 연 내 프로젝트를 그 자리에서 Next.js 프로젝트로 변환하게 하고(버전 고정 · 목업을 Next.js 화면으로 · 빈 API 자리 · docs · chat-logs), 변환 뒤 바로 .env에 키를 넣는다. Codex에게 서비스를 켜게 하고(안 되면 터미널), 다음 시간에 쓸 SQLite Viewer를 설치한다. 폴더가 곧 주소가 되는 것(app/page.js → /, Codex가 만든 app/hello/page.js → /hello)으로 프레임워크의 약속을 직접 보고, AGENTS.md에 「계획서에 먼저 쓴다」 규칙을 더한다." />
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;700;800;900&family=IBM+Plex+Sans+KR:wght@300;400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
@@ -16,295 +16,398 @@
   <button class="menu" onclick="tbToggleToc()">☰ <span class="ko">목차</span><span class="zh">目录</span></button>
   <button id="modeBtn" onclick="tbToggleMode()" aria-pressed="false"><span class="ko">한 장씩 보기</span><span class="zh">逐页查看</span></button>
   <button class="lng" onclick="tbToggleLang()" aria-pressed="false">中文</button>
-  <div class="brand"><em>10-1</em> <span class="lesson"><span class="ko">API와 요청·응답, 그리고 저장</span><span class="zh">API、请求·响应与保存</span></span></div>
+  <div class="brand"><em>10-1</em> <span class="lesson"><span class="ko">프레임워크란?</span><span class="zh">什么是框架？</span></span></div>
   <div class="spacer"></div>
   <div class="pct" id="count">1 / 1</div>
   <button class="pbtn" onclick="window.print()"><span class="ko">인쇄</span><span class="zh">打印</span></button>
 </div>
 <div id="prog"></div>
-<nav id="toc"><div class="h"><span class="ko">이 차시 — 10-1</span><span class="zh">本课时 — 10-1</span></div><a href="#opener"><span class="n">·</span><span class="ko">차시 표지</span><span class="zh">课时首页</span></a><a href="#s0"><span class="n">0</span><span class="ko">들어가며</span><span class="zh">开始之前</span></a><a href="#s1"><span class="n">1</span><span class="ko">10 폴더 받기</span><span class="zh">拿到 10 文件夹</span></a><a href="#s2"><span class="n">2</span><span class="ko">API</span><span class="zh">API</span></a><a href="#s3"><span class="n">3</span><span class="ko">요청 세 가지</span><span class="zh">请求三件事</span></a><a href="#s4"><span class="n">·</span><span class="ko">흐름을 요청·응답으로</span><span class="zh">把流程读成请求·响应</span></a><a href="#s5"><span class="n">4</span><span class="ko">GET과 POST</span><span class="zh">GET 与 POST</span></a><a href="#s6"><span class="n">5</span><span class="ko">JSON 읽기</span><span class="zh">读 JSON</span></a><a href="#s7"><span class="n">6</span><span class="ko">성공과 실패</span><span class="zh">成功与失败</span></a><a href="#s7m"><span class="n">7</span><span class="ko">프로젝트 지도</span><span class="zh">项目地图</span></a><a href="#s7f"><span class="n">·</span><span class="ko">프레임워크는 약속</span><span class="zh">框架是约定</span></a><a href="#s7g"><span class="n">·</span><span class="ko">왜 Next.js인가</span><span class="zh">为什么用 Next.js</span></a><a href="#s8"><span class="n">·</span><span class="ko">직접 보기</span><span class="zh">亲眼看</span></a><a href="#s9"><span class="n">8</span><span class="ko">보이는 것과 기억</span><span class="zh">看得到与记住</span></a><a href="#s10"><span class="n">9</span><span class="ko">SQLite Viewer</span><span class="zh">SQLite Viewer</span></a><a href="#s10_2"><span class="n">·</span><span class="ko">Viewer로 보는 것</span><span class="zh">用 Viewer 看什么</span></a><a href="#s11"><span class="n">10</span><span class="ko">내 약속표</span><span class="zh">我的约定表</span></a><a href="#s13"><span class="n">11</span><span class="ko">오해와 확인</span><span class="zh">误解与确认</span></a><a href="#s14"><span class="n">12</span><span class="ko">정리와 다음 차시</span><span class="zh">小结与下一课时</span></a><a href="#s15"><span class="n">+</span><span class="ko">막힐 때</span><span class="zh">卡住时</span></a><div class="h"><span class="ko">전체 차시</span><span class="zh">全部课时</span></div><a href="../../index.html"><span class="n"><span class="ko">표지</span><span class="zh">首页</span></span><span class="ko">전체 목차</span><span class="zh">全部目录</span></a></nav><div id="scrim" onclick="tbToggleToc(false)"></div>
+<nav id="toc"><div class="h"><span class="ko">이 차시 — 10-1</span><span class="zh">本课时 — 10-1</span></div><a href="#opener"><span class="n">·</span><span class="ko">차시 표지</span><span class="zh">课时首页</span></a><a href="#sc"><span class="n">0</span><span class="ko">Codex 준비</span><span class="zh">准备 Codex</span></a><a href="#s7f"><span class="n">1</span><span class="ko">프레임워크가 생긴 이유</span><span class="zh">框架为什么产生</span></a><a href="#s7f2"><span class="n">·</span><span class="ko">혼자 만들어도 약속</span><span class="zh">一个人做也要约定</span></a><a href="#s7g"><span class="n">·</span><span class="ko">왜 Next.js인가</span><span class="zh">为什么用 Next.js</span></a><a href="#m1"><span class="n">2</span><span class="ko">내 프로젝트 변환하기</span><span class="zh">转换自己的项目</span></a><a href="#s10"><span class="n">3</span><span class="ko">설정 · SQLite Viewer</span><span class="zh">设置 · SQLite Viewer</span></a><a href="#s7m"><span class="n">4</span><span class="ko">폴더가 곧 주소</span><span class="zh">文件夹就是地址</span></a><a href="#d1"><span class="n">5</span><span class="ko">계획서 규칙 · 계획 고치기</span><span class="zh">计划书规则 · 修改计划</span></a><a href="#s13"><span class="n">6</span><span class="ko">오해와 확인</span><span class="zh">误解与确认</span></a><a href="#s14"><span class="n">7</span><span class="ko">정리와 다음 차시</span><span class="zh">小结与下一课时</span></a><a href="#s15"><span class="n">+</span><span class="ko">막힐 때</span><span class="zh">卡住时</span></a><div class="h"><span class="ko">전체 차시</span><span class="zh">全部课时</span></div><a href="../../index.html"><span class="n"><span class="ko">표지</span><span class="zh">首页</span></span><span class="ko">전체 목차</span><span class="zh">全部目录</span></a></nav><div id="scrim" onclick="tbToggleToc(false)"></div>
 <main>
 <section class="page opener" id="opener"><div class="onum"><span class="ko">10회 · 첫째 차시</span><span class="zh">第 10 次课 · 第 1 课时</span></div>
-<h1><span class="ko">API와 요청·응답,<br/>그리고 저장</span><span class="zh">API、请求·响应<br/>与保存</span></h1>
-<div class="osub"><span class="ko">버튼을 누르면 화면 너머에서 무슨 일이 일어나고, 기록은 어디에 남을까요?<br/>보내는 것 · 돌아오는 것 · 남는 것을 <b>직접 보고</b> 약속으로 적습니다.</span><span class="zh">按下按钮后，画面背后发生了什么？记录又留在哪里？<br/><b>亲眼看</b>发出去的、送回来的、留下来的，再把它写成约定。</span></div>
+<h1><span class="ko">프레임워크란?</span><span class="zh">什么是框架？</span></h1>
+<div class="osub"><span class="ko">Codex를 설치하고, 내 프로젝트를 <b>Next.js</b>라는 프레임워크로 변환한 뒤<br/>Codex와 함께 일하는 <b>규칙</b>을 정합니다.</span><span class="zh">装好 Codex，把自己的项目转换成 <b>Next.js</b> 这个框架的项目，<br/>再定好和 Codex 一起工作的<b>规则</b>。</span></div>
 <div class="abar"></div>
-<div class="ometa"><span class="ko"><b>이전 차시</b> · 9-2. 현실적인 목표와 구체화<br/><b>다음 차시</b> · 10-2. AI와 API·저장 연결하기<br/><b>오늘 받는 것</b> · 13회까지 쓰는 <code>10</code> 폴더 — 내 서비스 프로젝트</span><span class="zh"><b>上一课时</b> · 9-2. 现实的目标与具体化<br/><b>下一课时</b> · 10-2. 与 AI 一起接上 API 与保存<br/><b>今天拿到的</b> · 用到第 13 次课的 <code>10</code> 文件夹 — 自己的服务项目</span></div></section>
+<div class="ometa"><span class="ko"><b>이전 차시</b> · 9-2. 현실적인 목표와 구체화<br/><b>다음 차시</b> · 10-2. API와 DB 연결하기<br/><b>오늘 만드는 것</b> · 6~9회에 만든 내 프로젝트를 변환한 Next.js 프로젝트 — 13회까지 쓴다</span><span class="zh"><b>上一课时</b> · 9-2. 现实的目标与具体化<br/><b>下一课时</b> · 10-2. 连接 API 与数据库<br/><b>今天做出的</b> · 把第 6~9 次课做的自己的项目转换成 Next.js 项目 — 用到第 13 次课</span></div></section>
 
-<section class="page" id="s0">
-<div class="kick"><span class="ko">들어가며</span><span class="zh">开始之前</span><b>10-1</b></div>
-<h2 class="title"><span class="ko">버튼을 누르면 화면 너머에서 무슨 일이 일어날까</span><span class="zh">按下按钮后，画面背后发生了什么</span></h2>
-<p class="lead"><span class="ko">9-2에서 세운 개발 계획의 대표 흐름에는 「버튼을 누른다 → 결과를 확인한다」 같은 단계가 있습니다. 그런데 버튼과 결과 사이에는 눈에 보이지 않는 한 걸음이 더 있습니다. 화면이 서비스에 <b>종이 한 장을 건네고</b>, 서비스가 처리한 뒤 <b>답이 적힌 종이를 돌려주는</b> 일입니다. 오늘은 그 종이 두 장과, 답을 준 뒤에도 남아 있어야 할 기록을 봅니다.</span><span class="zh">9-2 制订的开发计划里，代表流程中有“按下按钮 → 确认结果”这样的步骤。但在按钮和结果之间，还有一步是看不见的：画面<b>递给服务一张纸</b>，服务处理后<b>递回一张写着答复的纸</b>。今天就来看这两张纸，以及答复之后还应该留下来的记录。</span></p>
+<section class="page" id="sc">
+<div class="kick"><span class="ko">0. Codex 준비</span><span class="zh">0. 准备 Codex</span><b>10-1</b></div>
+<h2 class="title"><span class="ko">10회부터는 VS Code 안의 Codex와 함께 만든다</span><span class="zh">从第 10 次课起，和 VS Code 里的 Codex 一起做</span> <span class="badge lab"><span class="ko">실습</span><span class="zh">实践</span></span></h2>
+<p class="lead"><span class="ko">VS Code 안에서 쓰는 <b>Codex</b>와 함께 서비스를 만듭니다. 터미널에 명령을 치지 않고 VS Code 옆 창에서 대화하며, 로그인은 <b>API 키</b> 방식으로 해 봅니다. 다른 일보다 먼저 설치합니다.</span><span class="zh">和 VS Code 里的 <b>Codex</b> 一起做服务。不用在终端里敲命令，而是在 VS Code 旁边的窗口里对话；登录用 <b>API 密钥</b>的方式来试试。先于其他事情安装它。</span></p>
+<div class="steps"><div class="st-h"><span class="ko">설치 순서</span><span class="zh">安装顺序</span></div><ol><li><span class="ko">VS Code 왼쪽 활동 막대에서 <b>확장</b>(<code>Ctrl+Shift+X</code>)을 열고 검색칸에 <code>Codex</code>를 입력한다.</span><span class="zh">在 VS Code 左侧活动栏打开<b>扩展</b>（<code>Ctrl+Shift+X</code>），在搜索框输入 <code>Codex</code>。</span></li><li><span class="ko"><b>Codex – OpenAI’s coding agent</b>(게시자 OpenAI)를 누르고, 설명 화면의 <b>식별자</b>가 <code>openai.chatgpt</code>인지 본 뒤 <b>설치</b>를 누른다. 이것 하나만 설치하면 되고, 다른 프로그램은 따로 깔지 않는다.</span><span class="zh">点 <b>Codex – OpenAI’s coding agent</b>（发布者 OpenAI），确认说明画面里的 <b class="keep-ko">식별자</b>（扩展 ID）是 <code>openai.chatgpt</code>，再点 <b class="keep-ko">설치</b>（安装）。只装这一个就行，不用另外装别的程序。</span></li></ol></div>
 <!-- ═══════════════════════════════════════════════════════════════════════
-     [이미지 생성 요청] 10-1-01-counter
-     · 영역   : 이 주석 바로 아래 figure — 브라우저에 점선 자리로 보인다
-     · 규격   : 가로 21:9(넓고 납작) · 개념 삽화 · assets/img/10-1-01-counter.png
+     [이미지 생성 요청] 10-1-06-codex-install
+     · 영역   : 이 주석 바로 아래 figure
+     · 규격   : 가로 16:9 · ① 화면 · Codex 이미지 생성(실사풍) · assets/img/10-1-06-codex-install.png
      ───────────────────────────────────────────────────────────────────────
 
      ── 맥락 (모델에게 그대로 넘겨도 된다) ────────────────────────────
-     장대현중고등학교 「정보와 디지털 문해력」 10회 첫째 차시(10-1)에 쓸 그림이다.
-     학생은 중3~고2 여덟 명. API 라는 말을 이 시간에 처음 듣는다.
-     교과서는 API 를 「약속된 창구」에 빗대어 설명한다.
-     정해진 곳에 정해진 것을 내면 정해진 것이 돌아온다 — 그 장면 하나를 그린다.
-     교과서 인쇄물과 교실 스크린 양쪽에 같은 파일이 들어간다.
+     장대현중고등학교 「정보와 디지털 문해력」 10회 첫째 차시(10-1) 첫 쪽에 쓸 그림이다(2026-11-16).
+     학생은 중3~고2 여덟 명, 비개발자다. 학교 컴퓨터는 Windows, VS Code는 한국어 화면이다.
+     오늘 처음으로 VS Code 확장 「Codex」를 설치한다. 아직 헷갈리는 학생이 있어서,
+     자기 화면과 비교하며 「무엇을 검색해 어느 것을 고르고 무엇을 확인해 누르는지」를 보게 한다.
 
      ── 그릴 것 ────────────────────────────────────────────────────
-     작은 접수 창구 하나를 옆에서 본 장면. 카운터 위 유리 칸막이 아래쪽에
-     서류가 오갈 만한 틈이 있다.
-     한쪽에서 손 하나가 종이 한 장을 그 틈으로 밀어 넣고,
-     반대쪽에서 다른 손이 종이 한 장을 내주고 있다.
-
-     · 창구는 **하나**다. 여러 창구가 늘어선 은행 로비로 그리지 않는다.
-     · 종이의 글자는 읽히지 않게 한다. 종이라는 것만 보이면 된다.
-     · 주황(#FF5C00)은 창구의 그 틈 언저리 한 군데에만 아주 조금 쓴다.
-     · 손만 보이게 하고 얼굴은 넣지 않는다.
-     · 컴퓨터·모니터·아이콘을 넣지 않는다. 이 그림은 비유이지 화면이 아니다.
+     Windows에서 연 VS Code 창 전체를 실제 화면 캡처처럼 그린다. 밝은 테마(Light Modern).
+     · 왼쪽 활동 막대에서 확장 아이콘(네모 네 개)이 선택되어 있고, 그 옆 사이드바 머리에 「확장」.
+     · 사이드바 검색칸에 「Codex」가 입력되어 있다.
+     · 검색 결과 목록 세 줄, 위에서부터:
+         「Codex – OpenAI’s coding agent」 아래 게시자 「OpenAI」  ← 이 줄이 선택되어 있다
+         「Codex Helper」 아래 게시자 「codex-tools」
+         「Codex Snippets」 아래 게시자 「devkit」
+     · 오른쪽 편집 영역에 선택한 확장의 설명 탭이 열려 있다.
+         머리: 검은 바탕에 흰 꽃 모양 OpenAI 로고 아이콘, 큰 제목 「Codex – OpenAI’s coding agent」, 그 아래 「OpenAI」, 그 아래 파란 단추 「설치」.
+         오른쪽 옆 정보 칸에 「식별자」와 그 값 「openai.chatgpt」.
+         본문 자리는 회색 막대 몇 줄로만 둔다(읽히는 문장을 쓰지 않는다).
+     · 주황(#FF5C00) 둥근 테두리를 세 곳에만 친다: ① 검색칸 ② 목록의 「Codex – OpenAI’s coding agent」 줄 ③ 「식별자 openai.chatgpt」 줄.
 
      ── 지킬 것 ────────────────────────────────────────────────────
-     · 공통 스타일 **A(사실적 삽화)** 를 앞에 붙인다. B(플랫 벡터)를 같이 붙이지 않는다.
-       → 이미지_제작_가이드 「2. 공통 스타일」
-     · 비율 **21:9 가로**. 창구를 옆에서 본 장면이라 넓고 납작한 그림이 맞다.
-     · 16:9 로 만들면 교과서 그 쪽이 인쇄에서 넘친다. 반드시 21:9 로 만든다.
-     · 배경은 거의 흰색(#ffffff). 어두운 배경을 쓰지 않는다.
-     · 받은 뒤 확인 — ① 창구가 하나인가 ② 주고받는 것이 각각 한 장인가
-       ③ 글자가 없나 ④ 화면·기기가 끼어들지 않았나. 어긋나면 다시 만든다.
+     · 화면 안 글자는 위에 「」로 적은 것만 쓰고 철자를 정확히 지킨다. 특히 openai.chatgpt 의 철자.
+     · 「설치」 단추가 보이는 설치하기 전 상태다. 「제거」 단추를 그리지 않는다.
+     · Windows 창 모양으로 그린다. macOS 창 단추(빨강·노랑·초록 동그라미)를 쓰지 않는다.
+     · 손·마우스 커서·사람은 그리지 않는다. 비율 16:9 가로. 인쇄해도 글자가 읽히게 크게.
+
+     ── 받은 뒤 확인 ────────────────────────────────────────────────
+     ① openai.chatgpt 철자 ② 「설치」만 있고 「제거」 없음 ③ 선택된 줄이 OpenAI의 Codex ④ 주황 테두리 세 곳 · 한글 안 깨짐
      ═══════════════════════════════════════════════════════════════════════
 -->
-<figure class="fig"><img class="figimg" src="../../assets/img/10-1-01-counter.png" alt="유리 칸막이가 있는 창구에서 한 손이 종이를 틈으로 밀어 넣고 반대쪽 손이 다른 종이를 내주는 장면." data-id="10-1-01-counter" data-spec="가로 21:9 · 개념 삽화 · 창구 하나를 옆에서 본 장면" onerror="window.imgPlaceholder&amp;&amp;imgPlaceholder(this)"><figcaption><span class="ko">그림 10-1-1. 정해진 틈으로 종이를 넣으면, 정해진 틈으로 답이 나온다.</span><span class="zh">图 10-1-1. 从规定的缝里递进纸，答复也从规定的缝里出来。</span></figcaption></figure>
-<div class="bigq"><div class="qt"><span class="ko">핵심 질문</span><span class="zh">核心问题</span></div><p><span class="ko">사용자의 행동은 어떤 <b>요청</b>이 되고, 서비스는 어떤 <b>응답</b>을 돌려주며,<br/>다시 열었을 때 무엇이 <b>남아</b> 있어야 할까?</span><span class="zh">用户的动作会变成什么样的<b>请求</b>，服务送回什么样的<b>响应</b>，<br/>重新打开时又该<b>留下</b>什么？</span></p></div>
+<figure class="fig narrow"><img class="figimg" src="../../assets/img/10-1-06-codex-install.png" alt="VS Code 확장 화면에서 Codex를 검색해 OpenAI의 Codex – OpenAI’s coding agent를 고르고, 식별자 openai.chatgpt와 설치 단추가 보이는 화면." data-id="10-1-06-codex-install" data-spec="가로 16:9 · ① 화면 · Codex 이미지 생성(실사풍) · VS Code 확장 화면" onerror="window.imgPlaceholder&amp;&amp;imgPlaceholder(this)"><figcaption><span class="ko">그림 10-1-1. 검색칸 → OpenAI의 Codex → 식별자 openai.chatgpt 확인 → 설치.</span><span class="zh">图 10-1-1. 搜索框 → OpenAI 的 Codex → 确认扩展 ID openai.chatgpt → 安装。</span></figcaption></figure>
 </section>
 
-<section class="page" id="s1">
-<div class="kick"><span class="ko">1. 10 폴더 받기</span><span class="zh">1. 拿到 10 文件夹</span><b>10-1</b></div>
-<h2 class="title"><span class="ko">13회까지 쓸 10 폴더를 받고 설치부터 시작한다</span><span class="zh">拿到用到第 13 次课的 10 文件夹，先开始安装</span> <span class="badge lab"><span class="ko">실습</span><span class="zh">实践</span></span></h2>
-<p class="lead"><span class="ko">오늘부터 13회까지는 선생님이 준비한 <b>표준 프로젝트</b> 하나에서 내 서비스를 만듭니다. 이 프로젝트를 쓰려면 먼저 필요한 부품을 인터넷에서 받아 와야 하는데, 몇 분이 걸립니다. 그래서 설명을 듣기 전에 설치부터 걸어 두고, 받는 동안 오늘 내용을 읽습니다.</span><span class="zh">从今天到第 13 次课，都在老师准备的一个<b>标准项目</b>里做自己的服务。要用这个项目，先得从网上下载需要的部件，要花几分钟。所以先把安装跑起来，下载的同时读今天的内容。</span></p>
-<div class="folder-download-row"><a class="download-cta" href="../../downloads/10_student_files.zip" download><span class="download-icon" aria-hidden="true">↓</span><span><b class="ko">10 내 서비스 프로젝트 내려받기</b><b class="zh">下载 10 自己的服务项目</b><small>10_student_files.zip</small></span></a><div class="download-note"><span class="ko">압축을 풀면 <code>10</code> 폴더가 나옵니다. <code>JDH_VibeCoding_자기이름</code> 안에 넣습니다. 13회까지 이 폴더 하나를 씁니다.</span><span class="zh">解压后会出现 <code>10</code> 文件夹。把它放进 <code class="keep-ko">JDH_VibeCoding_자기이름</code>。到第 13 次课都只用这一个文件夹。</span></div></div>
-<div class="steps"><div class="st-h"><span class="ko">지금 하세요</span><span class="zh">现在就做</span></div><ol><li><span class="ko">압축을 풀어 나온 <code>10</code> 폴더를 <code>JDH_VibeCoding_자기이름</code> 안에 넣는다.</span><span class="zh">把解压出来的 <code>10</code> 文件夹放进 <code class="keep-ko">JDH_VibeCoding_자기이름</code>。</span></li><li><span class="ko">VS Code에서 <b>파일 → 폴더 열기</b>로 <code>10</code> 폴더 자체를 연다.</span><span class="zh">在 VS Code 里用 <b class="keep-ko">파일 → 폴더 열기</b>（文件 → 打开文件夹）打开 <code>10</code> 文件夹本身。</span></li><li><span class="ko"><b>터미널 → 새 터미널</b>을 열고 줄 끝이 <code>…\10&gt;</code>인지 본다.</span><span class="zh">打开 <b class="keep-ko">터미널 → 새 터미널</b>（终端 → 新建终端），看行末是不是 <code>…\10&gt;</code>。</span></li><li><span class="ko"><code>npm install</code>을 입력하고 <code>Enter</code>를 누른다. 끝날 때까지 터미널을 닫지 않는다.</span><span class="zh">输入 <code>npm install</code>，按 <code>Enter</code>。结束前不要关闭终端。</span></li></ol></div>
+<section class="page" id="sc_1b">
+<div class="kick"><span class="ko">0. Codex 준비</span><span class="zh">0. 准备 Codex</span><b>10-1</b></div>
+<h2 class="title"><span class="ko">Codex 창을 열고 API 키로 로그인한다</span><span class="zh">打开 Codex 窗口，用 API 密钥登录</span> <span class="cont"><span class="ko">(이어서)</span><span class="zh">（续）</span></span></h2>
+<p class="lead"><span class="ko">설치가 끝나면 Codex 창을 열어 로그인합니다. 「ChatGPT로 로그인」이 아니라 <b>API 키 사용</b>을 고릅니다.</span><span class="zh">装好后打开 Codex 窗口登录。选 <b class="keep-ko">API 키 사용</b>，不选“<b class="keep-ko">ChatGPT로 로그인</b>”。</span></p>
+<div class="steps"><div class="st-h"><span class="ko">로그인 순서</span><span class="zh">登录顺序</span></div><ol><li><span class="ko">① 편집기 창 <b>오른쪽 위</b>의 Codex 단추(OpenAI 꽃 모양)를 누른다. 왼쪽 활동 막대에는 생기지 않는다. ② 오른쪽 창 위 탭에서 「채팅」이 아니라 <b>Codex</b>를 고른다.</span><span class="zh">① 点编辑器窗口<b>右上角</b>的 Codex 按钮（OpenAI 花朵图标）。左侧活动栏里不会出现。② 在右侧窗口上方的标签里选 <b>Codex</b>，而不是“<b class="keep-ko">채팅</b>”（聊天）。</span></li><li><span class="ko">③ <b>API 키 사용</b> → ④ 「OpenAI API 키를 입력하세요」 칸에 <b>받은 내 키</b>를 붙여 넣고 <b>확인</b>. 안내 화면이 나오면 <b>계속</b>을 누르고, 아래에 대화 입력칸이 보이면 끝이다.</span><span class="zh">③ <b class="keep-ko">API 키 사용</b> → ④ 在“<b class="keep-ko">OpenAI API 키를 입력하세요</b>”（请输入 OpenAI API 密钥）框里粘贴<b>自己拿到的密钥</b>，点 <b class="keep-ko">확인</b>（确定）。出现说明画面就点 <b class="keep-ko">계속</b>（继续），下面出现对话输入框就完成了。</span></li></ol></div>
+<!-- ═══════════════════════════════════════════════════════════════════════
+     [이미지 생성 요청] 10-1-07-codex-login
+     · 영역   : 이 주석 바로 아래 figure
+     · 규격   : 가로 16:9 · ① 화면 · Codex 이미지 생성(실사풍) · assets/img/10-1-07-codex-login.png
+     ───────────────────────────────────────────────────────────────────────
+
+     ── 맥락 (모델에게 그대로 넘겨도 된다) ────────────────────────────
+     10-1 셋째 쪽에 쓸 그림이다(2026-11-16 다시 만듦). Windows · VS Code 한국어 화면.
+     Codex 확장을 설치하면 왼쪽 활동 막대에는 아이콘이 생기지 않는다. 대신 편집기 창 오른쪽 위(탭 줄 오른쪽 끝)에
+     OpenAI 꽃 모양 Codex 아이콘이 생기고, 누르면 VS Code 오른쪽 사이드바가 열린다. 사이드바 위에는 「채팅」(Copilot) 「Codex」 탭이 있어 「Codex」를 골라야 한다.
+     학생은 로그인 화면에서 「ChatGPT로 로그인」이 아니라 「API 키 사용」을 눌러 키를 붙여 넣는다.
+
+     ── 그릴 것 ────────────────────────────────────────────────────
+     가로로 긴 한 장. 왼쪽 약 64%는 Windows VS Code 창 전체(밝은 테마), 오른쪽 약 36%는 Codex 창만 크게 확대한 칸.
+     · 왼쪽 VS Code 창:
+         왼쪽 활동 막대에는 탐색기 · 검색 · 소스 제어 · 실행 · 확장 아이콘만 있다(Codex 아이콘 없음).
+         탐색기 머리에 폴더 이름 「10」, 그 아래 「app」 「docs」 「AGENTS.md」.
+         가운데 편집 영역에 탭 하나 「시작」, 본문은 회색 막대 몇 줄.
+         편집기 탭 줄의 오른쪽 끝에 작은 아이콘 세 개(왼쪽부터 OpenAI 꽃 모양 Codex 아이콘, 창 나누기 아이콘, 「…」).
+         그중 OpenAI 꽃 모양 아이콘에만 주황(#FF5C00) 둥근 테두리와 주황 숫자 「①」.
+         창 오른쪽에 세로로 긴 사이드바. 사이드바 맨 위에 탭 두 개 「채팅」 「Codex」 — 「Codex」 탭이 선택되어 있고 주황 테두리와 숫자 「②」.
+         사이드바 가운데에 큰 제목 「Codex」, 그 아래 검은 채움 단추 「ChatGPT로 로그인」,
+         그 아래 테두리 단추 「API 키 사용」(주황 테두리와 숫자 「③」), 그 아래 작은 회색 글자 「추가 옵션」.
+     · 오른쪽 확대 칸(위에 주황 숫자 「④」): 같은 Codex 사이드바를 크게. 글자 「OpenAI API 키를 입력하세요」,
+         입력칸 하나(안에 회색 점 ●●●●●●●●로 가려진 키), 그 아래 단추 「취소」와 검은 채움 단추 「확인」. 입력칸과 「확인」에 주황 테두리.
+     · 왼쪽 창의 사이드바에서 오른쪽 칸으로 굵은 주황 화살표 → 하나.
+
+     ── 지킬 것 ────────────────────────────────────────────────────
+     · 화면 안 글자는 「」로 적은 것만 쓴다. 키는 절대 글자로 쓰지 않고 점으로만 가린다(sk- 같은 글자도 쓰지 않는다).
+     · 왼쪽 활동 막대에 Codex 아이콘을 그리지 않는다(활동 막대에는 탐색기 · 검색 · 소스 제어 · 실행 · 확장 아이콘만).
+     · Windows 창 모양. macOS 창 단추 금지. 손·커서·사람 없음. 16:9 가로. 인쇄해도 읽히게 크게.
+
+     ── 받은 뒤 확인 ────────────────────────────────────────────────
+     ① 탭 줄 오른쪽 끝 OpenAI 꽃 아이콘 ② 「채팅」 「Codex」 탭 중 Codex ③ 「API 키 사용」 ④ 키가 점으로만 · 「확인」 ⑤ 활동 막대에 Codex 아이콘 없음 ⑥ 한글 안 깨짐
+     ═══════════════════════════════════════════════════════════════════════
+-->
+<figure class="fig narrow"><img class="figimg" src="../../assets/img/10-1-07-codex-login.png" alt="편집기 창 오른쪽 위의 Codex 단추를 누르면 오른쪽에 Codex 창이 열린다. ChatGPT로 로그인 아래의 API 키 사용, 확대한 칸에는 OpenAI API 키를 입력하세요 칸과 확인 단추." data-id="10-1-07-codex-login" data-spec="가로 16:9 · ① 화면 · Codex 이미지 생성(실사풍) · 오른쪽 위 Codex 단추와 로그인 화면" onerror="window.imgPlaceholder&amp;&amp;imgPlaceholder(this)"><figcaption><span class="ko">그림 10-1-2. ① 오른쪽 위 Codex 단추 → ② Codex 탭 → ③ API 키 사용 → ④ 키를 붙여 넣고 확인.</span><span class="zh">图 10-1-2. ① 右上角 Codex 按钮 → ② Codex 标签 → ③ <b class="keep-ko">API 키 사용</b> → ④ 粘贴密钥后点 <b class="keep-ko">확인</b>。</span></figcaption></figure>
+<div class="note warn"><div class="nt"><span class="ko">키는 돈과 같습니다</span><span class="zh">密钥就和钱一样</span></div><p><span class="ko">쓴 만큼 요금이 나갑니다. 키는 <b>로그인 칸에만</b> 붙여 넣고, 파일 · 메신저 · 사진이나 프로젝트 폴더에 두지 않습니다. 로그인한 키는 내 PC의 사용자 폴더에 따로 보관되어 제출 ZIP에 들어가지 않습니다.</span><span class="zh">用多少付多少。密钥<b>只贴在登录框里</b>，不放进文件 · 聊天软件 · 照片或项目文件夹。登录的密钥另存在用户文件夹里，不会进提交的 ZIP。</span></p></div>
 </section>
 
-<section class="page" id="s1_2">
-<div class="kick"><span class="ko">1. 10 폴더 받기</span><span class="zh">1. 拿到 10 文件夹</span><b>10-1</b></div>
-<h2 class="title"><span class="ko">13회까지 쓸 10 폴더를 받고 설치부터 시작한다</span><span class="zh">拿到用到第 13 次课的 10 文件夹，先开始安装</span> <span class="cont"><span class="ko">(이어서)</span><span class="zh">（续）</span></span></h2>
-<p class="lead"><span class="ko">설치가 도는 동안 9회까지의 자료를 <code>10</code> 폴더의 <code>docs</code>로 복사합니다. 10회부터 AI는 코드를 고치기 전에 <code>docs</code>의 문서를 먼저 읽고, 내 계획과 맞게 고칩니다. 파일 탐색기에서 <code>06</code> 폴더를 열어 아래 두 파일과 <code>mockup</code> 폴더를 고르고 복사합니다.</span><span class="zh">安装进行的同时，把到第 9 次课为止的资料复制到 <code>10</code> 文件夹的 <code>docs</code> 里。从第 10 次课起，AI 在改代码之前会先读 <code>docs</code> 里的文档，再按我的计划去改。在文件资源管理器里打开 <code>06</code> 文件夹，选中下面两个文件和 <code>mockup</code> 文件夹复制。</span></p>
-<div class="tablewrap"><table class="kv"><thead><tr><th style="width:50%"><span class="ko">06 폴더에서 복사</span><span class="zh">从 06 文件夹复制</span></th><th><span class="ko">10 폴더의 붙여 넣을 곳</span><span class="zh">粘贴到 10 文件夹的哪里</span></th></tr></thead><tbody><tr><td><span class="ko"><code>PRD.md</code></span><span class="zh"><code>PRD.md</code></span></td><td><span class="ko"><code>10\docs</code></span><span class="zh"><code>10\docs</code></span></td></tr><tr><td><span class="ko"><code>09_development_plan.md</code></span><span class="zh"><code>09_development_plan.md</code></span></td><td><span class="ko"><code>10\docs</code></span><span class="zh"><code>10\docs</code></span></td></tr><tr><td><span class="ko"><code>mockup</code> 폴더 통째로</span><span class="zh">整个 <code>mockup</code> 文件夹</span></td><td><span class="ko"><code>10\docs</code></span><span class="zh"><code>10\docs</code></span></td></tr></tbody></table></div>
-<div class="note ok"><div class="nt"><span class="ko">docs에는 처음부터 세 파일이 들어 있습니다</span><span class="zh">docs 里原本就有三个文件</span></div><p><span class="ko"><code>00_course_rules.md</code>는 수업에서 만들 수 있는 것과 어려운 것을 정한 수업 조건이고, <code>10_api_promise.md</code>는 오늘 쓰는 API 약속표, <code>12_test_record.md</code>는 12회에 쓰는 테스트 기록입니다. 그래서 <code>06</code>에서는 두 파일과 <code>mockup</code>만 가져옵니다. 복사가 끝나면 <code>docs</code>에 파일 다섯 개와 <code>mockup</code> 폴더가 있어야 합니다.</span><span class="zh"><code>00_course_rules.md</code> 是规定课上能做什么、什么难做的课堂条件，<code>10_api_promise.md</code> 是今天要写的 API 约定表，<code>12_test_record.md</code> 是第 12 次课写的测试记录。所以从 <code>06</code> 只拿两个文件和 <code>mockup</code>。复制完后，<code>docs</code> 里应该有五个文件和 <code>mockup</code> 文件夹。</span></p></div>
-<div class="note"><div class="nt"><span class="ko">설치가 끝나면</span><span class="zh">安装结束后</span></div><p><span class="ko">터미널에 다시 <code>…\10&gt;</code>가 나오고 탐색기에 <code>node_modules</code> 폴더가 생깁니다. 이 폴더는 열어 보지 않아도 되고, 제출할 때도 넣지 않습니다.</span><span class="zh">终端里会再次出现 <code>…\10&gt;</code>，资源管理器里会多出 <code>node_modules</code> 文件夹。这个文件夹不用打开，提交时也不放进去。</span></p></div>
+<section class="page" id="sc_1c">
+<div class="kick"><span class="ko">0. Codex 준비</span><span class="zh">0. 准备 Codex</span><b>10-1</b></div>
+<h2 class="title"><span class="ko">Windows 설정까지 마쳐야 Codex가 파일을 고칠 수 있다</span><span class="zh">完成 Windows 设置后，Codex 才能改文件</span> <span class="cont"><span class="ko">(이어서)</span><span class="zh">（续）</span></span></h2>
+<p class="lead"><span class="ko">로그인하면 Codex 창 아래쪽에 「계속 진행하려면 Windows 설정을 마치세요」 카드가 뜹니다. 이 설정은 Codex가 내 PC에서 파일을 만들고 명령을 안전하게 실행할 공간을 만드는 일입니다. 마치지 않으면 대화는 되지만 파일을 고치지 못합니다.</span><span class="zh">登录后，Codex 窗口下方会出现“<b class="keep-ko">계속 진행하려면 Windows 설정을 마치세요</b>”（请完成 Windows 设置以继续）卡片。这个设置是为 Codex 在自己电脑上新建文件、安全执行命令准备空间。不完成的话能对话，但改不了文件。</span></p>
+<div class="steps"><div class="st-h"><span class="ko">설정 순서</span><span class="zh">设置顺序</span></div><ol><li><span class="ko">① 카드의 <b>계속</b>을 누른다.</span><span class="zh">① 点卡片上的 <b class="keep-ko">계속</b>（继续）。</span></li><li><span class="ko">② Windows 「사용자 계정 컨트롤」 창이 뜨면 <b>예</b>를 누른다. 관리자 암호를 묻거나 실패하면 손을 든다(부록 「Codex에서 막힐 때」).</span><span class="zh">② 弹出 Windows“<b class="keep-ko">사용자 계정 컨트롤</b>”（用户账户控制）窗口时点 <b class="keep-ko">예</b>（是）。要求管理员密码或失败时举手（附录“在 Codex 里卡住时”）。</span></li><li><span class="ko">③ 「Windows 설정 마무리 중」이 몇 분 걸린다. 「Windows 설정이 완료되었습니다」가 나오면 끝이다.</span><span class="zh">③ “<b class="keep-ko">Windows 설정 마무리 중</b>”（正在完成 Windows 设置）要几分钟。出现“<b class="keep-ko">Windows 설정이 완료되었습니다</b>”（Windows 设置已完成）就好了。</span></li></ol></div>
+<!-- ═══════════════════════════════════════════════════════════════════════
+     [이미지 생성 요청] 10-1-09-codex-windows-setup
+     · 영역   : 이 주석 바로 아래 figure
+     · 규격   : 가로 16:9 · ① 화면 · Codex 이미지 생성(실사풍) · assets/img/10-1-09-codex-windows-setup.png
+     ───────────────────────────────────────────────────────────────────────
+
+     ── 맥락 (모델에게 그대로 넘겨도 된다) ────────────────────────────
+     10-1 Codex 준비 쪽에 쓸 그림이다(2026-11-16). Windows · VS Code 한국어 화면.
+     API 키로 로그인하면 오른쪽 Codex 창 아래 입력칸 바로 위에 Windows 설정 카드가 뜬다. 「계속」을 누르면
+     Windows 「사용자 계정 컨트롤」 창이 떠서 「예」를 눌러야 하고, 몇 분 뒤 「Windows 설정이 완료되었습니다」가 나온다.
+     이 설정을 마쳐야 Codex가 파일을 만들고 고칠 수 있다. 학생이 세 단계를 순서대로 보게 한다.
+
+     ── 그릴 것 ────────────────────────────────────────────────────
+     가로로 긴 한 장을 세 칸으로 나눈다. 칸 위에 주황(#FF5C00) 숫자 「①」 「②」 「③」. 칸 사이에 주황 화살표 →.
+     · ① 칸: VS Code 오른쪽 Codex 창(밝은 테마)의 아래쪽을 잘라 낸 모습. 위에 탭 「채팅」 「Codex」(Codex 선택).
+         입력칸 바로 위에 둥근 카드 하나: 굵은 글자 「계속 진행하려면 Windows 설정을 마치세요」,
+         그 아래 작은 회색 글자 「파일을 만들고, 코드를 편집하고, 액션을 실행하려면 설정을 완료하세요」,
+         카드 오른쪽에 검은 채움 단추 「계속」(주황 둥근 테두리).
+         카드 아래 입력칸 안내 글 「무엇이든 요청하세요」.
+     · ② 칸: Windows 11 「사용자 계정 컨트롤」 대화 상자(파란 머리 띠 없이 Windows 11 모양).
+         맨 위 작은 글자 「사용자 계정 컨트롤」, 큰 글자 「이 앱이 디바이스를 변경하도록 허용하시겠어요?」,
+         아래 단추 두 개: 「예」(주황 둥근 테두리) 「아니요」.
+     · ③ 칸: ①과 같은 Codex 창 아래쪽. 카드 자리에 초록 체크 표시와 굵은 글자 「Windows 설정이 완료되었습니다」.
+         그 아래 입력칸 안내 글 「무엇이든 요청하세요」.
+
+     ── 지킬 것 ────────────────────────────────────────────────────
+     · 화면 안 글자는 「」로 적은 것만 쓴다. 철자 정확히. 앱 이름 · 게시자 · 파일 경로 같은 다른 글자를 넣지 않는다.
+     · Windows 창 모양. macOS 창 단추 금지. 손·커서·사람 없음. 16:9 가로. 인쇄해도 읽히게 크게.
+
+     ── 받은 뒤 확인 ────────────────────────────────────────────────
+     ① 카드 문구와 「계속」 ② 「예」 테두리 ③ 「Windows 설정이 완료되었습니다」 ④ 한글 안 깨짐
+     ═══════════════════════════════════════════════════════════════════════
+-->
+<figure class="fig narrow"><img class="figimg" src="../../assets/img/10-1-09-codex-windows-setup.png" alt="① Codex 창의 Windows 설정 카드와 계속 단추, ② Windows 사용자 계정 컨트롤 창의 예 단추, ③ Windows 설정이 완료되었습니다." data-id="10-1-09-codex-windows-setup" data-spec="가로 16:9 · ① 화면 · Codex 이미지 생성(실사풍) · Windows 설정 카드 → 사용자 계정 컨트롤 → 완료" onerror="window.imgPlaceholder&amp;&amp;imgPlaceholder(this)"><figcaption><span class="ko">그림 10-1-3. ① 계속 → ② 예 → ③ 완료 메시지까지 기다린다.</span><span class="zh">图 10-1-3. ① <b class="keep-ko">계속</b> → ② <b class="keep-ko">예</b> → ③ 等到出现完成提示。</span></figcaption></figure>
 </section>
 
-<section class="page" id="s2">
-<div class="kick"><span class="ko">2. API</span><span class="zh">2. API</span><b>10-1</b></div>
-<h2 class="title"><span class="ko">API는 서비스 안의 약속된 창구다</span><span class="zh">API 是服务里约定好的窗口</span> <span class="badge core"><span class="ko">핵심</span><span class="zh">核心</span></span></h2>
-<p class="lead"><span class="ko">그림의 창구에서 종이는 아무 데로나 넣지 않습니다. 정해진 틈으로, 정해진 양식을 넣어야 답이 나옵니다. 서비스에서도 화면이 기능에게 일을 부탁할 때 이렇게 <b>미리 정한 창구</b>로 부탁합니다. 이 창구를 API라고 부릅니다.</span><span class="zh">图里的窗口，纸不能随便往哪儿塞。要从规定的缝里、按规定的格式递进去，才会有答复。服务里也一样：画面请功能办事时，要通过这样<b>事先定好的窗口</b>来请求。这个窗口就叫 API。</span></p>
-<div class="term"><div class="term-h"><span class="ko"><span class="w">API</span><span class="en">Application Programming Interface</span></span><span class="zh"><span class="w">API</span><span class="en">Application Programming Interface</span></span></div><dl><dt><span class="ko">현상</span><span class="zh">现象</span></dt><dd><span class="ko">버튼을 누르면 잠깐 「보내는 중」이 보였다가 결과가 나타납니다. 그 사이에 화면은 서비스에 무언가를 보내고 답을 기다렸습니다.</span><span class="zh">按下按钮后，会短暂显示“正在发送”，然后结果才出现。在这之间，画面向服务发出了什么，并在等答复。</span></dd><dt><span class="ko">쉬운 설명</span><span class="zh">通俗说法</span></dt><dd><span class="ko">화면과 기능이 서로 부탁하고 답하는 <b>약속된 창구</b>입니다.</span><span class="zh">画面和功能互相请求、答复的<b>约定好的窗口</b>。</span></dd><dt><span class="ko">정확한 정의</span><span class="zh">准确定义</span></dt><dd class="def"><span class="ko">한 프로그램이 다른 프로그램에게 일을 요청할 때 쓰는 <b>주소 · 방법 · 주고받는 데이터의 약속</b>.</span><span class="zh">一个程序请另一个程序办事时使用的<b>地址 · 方法 · 收发数据的约定</b>。</span></dd><dt><span class="ko">경계</span><span class="zh">边界</span></dt><dd><span class="ko">API가 꼭 다른 회사의 서비스를 뜻하지는 않습니다. 오늘 보는 API는 <b>내 프로젝트 안</b>에 있는 창구입니다.</span><span class="zh">API 不一定指别家公司的服务。今天看的 API 是<b>自己项目里面</b>的窗口。</span></dd><dt><span class="ko">문장 속 사용</span><span class="zh">句中用法</span></dt><dd><span class="ko">“추가 버튼을 누르면 화면이 <code>/api/tasks</code> API에 할 일을 보낸다.”</span><span class="zh">“按下添加按钮，画面就把待办发给 <code>/api/tasks</code> 这个 API。”</span></dd></dl></div>
-</section>
+<section class="page" id="sc_2">
+<div class="kick"><span class="ko">0. Codex 준비</span><span class="zh">0. 准备 Codex</span><b>10-1</b></div>
+<h2 class="title"><span class="ko">Codex에게 어디까지 맡길지 — 권한을 고른다</span><span class="zh">让 Codex 做到哪一步 — 选择权限</span> <span class="cont"><span class="ko">(이어서)</span><span class="zh">（续）</span></span></h2>
+<p class="lead"><span class="ko">Codex는 내 프로젝트 폴더의 파일을 직접 고치고 명령도 실행합니다. 어디까지 묻지 않고 하게 할지는 입력칸 아래 <b>권한</b> 단추로 정합니다.</span><span class="zh">Codex 会直接改项目文件夹里的文件、执行命令。不问就做到哪一步，用输入框下面的<b>权限</b>按钮来定。</span></p>
+<div class="tablewrap"><table class="kv"><thead><tr><th style="width:24%"><span class="ko">권한 단추에서 고르는 것</span><span class="zh">权限按钮里的选项</span></th><th><span class="ko">Codex가 하는 일</span><span class="zh">Codex 做的事</span></th><th style="width:16%"><span class="ko">수업에서</span><span class="zh">课上</span></th></tr></thead><tbody><tr><td><span class="ko"><b>승인 요청</b></span><span class="zh"><b class="keep-ko">승인 요청</b></span></td><td><span class="ko">프로젝트 폴더 안은 고치고, 폴더 밖 · 인터넷은 <b>항상 묻는다</b></span><span class="zh">（请求批准）改项目文件夹里的；文件夹外 · 上网<b>每次都问</b></span></td><td><span class="ko"><b>이것만 쓴다</b></span><span class="zh"><b>只用它</b></span></td></tr><tr><td><span class="ko"><b>나 대신 승인</b></span><span class="zh"><b class="keep-ko">나 대신 승인</b></span></td><td><span class="ko">위험해 보이는 일만 묻고 나머지는 스스로 승인 · 요금이 더 든다</span><span class="zh">（替我批准）只问危险的事 · 更费钱</span></td><td><span class="ko">쓰지 않는다</span><span class="zh">不用</span></td></tr><tr><td><span class="ko"><b>전체 권한</b></span><span class="zh"><b class="keep-ko">전체 권한</b></span></td><td><span class="ko">묻지 않고 인터넷과 컴퓨터의 <b>모든 파일</b>을 쓴다</span><span class="zh">（完全权限）不问就用网络和<b>所有文件</b></span></td><td><span class="ko">쓰지 않는다</span><span class="zh">不用</span></td></tr></tbody></table></div>
+<!-- ═══════════════════════════════════════════════════════════════════════
+     [이미지 생성 요청] 10-1-08-codex-permission
+     · 영역   : 이 주석 바로 아래 figure
+     · 규격   : 가로 16:9 · ① 화면 · Codex 이미지 생성(실사풍) · assets/img/10-1-08-codex-permission.png
+     ───────────────────────────────────────────────────────────────────────
 
-<section class="page" id="s3">
-<div class="kick"><span class="ko">3. 요청</span><span class="zh">3. 请求</span><b>10-1</b></div>
-<h2 class="title"><span class="ko">요청에는 어디로 · 어떻게 · 무엇을이 담긴다</span><span class="zh">请求里装着 往哪里 · 怎么做 · 送什么</span> <span class="badge core"><span class="ko">핵심</span><span class="zh">核心</span></span></h2>
-<p class="lead"><span class="ko">창구에 종이를 넣을 때 정해야 하는 것은 세 가지입니다. 어느 창구로 갈지, 무엇을 해 달라고 할지, 함께 무엇을 건넬지입니다. 오늘 받은 <code>10</code> 프로젝트에는 이 세 가지가 이미 정해진 예시 「할 일 정리」가 들어 있습니다. 표의 오른쪽 칸은 할 일을 추가할 때의 요청입니다.</span><span class="zh">往窗口递纸时要定三件事：去哪个窗口、请它做什么、一起递过去什么。今天拿到的 <code>10</code> 项目里，已经有一个把这三件事定好的示例“<b class="keep-ko">할 일 정리</b>”（待办整理）。表格右栏是添加待办时的请求。</span></p>
-<div class="tablewrap"><table class="kv"><thead><tr><th style="width:20%"><span class="ko">요청에 담기는 것</span><span class="zh">请求里装的</span></th><th><span class="ko">뜻</span><span class="zh">意思</span></th><th style="width:28%"><span class="ko">예시 프로젝트에서는</span><span class="zh">在示例项目里</span></th></tr></thead><tbody><tr><td><span class="ko">어디로</span><span class="zh">往哪里</span></td><td><span class="ko">요청 주소</span><span class="zh">请求地址</span></td><td><span class="ko"><code>/api/tasks</code></span><span class="zh"><code>/api/tasks</code></span></td></tr><tr><td><span class="ko">어떻게</span><span class="zh">怎么做</span></td><td><span class="ko">방법 — 보여 달라(GET)인지 처리해 달라(POST)인지</span><span class="zh">方法 — 是“给我看”（GET）还是“帮我处理”（POST）</span></td><td><span class="ko"><code>POST</code></span><span class="zh"><code>POST</code></span></td></tr><tr><td><span class="ko">무엇을</span><span class="zh">送什么</span></td><td><span class="ko">함께 보내는 데이터</span><span class="zh">一起发送的数据</span></td><td><span class="ko">입력한 할 일 <code>text</code></span><span class="zh">输入的待办 <code>text</code></span></td></tr></tbody></table></div>
-<div class="note"><div class="nt"><span class="ko">주소는 내가 처음부터 정하지 않습니다</span><span class="zh">地址不用自己从头定</span></div><p><span class="ko">주소와 방법은 10-2에서 AI가 제안하면 내가 읽고 확인합니다. 오늘 내가 먼저 정할 것은 <b>무엇을 보내고 무엇을 돌려받아야 하는지</b>입니다.</span><span class="zh">地址和方法到 10-2 由 AI 提出、由我读过确认。今天我先要定的是<b>发送什么、该收回什么</b>。</span></p></div>
-</section>
+     ── 맥락 (모델에게 그대로 넘겨도 된다) ────────────────────────────
+     10-1 「Codex 창에서 확인할 두 가지 — 권한과 일하는 순서」 쪽에 쓸 그림이다(2026-11-16, 옛 10-1-08-codex-plan을 바꿈).
+     계획 모드는 쓰지 않는다(선생님 「계획모드, 이런거 이제 안쓰려고. 그냥 문서에다 쓰게하는 방식」). 그림은 권한 「승인 요청」만 확인시킨다.
+     Windows · VS Code 한국어 화면, 어두운 테마. 로그인한 뒤 Codex 창 아래의 대화 입력칸.
 
-<section class="page" id="s4">
-<div class="kick"><span class="ko">3. 요청</span><span class="zh">3. 请求</span><b>10-1</b></div>
-<h2 class="title"><span class="ko">계획의 대표 흐름을 요청과 응답으로 다시 읽는다</span><span class="zh">用请求与响应重读计划里的代表流程</span></h2>
-<p class="lead"><span class="ko">9-2에서 정한 대표 흐름은 여전히 기준입니다. 다만 오늘은 「행동」과 「서비스의 반응」 사이에 숨어 있던 두 걸음을 꺼내 봅니다. 화면이 요청을 보내는 걸음과, API가 처리해 응답을 돌려주는 걸음입니다.</span><span class="zh">9-2 定下的代表流程依然是标准。只是今天要把藏在“动作”和“服务的回应”之间的两步拿出来看：画面发出请求的一步，和 API 处理后送回响应的一步。</span></p>
-<div class="steps"><div class="st-h"><span class="ko">할 일 정리 서비스에서 추가를 누르면</span><span class="zh">在待办整理服务里按下添加</span></div><ol><li><span class="ko">사용자가 할 일을 쓰고 <b>추가</b>를 누른다. <i>— 대표 흐름의 행동</i></span><span class="zh">用户写下待办，按<b>添加</b>。<i>— 代表流程里的动作</i></span></li><li><span class="ko">화면이 API에 <b>요청</b>을 보낸다. 「<code>/api/tasks</code>로, 처리해 줘, 할 일 = 과학 보고서」</span><span class="zh">画面向 API 发出<b>请求</b>。“发到 <code>/api/tasks</code>，请处理，待办 = 科学报告”</span></li><li><span class="ko">API가 빈칸인지 확인하고, 할 일을 <b>SQLite 파일에 저장</b>한다.</span><span class="zh">API 检查是不是空的，再把待办<b>存进 SQLite 文件</b>。</span></li><li><span class="ko">API가 <b>응답</b>을 돌려준다. 「성공, 추가했습니다」</span><span class="zh">API 送回<b>响应</b>。“成功，已添加”</span></li><li><span class="ko">화면이 목록을 <b>다시 불러와</b> 새 할 일을 보여 준다. <i>— 대표 흐름의 서비스의 반응</i></span><span class="zh">画面<b>重新读取</b>列表，显示新的待办。<i>— 代表流程里服务的回应</i></span></li></ol></div>
-<div class="note ok"><div class="nt"><span class="ko">대표 흐름의 한 단계가 다섯 걸음이 됩니다</span><span class="zh">代表流程的一步变成了五步</span></div><p><span class="ko">내 <code>09_development_plan.md</code>의 2항 대표 흐름에서 버튼을 누르는 단계를 찾아보세요. 그 단계가 오늘 요청과 응답으로 펼칠 자리이고, 3항 「기억할 기록과 표」가 저장할 것입니다.</span><span class="zh">在自己的 <code>09_development_plan.md</code> 第 2 项代表流程里，找出按按钮的那一步。那一步就是今天要展开成请求与响应的地方，第 3 项“<b class="keep-ko">기억할 기록과 표</b>”（要记住的记录与表）就是要保存的东西。</span></p></div>
-</section>
+     ── 그릴 것 ────────────────────────────────────────────────────
+     옛 그림(10-1-08-codex-plan)과 같은 구도에서 다음만 바꾼다.
+     · 입력칸의 「플랜」 표시 · 그 주황 테두리 · 「Shift+Tab」 말풍선을 없앤다.
+     · 입력칸 회색 안내 글은 실제 화면처럼 「무엇이든 요청하세요」.
+     · 주황 둥근 테두리는 입력칸 아래 권한 「승인 요청」 한 곳에만.
 
-<section class="page" id="s5">
-<div class="kick"><span class="ko">4. GET과 POST</span><span class="zh">4. GET 与 POST</span><b>10-1</b></div>
-<h2 class="title"><span class="ko">보여 달라는 GET, 처리해 달라는 POST</span><span class="zh">“给我看”的 GET，“帮我处理”的 POST</span> <span class="badge core"><span class="ko">핵심</span><span class="zh">核心</span></span></h2>
-<p class="lead"><span class="ko">요청의 방법은 여러 가지지만 이 수업에서는 두 가지만 구분합니다. 이미 있는 정보를 <b>보여 달라</b>는 요청과, 데이터를 보내 <b>처리해 달라</b>는 요청입니다. 이름을 외우기보다 내 기능이 어느 쪽인지 고를 수 있으면 됩니다.</span><span class="zh">请求的方法有好几种，这门课只区分两种：请它<b>给我看</b>已有信息的请求，和发送数据请它<b>帮我处理</b>的请求。比起记名字，能判断自己的功能属于哪一种就行。</span></p>
-<div class="tablewrap"><table class="kv"><thead><tr><th style="width:16%"><span class="ko">방법</span><span class="zh">方法</span></th><th style="width:40%"><span class="ko">쉽게 말하면</span><span class="zh">通俗说法</span></th><th><span class="ko">예</span><span class="zh">例子</span></th></tr></thead><tbody><tr><td><span class="ko"><code>GET</code></span><span class="zh"><code>GET</code></span></td><td><span class="ko">이미 있는 정보를 보여 달라</span><span class="zh">把已有的信息给我看</span></td><td><span class="ko">저장된 할 일 목록 불러오기</span><span class="zh">调出已保存的待办列表</span></td></tr><tr><td><span class="ko"><code>POST</code></span><span class="zh"><code>POST</code></span></td><td><span class="ko">데이터를 보내 처리해 달라</span><span class="zh">发送数据，帮我处理</span></td><td><span class="ko">새 할 일 추가 · 입력한 값으로 계산</span><span class="zh">添加新待办 · 用输入的值计算</span></td></tr></tbody></table></div>
-<ul class="blist"><li><span class="ko">버튼을 누를 때 사용자가 입력한 값이 함께 가는가? → 대개 <code>POST</code></span><span class="zh">按按钮时，用户输入的值会一起发过去吗？→ 通常是 <code>POST</code></span></li><li><span class="ko">화면을 열자마자 저장된 기록이 보여야 하는가? → 대개 <code>GET</code></span><span class="zh">一打开画面就要显示已保存的记录吗？→ 通常是 <code>GET</code></span></li></ul>
-</section>
+     ── 지킬 것 ────────────────────────────────────────────────────
+     · 화면 안 글자 철자 정확히. 「전체 액세스」 · 「플랜」은 그리지 않는다. Claude 아이콘 · Go Live 글자 금지.
+     · Windows 창 모양. 손·커서·사람 없음. 16:9 가로.
 
-<section class="page" id="s6">
-<div class="kick"><span class="ko">5. JSON</span><span class="zh">5. JSON</span><b>10-1</b></div>
-<h2 class="title"><span class="ko">요청과 응답은 이름 : 값으로 적힌다</span><span class="zh">请求和响应用 名字 : 值 来写</span> <span class="badge core"><span class="ko">핵심</span><span class="zh">核心</span></span></h2>
-<p class="lead"><span class="ko">화면과 API가 주고받는 종이에는 JSON이라는 형식으로 글이 적힙니다. 3-2에서 본 사전(dict)처럼 <b>이름과 값</b>이 짝을 이룹니다. 괄호와 쉼표를 직접 쓰는 연습은 하지 않습니다. 각 이름이 무슨 뜻인지 읽을 수 있으면 됩니다.</span><span class="zh">画面和 API 来回传的纸上，内容是用 JSON 格式写的。像 3-2 学过的字典（dict）一样，<b>名字和值</b>成对出现。不练习自己写括号和逗号，只要能读懂每个名字是什么意思就行。</span></p>
-<div class="code"><div class="chd"><span class="fn"><span class="ko">요청 — 화면이 보내는 것</span><span class="zh">请求 — 画面发送的</span></span></div><pre class="ko blk">{
-  "text": "과학 보고서"
-}</pre><pre class="zh blk">{
-  "text": "<span class="keep-ko">과학 보고서</span>"
-}</pre></div>
-<div class="code"><div class="chd"><span class="fn"><span class="ko">응답 — API가 돌려주는 것 (성공)</span><span class="zh">响应 — API 送回的（成功）</span></span></div><pre class="ko blk">{
-  "ok": true,
-  "message": "추가했습니다."
-}</pre><pre class="zh blk">{
-  "ok": true,
-  "message": "<span class="keep-ko">추가했습니다.</span>"
-}</pre></div>
-<div class="tablewrap"><table class="kv"><thead><tr><th style="width:24%"><span class="ko">이름</span><span class="zh">名字</span></th><th><span class="ko">뜻</span><span class="zh">意思</span></th></tr></thead><tbody><tr><td><span class="ko"><code>text</code></span><span class="zh"><code>text</code></span></td><td><span class="ko">사용자가 입력한 할 일</span><span class="zh">用户输入的待办</span></td></tr><tr><td><span class="ko"><code>ok</code></span><span class="zh"><code>ok</code></span></td><td><span class="ko">처리했는가 — <code>true</code>면 성공, <code>false</code>면 실패</span><span class="zh">处理了吗 — <code>true</code> 成功，<code>false</code> 失败</span></td></tr><tr><td><span class="ko"><code>message</code></span><span class="zh"><code>message</code></span></td><td><span class="ko">화면에 보여 줄 문장</span><span class="zh">要在画面上显示的句子</span></td></tr><tr><td><span class="ko"><code>items</code></span><span class="zh"><code>items</code></span></td><td><span class="ko">GET 응답에 담긴 저장된 할 일 목록</span><span class="zh">GET 响应里装着的已保存待办列表</span></td></tr></tbody></table></div>
-</section>
-
-<section class="page" id="s7">
-<div class="kick"><span class="ko">6. 성공과 실패</span><span class="zh">6. 成功与失败</span><b>10-1</b></div>
-<h2 class="title"><span class="ko">응답은 성공만이 아니라 실패도 알려 준다</span><span class="zh">响应不只告诉成功，也要告诉失败</span> <span class="badge core"><span class="ko">핵심</span><span class="zh">核心</span></span></h2>
-<p class="lead"><span class="ko">좋은 API는 잘될 때만 답하지 않습니다. 입력이 비었거나 틀렸을 때도 무엇이 문제인지 알려 줘야 사용자가 고쳐서 다시 할 수 있습니다. 개발 계획 4항에 적은 예외 흐름이 바로 이 실패 응답으로 만들어집니다. 응답의 종류는 세 가지로 나눠 봅니다.</span><span class="zh">好的 API 不只在顺利时回答。输入为空或有错时，也要告诉用户问题在哪，用户才能改好重来。开发计划第 4 项写的例外流程，就是用这种失败响应做出来的。把响应分成三种来看。</span></p>
-<div class="tablewrap"><table class="kv"><thead><tr><th style="width:18%"><span class="ko">결과</span><span class="zh">结果</span></th><th style="width:40%"><span class="ko">응답에 들어갈 것</span><span class="zh">响应里要有的</span></th><th><span class="ko">화면이 할 일</span><span class="zh">画面要做的</span></th></tr></thead><tbody><tr><td><span class="ko">성공</span><span class="zh">成功</span></td><td><span class="ko">성공했다는 표시와 결과</span><span class="zh">成功的标记和结果</span></td><td><span class="ko">사용자가 원한 결과를 보여 준다</span><span class="zh">显示用户想要的结果</span></td></tr><tr><td><span class="ko">입력 문제</span><span class="zh">输入问题</span></td><td><span class="ko">무엇을 고쳐야 하는지</span><span class="zh">要改什么</span></td><td><span class="ko">고쳐서 다시 하는 방법을 알려 준다</span><span class="zh">告诉用户怎么改好再试</span></td></tr><tr><td><span class="ko">서비스 문제</span><span class="zh">服务问题</span></td><td><span class="ko">처리하지 못했다는 것과 다시 해 볼 수 있다는 것</span><span class="zh">没能处理，以及可以再试</span></td><td><span class="ko">사용자 탓으로 돌리지 않는다</span><span class="zh">不把责任推给用户</span></td></tr></tbody></table></div>
-<div class="note"><div class="nt"><span class="ko">상태 번호는 외우지 않습니다</span><span class="zh">状态码不用背</span></div><p><span class="ko">개발자는 실패에 400 같은 번호를 붙이기도 합니다. 이 수업에서는 번호보다 <b>사용자가 다음에 무엇을 하면 되는지 알 수 있는가</b>를 봅니다.</span><span class="zh">开发者有时会给失败标上 400 之类的编号。这门课不看编号，而是看<b>用户能不能知道下一步该做什么</b>。</span></p></div>
-</section>
-
-<section class="page" id="s7m">
-<div class="kick"><span class="ko">7. 프로젝트 지도</span><span class="zh">7. 项目地图</span><b>10-1</b></div>
-<h2 class="title"><span class="ko">켜기 전에 — 이 프로젝트의 지도</span><span class="zh">启动之前 — 这个项目的地图</span> <span class="badge core"><span class="ko">핵심</span><span class="zh">核心</span></span></h2>
-<p class="lead"><span class="ko">예시를 켜기 전에 <code>10</code> 폴더 안에서 무엇이 어디에 있는지 한 번 봅니다. 이 프로젝트는 화면 · 요청을 받는 곳 · 저장 · AI가 읽는 문서의 자리가 처음부터 정해져 있습니다. 앞으로 AI가 「○○ 파일을 고치겠습니다」라고 말하면 그 파일이 이 지도의 어디인지 찾아보면 됩니다.</span><span class="zh">启动示例之前，先看一眼 <code>10</code> 文件夹里什么东西在哪里。这个项目里，画面 · 接收请求的地方 · 保存 · AI 要读的文档，位置从一开始就定好了。以后 AI 说“我要改 ○○ 文件”时，就在这张地图上找那个文件在哪儿。</span></p>
-<div class="tablewrap"><table class="kv"><thead><tr><th style="width:32%"><span class="ko">하는 일</span><span class="zh">做什么</span></th><th style="width:32%"><span class="ko">파일 · 폴더</span><span class="zh">文件 · 文件夹</span></th><th><span class="ko">예시 「할 일 정리」에서는</span><span class="zh">在示例“待办整理”里</span></th></tr></thead><tbody><tr><td><span class="ko"><b>화면</b> — 사용자가 보고 누르는 곳</span><span class="zh"><b>画面</b> — 用户看和按的地方</span></td><td><span class="ko"><code>app\page.js</code> · 목업을 쓰면 <code>public\screen</code></span><span class="zh"><code>app\page.js</code> · 用模型时是 <code>public\screen</code></span></td><td><span class="ko">입력칸 · 추가 버튼 · 목록</span><span class="zh">输入框 · 添加按钮 · 列表</span></td></tr><tr><td><span class="ko"><b>요청을 받는 곳</b> — API</span><span class="zh"><b>接收请求的地方</b> — API</span></td><td><span class="ko"><code>app\api\tasks\route.js</code></span><span class="zh"><code>app\api\tasks\route.js</code></span></td><td><span class="ko">할 일을 받아 저장하고 응답한다</span><span class="zh">收下待办，保存后作出响应</span></td></tr><tr><td><span class="ko"><b>저장</b> — SQLite 연결과 표</span><span class="zh"><b>保存</b> — SQLite 连接和表</span></td><td><span class="ko"><code>lib\db.js</code> → <code>data\app.db</code></span><span class="zh"><code>lib\db.js</code> → <code>data\app.db</code></span></td><td><span class="ko"><code>db.js</code>가 <code>tasks</code> 표를 만들고, 기록은 <code>app.db</code> 파일에 쌓인다</span><span class="zh"><code>db.js</code> 建好 <code>tasks</code> 表，记录堆进 <code>app.db</code> 文件</span></td></tr><tr><td><span class="ko"><b>AI가 먼저 읽는 문서</b></span><span class="zh"><b>AI 先读的文档</b></span></td><td><span class="ko"><code>docs\</code></span><span class="zh"><code>docs\</code></span></td><td><span class="ko">수업 조건 · PRD · 개발 계획 · 약속표 · 테스트 기록 · 목업</span><span class="zh">课堂条件 · PRD · 开发计划 · 约定表 · 测试记录 · 模型</span></td></tr></tbody></table></div>
-<div class="note"><div class="nt"><span class="ko">내 목업을 화면으로 그대로 쓸 수 있습니다</span><span class="zh">可以把自己的模型直接当画面用</span></div><p><span class="ko"><code>docs\mockup</code>은 6~8회에 만든 목업 원본입니다. 원하면 10-2부터 이 목업을 시작 화면으로 씁니다. AI가 목업을 <code>public\screen</code>으로 복사하고, <code>app\page.js</code>는 그 화면을 열기만 합니다. 다만 목업에는 흉내가 섞여 있습니다. 브라우저에만 저장하던 것이나 미리 넣어 둔 예시 값은 API · SQLite로 바꿔야 기록이 남습니다.</span><span class="zh"><code>docs\mockup</code> 是第 6~8 次课做的模型原件。愿意的话，从 10-2 起就把这个模型当作起始画面。AI 把模型复制到 <code>public\screen</code>，<code>app\page.js</code> 只负责打开那个画面。不过模型里有“模拟”：只存在浏览器里的东西和预先放好的示例值，要换成 API · SQLite 才会留下记录。</span></p></div>
-<div class="note ok"><div class="nt"><span class="ko">이 자리는 바꾸지 않습니다</span><span class="zh">这些位置不改</span></div><p><span class="ko"><code>package.json</code> · <code>next.config.mjs</code> · <code>scripts</code>는 선생님이 정해 둔 틀입니다. AI가 이 파일들을 고치거나 폴더 구조를 새로 만들자고 하면 「지금 구조 그대로 해 줘」라고 말합니다.</span><span class="zh"><code>package.json</code> · <code>next.config.mjs</code> · <code>scripts</code> 是老师定好的框架。AI 要改它们或重搭文件夹结构时，就说“照现在的结构做”。</span></p></div>
+     ── 받은 뒤 확인 ────────────────────────────────────────────────
+     ① 「플랜」이 없다 ② 「무엇이든 요청하세요」 ③ 「승인 요청」에만 주황 테두리 ④ 한글 안 깨짐
+     ═══════════════════════════════════════════════════════════════════════
+-->
+<figure class="fig narrow"><img class="figimg" src="../../assets/img/10-1-08-codex-permission.png" alt="로그인한 Codex 창의 입력 상자. 안내 글 무엇이든 요청하세요, 아래에 권한 승인 요청이 보인다." data-id="10-1-08-codex-permission" data-spec="가로 16:9 · ① 화면 · Codex 이미지 생성(실사풍) · Codex 입력칸 아래 승인 요청" onerror="window.imgPlaceholder&amp;&amp;imgPlaceholder(this)"><figcaption><span class="ko">그림 10-1-4. 권한은 「승인 요청」. 묻는 카드가 뜨면 명령을 읽고 「한 번만 허용」 또는 「거부」.</span><span class="zh">图 10-1-4. 权限选“<b class="keep-ko">승인 요청</b>”。出现询问卡片就读命令，选“<b class="keep-ko">한 번만 허용</b>”（允许一次）或“<b class="keep-ko">거부</b>”（拒绝）。</span></figcaption></figure>
+<div class="note warn"><div class="nt"><span class="ko">샌드박스 밖 실행은 서비스 켜기에만</span><span class="zh">沙盒外执行只用于启动服务</span></div><p><span class="ko">Codex가 「샌드박스 밖에서 실행할까요?」라고 물으면, 서비스 켜기(<code>npm run dev</code>)일 때만 「한 번만 허용」합니다. 다른 명령이면 「거부」하고 왜 필요한지 묻습니다.</span><span class="zh">问要不要在沙盒外执行时，只有 <code>npm run dev</code> 才点“<b class="keep-ko">한 번만 허용</b>”，其他命令点“<b class="keep-ko">거부</b>”（拒绝）。</span></p></div>
 </section>
 
 <section class="page" id="s7f">
-<div class="kick"><span class="ko">7. 프로젝트 지도</span><span class="zh">7. 项目地图</span><b>10-1</b></div>
-<h2 class="title"><span class="ko">프레임워크는 「파일을 어디에 두면 무엇이 되는지」에 대한 약속이다</span><span class="zh">框架是“文件放在哪里就变成什么”的约定</span> <span class="badge core"><span class="ko">핵심</span><span class="zh">核心</span></span></h2>
-<p class="lead"><span class="ko">앞 쪽의 지도는 아무렇게나 정한 것이 아닙니다. 이 프로젝트가 쓰는 <b>Next.js</b>라는 <b>프레임워크</b>가 정해 둔 약속입니다. <code>app\page.js</code>에 두면 화면이 되고, <code>app\api\…\route.js</code>에 두면 요청을 받는 창구가 됩니다. 이 약속이 있어서 나도, AI도, 선생님도, 같은 팀 친구도 같은 자리를 보며 이야기할 수 있습니다.</span><span class="zh">前一页的地图不是随便定的，而是这个项目用的 <b>Next.js</b> 这个<b>框架</b>定好的约定：放在 <code>app\page.js</code> 就成为画面，放在 <code>app\api\…\route.js</code> 就成为接收请求的窗口。因为有这个约定，我、AI、老师和同组的同学，才能看着同样的位置来讨论。</span></p>
-<div class="tablewrap"><table class="kv"><thead><tr><th style="width:30%"><span class="ko">이번 학기의 약속</span><span class="zh">这学期的约定</span></th><th style="width:16%"><span class="ko">언제</span><span class="zh">什么时候</span></th><th><span class="ko">무엇을 정했나</span><span class="zh">定了什么</span></th></tr></thead><tbody><tr><td><span class="ko"><code>PRD.md</code></span><span class="zh"><code>PRD.md</code></span></td><td><span class="ko">6~8회</span><span class="zh">第 6~8 次课</span></td><td><span class="ko">누구를 위해 무엇을 만들지</span><span class="zh">为谁做什么</span></td></tr><tr><td><span class="ko">표와 열</span><span class="zh">表和列</span></td><td><span class="ko">7회</span><span class="zh">第 7 次课</span></td><td><span class="ko">기록이 어떤 모양으로 남는지</span><span class="zh">记录以什么样子留下</span></td></tr><tr><td><span class="ko"><code>AGENTS.md</code></span><span class="zh"><code>AGENTS.md</code></span></td><td><span class="ko">8-2</span><span class="zh">8-2</span></td><td><span class="ko">이 폴더에서 AI가 먼저 읽고 지킬 규칙</span><span class="zh">在这个文件夹里 AI 先读、要遵守的规则</span></td></tr><tr><td><span class="ko"><code>10_api_promise.md</code></span><span class="zh"><code>10_api_promise.md</code></span></td><td><span class="ko">10회</span><span class="zh">第 10 次课</span></td><td><span class="ko">화면과 API가 주고받을 것</span><span class="zh">画面和 API 之间要来回传的东西</span></td></tr><tr><td><span class="ko">프레임워크 · Next.js</span><span class="zh">框架 · Next.js</span></td><td><span class="ko">10회부터</span><span class="zh">第 10 次课起</span></td><td><span class="ko">파일을 어디에 두면 무엇이 되는지</span><span class="zh">文件放在哪里就变成什么</span></td></tr></tbody></table></div>
-<div class="note ok"><div class="nt"><span class="ko">일하는 순서도 약속입니다</span><span class="zh">工作的顺序也是约定</span></div><p><span class="ko">이번 학기는 <b>기획 → 데이터 → PRD → 점검 · 계획 → API · 저장 → 개발 → 테스트 → 제출</b> 순서로 왔습니다. 모두가 이 순서를 알고 있어서, 지금 어디쯤인지 함께 말할 수 있습니다.</span><span class="zh">这学期是按 <b>策划 → 数据 → PRD → 检查 · 计划 → API · 保存 → 开发 → 测试 → 提交</b> 的顺序走过来的。大家都知道这个顺序，所以能一起说清现在走到了哪里。</span></p></div>
+<div class="kick"><span class="ko">1. 프레임워크란?</span><span class="zh">1. 什么是框架？</span><b>10-1</b></div>
+<h2 class="title"><span class="ko">프레임워크는 여러 사람이 함께 만들기 위해 생겼다</span><span class="zh">框架是为了让很多人一起做而产生的</span> <span class="badge core"><span class="ko">핵심</span><span class="zh">核心</span></span></h2>
+<p class="lead"><span class="ko">4-1에서 그래프를 그릴 때 matplotlib이라는 <b>라이브러리</b>를 가져다 썼습니다. 필요한 기능 묶음을 골라 쓴 것입니다. 그런데 서비스는 보통 혼자 만들지 않습니다. 여러 사람이 각자 방식대로 만들면 서로 만든 것을 이어 붙이거나 고치기 어렵습니다. 그래서 개발자들은 서비스 전체의 뼈대와 「무엇을 어디에 두고, 누가 무엇을 맡는다」는 <b>약속</b>을 미리 정해 두었습니다. 이것이 <b>프레임워크</b>입니다.</span><span class="zh">4-1 画图表时，我们拿来用了一个叫 matplotlib 的<b>库</b>，就是挑需要的功能包来用。可服务通常不是一个人做的。很多人各按各的做法做，彼此做的东西就很难接起来、也很难修改。所以开发者们把整个服务的骨架，连同“什么放在哪里、谁负责什么”的<b>约定</b>都事先定好了。这就是<b>框架</b>。</span></p>
+<!-- ═══════════════════════════════════════════════════════════════════════
+     [이미지 생성 요청] 10-1-10-framework-kitchen
+     · 영역   : 이 주석 바로 아래 figure
+     · 규격   : 가로 21:9 · 개념 사진 · Codex 이미지 생성(실사풍) · assets/img/10-1-10-framework-kitchen.png
+     ───────────────────────────────────────────────────────────────────────
+
+     ── 맥락 ────────────────────────────────────────────────────────
+     10-1 「1. 프레임워크란?」 첫 쪽에서 눈을 사로잡는 그림(2026-11-16 선생님 「이미지로 일단 눈을 사로잡고 싶어」).
+     4-1 그림 04-1-02-library-shelf(라이브러리 = 시판 소스 · 면을 골라 쓴다)의 다음 이야기로, 같은 밝은 실사 톤.
+     라이브러리 = 골라 쓰는 재료, 프레임워크 = 여러 요리사가 함께 일하도록 자리와 순서가 정해진 주방(약속).
+
+     ── 그릴 것 ────────────────────────────────────────────────────
+     · 왼쪽 약 1/3: 밝은 대리석 조리대 위 소스 병 하나와 건면 한 봉지, 한 손이 소스 병을 집어 든다.
+     · 오른쪽 약 2/3: 넓고 깨끗한 레스토랑 주방 라인(손질대 → 화구 → 담는 곳). 위 스테인리스 선반 칸마다 같은 소스 병 · 그릇 · 도구가
+       제자리에, 칸마다 글자 없는 색 이름표. 흰 조리복 요리사 두세 명이 각자 자리에서 일한다(얼굴 안 보임).
+     · 두 부분 사이 얇은 흰 세로 구분선.
+
+     ── 지킬 것 ────────────────────────────────────────────────────
+     · 글자 · 숫자 · 상표 · 로고 없음. 얼굴 없음. 밝고 선명하게.
+
+     ── 받은 뒤 확인 ────────────────────────────────────────────────
+     ① 왼쪽 재료 / 오른쪽 주방이 한눈에 나뉜다 ② 선반의 정해진 칸이 보인다 ③ 글자 · 얼굴이 없다
+     ═══════════════════════════════════════════════════════════════════════
+-->
+<figure class="fig"><img class="figimg" src="../../assets/img/10-1-10-framework-kitchen.png" alt="왼쪽은 조리대 위 소스 병과 면을 한 손이 골라 드는 장면, 오른쪽은 선반 칸마다 같은 병과 그릇이 제자리에 있고 요리사들이 각자 자리에서 일하는 넓은 레스토랑 주방." data-id="10-1-10-framework-kitchen" data-spec="가로 21:9 · 개념 사진 · Codex 이미지 생성(실사풍) · 라이브러리 재료 / 프레임워크 주방" onerror="window.imgPlaceholder&amp;&amp;imgPlaceholder(this)"><figcaption><span class="ko">그림 10-1-5. 라이브러리는 골라 쓰는 재료, 프레임워크는 여러 요리사가 함께 일하도록 자리와 순서가 정해진 주방이다.</span><span class="zh">图 10-1-5. 库是挑来用的食材，框架是为了让多位厨师一起工作而定好位置和顺序的厨房。</span></figcaption></figure>
+<div class="tablewrap"><table class="kv"><thead><tr><th style="width:16%"><span class="ko"></span><span class="zh"></span></th><th style="width:38%"><span class="ko">라이브러리 (4회)</span><span class="zh">库（第 4 次课）</span></th><th><span class="ko">프레임워크 (10회부터)</span><span class="zh">框架（第 10 次课起）</span></th></tr></thead><tbody><tr><td><span class="ko">무엇</span><span class="zh">是什么</span></td><td><span class="ko">필요한 기능을 골라 쓰는 묶음</span><span class="zh">挑需要的功能来用的功能包</span></td><td><span class="ko">서비스 전체의 뼈대와 약속</span><span class="zh">整个服务的骨架和约定</span></td></tr><tr><td><span class="ko">누가 이끄나</span><span class="zh">谁来主导</span></td><td><span class="ko">필요할 때 가져다 쓴다</span><span class="zh">需要时拿来用</span></td><td><span class="ko">약속대로 채워 넣으면 프레임워크가 움직인다</span><span class="zh">照约定填进去，框架来运转</span></td></tr><tr><td><span class="ko">예</span><span class="zh">例子</span></td><td><span class="ko">matplotlib · pandas</span><span class="zh">matplotlib · pandas</span></td><td><span class="ko">Next.js</span><span class="zh">Next.js</span></td></tr></tbody></table></div>
+</section>
+
+<section class="page" id="s7f2">
+<div class="kick"><span class="ko">1. 프레임워크란?</span><span class="zh">1. 什么是框架？</span><b>10-1</b></div>
+<h2 class="title"><span class="ko">바이브코딩으로 혼자 만들어도, 약속은 필요하다</span><span class="zh">就算用氛围编程一个人做，也需要约定</span> <span class="badge core"><span class="ko">핵심</span><span class="zh">核心</span></span></h2>
+<p class="lead"><span class="ko">바이브코딩이 생기면서 이제 혼자서도 서비스를 만들 수 있게 되었습니다. 하지만 그것은 개인 단위 프로젝트일 때의 이야기입니다. 실제 서비스는 여러 사람이 함께 만들고 오래 고쳐 나갑니다. 그리고 우리도 사실 혼자가 아닙니다. AI, 선생님, 짝이 같은 프로젝트를 함께 봅니다. 그래서 이번 학기 내내 약속을 하나씩 만들어 왔고, 오늘 내 프로젝트를 변환할 <b>Next.js</b>도 그 약속 가운데 하나입니다.</span><span class="zh">有了氛围编程（vibe coding），现在一个人也能做服务了。但那只是个人规模项目的情况。真正的服务是很多人一起做、长期修改的。而且我们其实也不是一个人：AI、老师、同桌都在一起看同一个项目。所以这学期我们一直在一个个地定约定，今天要把自己的项目转换过去的 <b>Next.js</b> 也是其中之一。</span></p>
+<div class="tablewrap"><table class="kv"><thead><tr><th style="width:34%"><span class="ko">이번 학기의 약속</span><span class="zh">这学期的约定</span></th><th style="width:14%"><span class="ko">언제</span><span class="zh">什么时候</span></th><th><span class="ko">무엇을 정했나</span><span class="zh">定了什么</span></th></tr></thead><tbody><tr><td><span class="ko"><code>PRD.md</code></span><span class="zh"><code>PRD.md</code></span></td><td><span class="ko">6~8회</span><span class="zh">第 6~8 次课</span></td><td><span class="ko">누구를 위해 무엇을 만들지</span><span class="zh">为谁做什么</span></td></tr><tr><td><span class="ko">표와 열</span><span class="zh">表和列</span></td><td><span class="ko">7회</span><span class="zh">第 7 次课</span></td><td><span class="ko">기록이 어떤 모양으로 남는지</span><span class="zh">记录以什么样子留下</span></td></tr><tr><td><span class="ko"><code>AGENTS.md</code></span><span class="zh"><code>AGENTS.md</code></span></td><td><span class="ko">8-2</span><span class="zh">8-2</span></td><td><span class="ko">이 폴더에서 AI가 먼저 읽고 지킬 규칙</span><span class="zh">在这个文件夹里 AI 先读、要遵守的规则</span></td></tr><tr><td><span class="ko"><code>09_development_plan.md</code></span><span class="zh"><code>09_development_plan.md</code></span></td><td><span class="ko">9회</span><span class="zh">第 9 次课</span></td><td><span class="ko">무엇부터 만들고, 무엇을 바꿨는지</span><span class="zh">先做什么、改了什么</span></td></tr><tr><td><span class="ko"><code>10_api_promise.md</code></span><span class="zh"><code>10_api_promise.md</code></span></td><td><span class="ko">10회</span><span class="zh">第 10 次课</span></td><td><span class="ko">화면과 API가 주고받을 것</span><span class="zh">画面和 API 之间要来回传的东西</span></td></tr><tr><td><span class="ko">프레임워크 · Next.js</span><span class="zh">框架 · Next.js</span></td><td><span class="ko">10회부터</span><span class="zh">第 10 次课起</span></td><td><span class="ko">서비스를 만드는 뼈대와 규칙</span><span class="zh">做服务的骨架和规则</span></td></tr></tbody></table></div>
+<div class="note ok"><div class="nt"><span class="ko">일하는 순서도 약속입니다</span><span class="zh">工作的顺序也是约定</span></div><p><span class="ko">실제 회사에서도 서비스는 <b>기획 → 설계 → 개발 → 테스트 → 출시 · 운영</b> 순서로 만듭니다. 이 흐름을 「소프트웨어 개발 생명주기」라고 부릅니다. 기획자 · 디자이너 · 개발자 · 테스터가 이 순서를 함께 알고 있어서, 「지금은 테스트 단계」라고 말하면 누가 무엇을 할 차례인지 바로 압니다. 이번 학기도 같은 순서로 왔습니다 — 기획(6회) → 데이터와 PRD(7~8회) → 점검 · 계획(9회) → 개발(10~11회) → 테스트(12회) → 제출(13회). 실제 현장에서는 이 순서를 한 번만 가지 않고, 기능 하나씩 작게 여러 번 되풀이합니다. 11회에 기능 하나마다 계획서에 쓰고 → 만들고 → 세 번 확인하는 것이 바로 그 방식입니다.</span><span class="zh">真实的公司里，服务也按 <b>策划 → 设计 → 开发 → 测试 → 上线 · 运营</b> 的顺序做，这叫“软件开发生命周期”。大家都知道这个顺序，一说“现在是测试阶段”，就知道轮到谁做什么。这学期也是这个顺序：策划（6）→ 数据和 PRD（7~8）→ 检查 · 计划（9）→ 开发（10~11）→ 测试（12）→ 提交（13）。现场不是只走一遍，而是一个功能一个功能小步反复。第 11 次课每个功能都“写计划 → 做 → 确认三次”，就是这种方式。</span></p></div>
 </section>
 
 <section class="page" id="s7g">
-<div class="kick"><span class="ko">7. 프로젝트 지도</span><span class="zh">7. 项目地图</span><b>10-1</b></div>
+<div class="kick"><span class="ko">1. 프레임워크란?</span><span class="zh">1. 什么是框架？</span><b>10-1</b></div>
 <h2 class="title"><span class="ko">기능마다 맞는 약속이 따로 있다</span><span class="zh">不同的功能有各自合适的约定</span> <span class="badge core"><span class="ko">핵심</span><span class="zh">核心</span></span></h2>
 <p class="lead"><span class="ko">AI에게 「만들어 줘」라고만 하면 대개 Next.js를 고릅니다. 하지만 기능마다 더 잘 맞는 프레임워크와 도구가 있습니다. 이것을 알면 AI의 첫 선택을 그대로 받지 않고 「이 기능에 맞는 것을 이유와 함께 골라 줘」라고 물을 수 있습니다. 9-1에서 AI가 PRD의 <code>[점검 3]</code> 주석 「맞는 틀」 줄에 적은 이름들이 바로 그런 다른 약속들입니다.</span><span class="zh">只说“帮我做”，AI 大多会选 Next.js。但不同功能各有更合适的框架和工具。知道这一点，就能不照单全收 AI 的第一选择，而是问“请为这个功能挑合适的，并说明理由”。9-1 时 AI 在 PRD 的 <code class="keep-ko">[점검 3]</code>（检查 3）注释“<b class="keep-ko">맞는 틀</b>”（合适的框架）一行里写的名称，就是这样的其他约定。</span></p>
 <div class="tablewrap"><table class="kv"><thead><tr><th style="width:40%"><span class="ko">만들고 싶은 것</span><span class="zh">想做的东西</span></th><th><span class="ko">자주 쓰는 프레임워크 · 도구</span><span class="zh">常用的框架 · 工具</span></th></tr></thead><tbody><tr><td><span class="ko">3D 화면 · 게임 / 2D 게임</span><span class="zh">3D 画面 · 游戏 / 2D 游戏</span></td><td><span class="ko">three.js · 게임 엔진 / Phaser</span><span class="zh">three.js · 游戏引擎 / Phaser</span></td></tr><tr><td><span class="ko">소리 · 음악 분석</span><span class="zh">声音 · 音乐分析</span></td><td><span class="ko">Python 소리 분석 도구</span><span class="zh">Python 的声音分析工具</span></td></tr><tr><td><span class="ko">휴대폰 앱</span><span class="zh">手机 App</span></td><td><span class="ko">React Native · Flutter</span><span class="zh">React Native · Flutter</span></td></tr></tbody></table></div>
-<div class="steps"><div class="st-h"><span class="ko">선생님이 Next.js를 고른 이유</span><span class="zh">老师选 Next.js 的理由</span></div><ol><li><span class="ko"><b>AI가 가장 많이 쓰는 프레임워크다.</b> 코드를 한 줄씩 다 읽지 않아도 되니, 요즘 가장 흔한 약속을 직접 겪어 본다.</span><span class="zh"><b>这是 AI 用得最多的框架。</b>不用一行一行读完代码，就亲身体验一下现在最常见的约定。</span></li><li><span class="ko"><b>화면 쪽(프론트엔드)과 기록을 받고 저장하는 쪽(백엔드)이 한 프로젝트에 같이 있다.</b> 그래서 폴더 하나, <code>npm run pack</code> ZIP 하나로 제출이 쉽다.</span><span class="zh"><b>画面这一边（前端）和接收、保存记录那一边（后端）在同一个项目里。</b>所以一个文件夹、一个 <code>npm run pack</code> 的 ZIP 就能提交。</span></li><li><span class="ko"><b>모두 같은 틀을 쓰면 실행 · 확인 · 평가 방법이 같다.</b> 그래서 선생님이 함께 봐 주고 평가하기 쉽다.</span><span class="zh"><b>大家用同一个框架，运行 · 确认 · 评价的方法就一样。</b>所以老师容易一起看、一起评价。</span></li></ol></div>
+<div class="steps"><div class="st-h"><span class="ko">선생님이 Next.js를 고른 이유</span><span class="zh">老师选 Next.js 的理由</span></div><ol><li><span class="ko"><b>바이브코딩에서 가장 많이 쓰는 프레임워크입니다.</b> AI에게 웹 서비스를 만들어 달라고 하면 대부분 Next.js로 만듭니다. 많이 쓰이는 만큼 AI도 잘 알고, 막혔을 때 찾아볼 자료도 많습니다.</span><span class="zh"><b>这是氛围编程（vibe coding）里用得最多的框架。</b>让 AI 做网页服务，它大多会用 Next.js 来做。用的人多，AI 也就熟悉，卡住时能查的资料也多。</span></li><li><span class="ko"><b>화면(프론트엔드)과 기록을 저장하는 부분(백엔드)을 한 프로젝트에서 함께 만듭니다.</b> 그래서 폴더 하나를 ZIP 하나로 묶어 제출할 수 있습니다.</span><span class="zh"><b>画面（前端）和保存记录的部分（后端）在同一个项目里一起做。</b>所以把一个文件夹打包成一个 ZIP 交上来就可以。</span></li><li><span class="ko"><b>모두 같은 프레임워크를 쓰면 실행하고 확인하는 방법이 같습니다.</b> 그래서 선생님이 함께 봐 주고 평가하기도 쉽습니다.</span><span class="zh"><b>大家都用同一个框架，运行和确认的方法就一样。</b>所以老师也容易一起看、一起评价。</span></li></ol></div>
 <div class="note warn"><div class="nt"><span class="ko">수업 도중에는 약속을 바꾸지 않습니다</span><span class="zh">课程进行中不换约定</span></div><p><span class="ko">같이 일하는 도중에 약속을 바꾸면 모두가 엉킵니다. 써 보고 싶은 다른 프레임워크는 계획 6항 「수업 뒤로 미룬 것」에 적어 두고, 13회 뒤에 스스로 해 봅니다.</span><span class="zh">一起做事途中换约定，大家都会乱。想试的其他框架写进计划第 6 项“<b class="keep-ko">수업 뒤로 미룬 것</b>”（推到课程之后的），第 13 次课后自己试。</span></p></div>
 </section>
 
-<section class="page" id="s8">
-<div class="kick"><span class="ko">7. 직접 보기</span><span class="zh">7. 亲眼看</span><b>10-1</b></div>
-<h2 class="title"><span class="ko">예시 「할 일 정리」를 켜고 요청과 응답을 직접 본다</span><span class="zh">打开示例“待办整理”，亲眼看请求与响应</span> <span class="badge lab"><span class="ko">실습</span><span class="zh">实践</span></span></h2>
-<p class="lead"><span class="ko">이제 설치가 끝났을 것입니다. 예시 프로젝트를 켜서 지금까지 읽은 요청과 응답이 실제로 오가는지 봅니다. 서비스를 켜 두는 터미널은 따로 하나 둡니다. 켜는 명령은 13회까지 같습니다.</span><span class="zh">安装应该已经结束了。打开示例项目，看刚才读到的请求与响应是否真的在来回传。让服务一直运行的终端要单独留一个。启动命令到第 13 次课都一样。</span></p>
-<div class="steps"><div class="st-h"><span class="ko">순서</span><span class="zh">顺序</span></div><ol><li><span class="ko">터미널에 <code>npm run dev</code>를 입력한다. <code>Ready</code>가 보이면 된다.</span><span class="zh">在终端输入 <code>npm run dev</code>。看到 <code>Ready</code> 就好了。</span></li><li><span class="ko">브라우저 주소창에 <code>localhost:3000</code>을 입력해 연다. 「할 일 정리」 화면이 나온다.</span><span class="zh">在浏览器地址栏输入 <code>localhost:3000</code> 打开。会出现“<b class="keep-ko">할 일 정리</b>”（待办整理）画面。</span></li><li><span class="ko">입력칸에 할 일을 쓰고 <b>추가</b>를 누른다. 초록 상자에 「추가했습니다.」가 나오고 아래 목록에 할 일이 생긴다.</span><span class="zh">在输入框里写一条待办，按<b class="keep-ko">추가</b>（添加）。绿色框里出现“<b class="keep-ko">추가했습니다.</b>”（已添加），下面的列表里多出这条待办。</span></li><li><span class="ko">입력칸을 비우고 <b>추가</b>를 누른다. 주황 상자에 「할 일을 입력하세요.」가 나온다.</span><span class="zh">清空输入框，按<b class="keep-ko">추가</b>。橙色框里会出现“<b class="keep-ko">할 일을 입력하세요.</b>”（请输入待办）。</span></li><li><span class="ko">할 일을 두 개 더 추가해 목록을 세 줄로 만든다. 9절에서 이 기록을 파일 안에서 찾는다.</span><span class="zh">再添加两条待办，让列表变成三行。第 9 节会在文件里找到这些记录。</span></li></ol></div>
-<div class="note ok"><div class="nt"><span class="ko">두 번 누른 것이 성공 응답과 실패 응답입니다</span><span class="zh">按的两次，就是成功响应和失败响应</span></div><p><span class="ko">초록 상자는 <code>ok: true</code> 응답, 주황 상자는 <code>ok: false</code> 응답이 화면에 나타난 것입니다. 목록은 화면이 <code>GET</code>으로 다시 불러온 저장된 할 일입니다.</span><span class="zh">绿色框是 <code>ok: true</code> 的响应，橙色框是 <code>ok: false</code> 的响应显示在画面上的样子。列表是画面用 <code>GET</code> 重新读取的已保存待办。</span></p></div>
+<section class="page" id="m1">
+<div class="kick"><span class="ko">2. 내 프로젝트 변환하기</span><span class="zh">2. 转换自己的项目</span><b>10-1</b></div>
+<h2 class="title"><span class="ko">내 프로젝트를 Codex가 그 자리에서 Next.js 프로젝트로 변환하게 한다</span><span class="zh">让 Codex 把自己的项目就地转换成 Next.js 项目</span> <span class="badge lab"><span class="ko">실습</span><span class="zh">实践</span></span></h2>
+<p class="lead"><span class="ko">6~9회에 만든 내 프로젝트(목업 · PRD · 계획)를 오늘부터 13회까지 쓸 <b>Next.js</b> 프로젝트로 변환합니다. 새 폴더를 만들지 않고 지금 쓰던 폴더가 그대로 바뀝니다. 변환은 Codex가 하지만, 무엇을 시키는지는 여러분이 알고 보내야 합니다. 아래 <b>변환 요청</b>을 처음부터 끝까지 읽고, 뜻을 모르는 줄이 있으면 먼저 묻습니다.</span><span class="zh">把第 6~9 次课做的自己的项目（模型 · PRD · 计划）转换成从今天用到第 13 次课的 <b>Next.js</b> 项目。不新建文件夹，现在用的文件夹直接变过去。转换由 Codex 来做，但让它做什么，大家要自己弄懂再发。把下面的<b>转换请求</b>从头到尾读一遍，有看不懂的行就先问。</span></p>
+<div class="steps"><div class="st-h"><span class="ko">지금 하세요</span><span class="zh">现在就做</span></div><ol><li><span class="ko">VS Code에 평소 작업하던 내 프로젝트 폴더가 열려 있는지 본다. 탐색기에 <code>PRD.md</code> · <code>mockup</code>이 보이면 된다. 닫혀 있으면 <b>파일 → 폴더 열기</b>로 연다.</span><span class="zh">看 VS Code 里是否打开着平时做的自己的项目文件夹。资源管理器里能看到 <code>PRD.md</code> · <code>mockup</code> 就对了。关着的话用 <b class="keep-ko">파일 → 폴더 열기</b>（文件 → 打开文件夹）打开。</span></li><li><span class="ko">Codex 창 위쪽의 <b>새 대화</b>(연필 모양)를 누르고, 아래 요청을 끝까지 읽은 뒤 <b>복사</b> → Codex 입력칸에 붙여 넣고 보낸다.</span><span class="zh">点 Codex 窗口上方的<b class="keep-ko">새 대화</b>（新对话，铅笔图标），把下面的请求读完后点<b class="keep-ko">복사</b>（复制）→ 粘贴到 Codex 输入框发送。</span></li></ol></div>
+<div class="note ok"><div class="nt"><span class="ko">요청은 여러분이 읽을 수 있는 말로만 되어 있습니다</span><span class="zh">请求只用大家看得懂的话写成</span></div><p><span class="ko">다음 쪽의 요청에는 코드가 없습니다. 번호마다 Codex가 할 일이 하나씩 적혀 있습니다 — 원래 파일 남기기, 버전 맞추기, 문서 정리, 목업을 Next.js 화면으로 바꾸기, 대화 기록 정리, 설치. 프레임워크와 버전만 맞추고, 나머지 규칙은 필요한 때에 하나씩 더합니다.</span><span class="zh">下一页的请求里没有代码。每个编号写着 Codex 要做的一件事 — 留下原文件、统一版本、整理文档、把模型变成 Next.js 画面、整理对话记录、安装。这里只统一框架和版本，其余规则到需要时再一条条加。</span></p></div>
 </section>
 
-<section class="page" id="s8_2">
-<div class="kick"><span class="ko">7. 직접 보기</span><span class="zh">7. 亲眼看</span><b>10-1</b></div>
-<h2 class="title"><span class="ko">예시 「할 일 정리」를 켜고 요청과 응답을 직접 본다</span><span class="zh">打开示例“待办整理”，亲眼看请求与响应</span> <span class="cont"><span class="ko">(이어서)</span><span class="zh">（续）</span></span></h2>
-<p class="lead"><span class="ko">방금 본 일을 맡은 파일은 두 개입니다. <code>app\page.js</code>는 화면이고, 열 때와 버튼을 누를 때 요청을 보냅니다. <code>app\api\tasks\route.js</code>는 API이고, 요청을 받아 응답을 돌려줍니다. 코드를 다 읽을 필요는 없습니다. 아래의 주석 줄만 찾아 읽습니다.</span><span class="zh">刚才那件事由两个文件负责。<code>app\page.js</code> 是画面，打开时和按按钮时发出请求。<code>app\api\tasks\route.js</code> 是 API，收到请求后送回响应。代码不用全读，只找下面的注释行来读。</span></p>
-<div class="code"><div class="chd"><span class="fn"><span class="ko">app\page.js — 화면에서 요청을 보내는 부분</span><span class="zh">app\page.js — 画面发出请求的部分</span></span></div><pre class="ko blk">// ① 다시 불러오기: 어디로(/api/tasks), 어떻게(GET)
-const res = await fetch("/api/tasks");
-
-// ② 저장하기: 어디로(/api/tasks), 어떻게(POST), 무엇을({ text })
-const res = await fetch("/api/tasks", {
-  method: "POST",
-  body: JSON.stringify({ text }),
-});
-// ③ 응답: { ok, message }</pre><pre class="zh blk">// ① <span class="keep-ko">다시 불러오기: 어디로(/api/tasks), 어떻게(GET)</span>
-//    重新读取：往哪里、怎么做
-const res = await fetch("/api/tasks");
-
-// ② <span class="keep-ko">저장하기: 어디로(/api/tasks), 어떻게(POST), 무엇을({ text })</span>
-//    保存：往哪里、怎么做、送什么
-const res = await fetch("/api/tasks", {
-  method: "POST",
-  body: JSON.stringify({ text }),
-});
-// ③ <span class="keep-ko">응답: { ok, message }</span>  响应</pre></div>
-<div class="code"><div class="chd"><span class="fn"><span class="ko">app\api\tasks\route.js — API의 머리 주석</span><span class="zh">app\api\tasks\route.js — API 开头的注释</span></span></div><pre class="ko blk">// 주소: /api/tasks
-//   GET  : 저장된 할 일을 보여 달라  → { ok, items }
-//   POST : 할 일 하나를 저장해 달라 → 보낼 것 { text } · 돌려줄 것 { ok, message }</pre><pre class="zh blk">// <span class="keep-ko">주소: /api/tasks</span>  地址
-//   GET  : <span class="keep-ko">저장된 할 일을 보여 달라</span>  → { ok, items }   给我看已保存的待办
-//   POST : <span class="keep-ko">할 일 하나를 저장해 달라</span> → { text } · { ok, message }   帮我保存一条待办</pre></div>
-<div class="note"><div class="nt"><span class="ko">10-2에서 이 파일들을 내 서비스에 맞게 바꿉니다</span><span class="zh">10-2 会把这些文件改成适合自己的服务</span></div><p><span class="ko">고치는 일은 AI가 합니다. 나는 AI가 바꾼 뒤에도 어디로 · 어떻게 · 무엇을 세 가지와 응답의 모양이 약속대로인지, 기록이 정말 남는지 확인합니다.</span><span class="zh">改的事由 AI 来做。我要确认的是：AI 改完后，往哪里 · 怎么做 · 送什么 这三件事和响应的样子是否符合约定，记录是否真的留下了。</span></p></div>
+<section class="page" id="m1b">
+<div class="kick"><span class="ko">2. 내 프로젝트 변환하기</span><span class="zh">2. 转换自己的项目</span><b>10-1</b></div>
+<h2 class="title"><span class="ko">변환 요청을 한 줄씩 읽고 보낸다</span><span class="zh">把转换请求一行行读完再发</span> <span class="cont"><span class="ko">(이어서)</span><span class="zh">（续）</span></span></h2>
+<p class="lead"><span class="ko">아래가 변환 요청 전부입니다. 1~10번을 차례로 읽으며 Codex가 무엇을 할지 머릿속으로 따라가 봅니다. 특히 5번은 내 목업이 어떤 화면으로 바뀌는지, 3번은 어떤 버전으로 맞추는지입니다. 다 읽었으면 <b>복사</b>를 눌러 Codex 입력칸에 붙여 넣고 보냅니다.</span><span class="zh">下面就是转换请求的全部。按顺序读第 1~10 条，在脑子里跟着想一想 Codex 要做什么。特别是第 5 条说的是自己的模型会变成什么样的画面，第 3 条说的是统一成哪个版本。读完就点<b class="keep-ko">복사</b>（复制），粘贴到 Codex 输入框发送。</span></p>
+<div class="code"><div class="chd"><span class="fn"><span class="ko">변환 요청 — 읽고 Codex 입력칸에 붙여 넣어 보내기</span><span class="zh">转换请求 — 读完后粘贴到 Codex 输入框发送</span></span><button class="cp" onclick="copyCode(this)"><span class="ko">복사</span><span class="zh">复制</span></button></div><pre class="ko blk">지금 VS Code에서 연 이 폴더는 내가 6~9회에 만든 프로젝트야(목업 · PRD · 계획 · AGENTS.md · 대화 기록).
+이 폴더를 그 자리에서 Next.js 프로젝트로 변환해 줘. 새 폴더는 만들지 마.
+1. 이미 package.json이 있으면 아무것도 하지 말고 멈춰서 알려 줘.
+2. 변환하기 전에 지금 있는 파일과 폴더를 모두 .before-nextjs 폴더에 그대로 복사해 둬. 이 폴더는 이후에 고치거나 지우지 마.
+3. 버전은 Next.js 16.4.3, React 19.3.1로 맞추고, JavaScript와 app 폴더 방식으로 만들어 줘. TypeScript · Tailwind는 쓰지 마. 스타일은 목업의 CSS를 그대로 살려 줘.
+   요청을 받는 자리(API)를 볼 수 있게 app/api/hello/route.js 파일만 만들어 두고, 안의 내용은 비워 둬.
+4. 내 문서(PRD.md · 09_development_plan.md 같은 .md · .txt 파일)와 mockup 폴더는 docs 폴더로 옮겨 줘. 내용은 고치지 마.
+5. 내 목업을 Next.js 화면으로 변환해 줘. 디자인(HTML · CSS)은 목업과 똑같이 보이게 하고, 목업의 JS 동작(버튼 · 화면 전환 · 입력)은 Next.js에 맞게 바꿔서 똑같이 움직이게 해 줘. 원본 docs/mockup은 고치지 마.
+   화면 파일(.html)이 여러 개면 최신 버전을 변환해 줘. 이름에 v1 · v2 같은 버전이 있으면 가장 높은 버전, old처럼 옛것 표시가 있으면 빼고, 그래도 모르겠으면 가장 최근에 고친 파일로. 어느 파일로 했는지 알려 줘.
+   목업이 쓰던 라이브러리(three.js 같은)는 계속 쓸 수 있게 하고, 새로 설치해야 하면 이름과 이유를 먼저 말하고 내 허락을 받아.
+6. AI대화기록.md와 OpenCode 세션 파일은 chat-logs/opencode-logs로 옮겨 줘. 그 안에 sk-로 시작하는 키가 보이면 sk-***로 가리고 몇 군데였는지만 알려 줘.
+7. AGENTS.md는 내가 만든 규칙 그대로 둬. 대화 기록을 남기는 곳만 chat-logs/codex-logs/AI대화기록.md로 고쳐 줘. OpenCode에만 맞는 규칙이 있으면 지우지 말고 알려만 줘.
+8. .gitignore에 node_modules, .next, .env*, .before-nextjs를 넣어 줘.
+9. npm install까지 해 줘. 서비스를 켜는 것은 키를 넣은 뒤에 따로 부탁할게.
+10. 끝나면 짧게 알려 줘: 바뀐 것, docs로 옮긴 것, 목업에서 흉내였던 곳(새로고침하면 사라지는 것 · 미리 넣은 예시 값 · 눌러도 아무 일 없는 버튼).</pre><pre class="zh blk">现在 VS Code 打开的这个文件夹，是我第 6~9 次课做的项目（模型 · PRD · 计划 · AGENTS.md · 对话记录）。
+请把这个文件夹就地转换成 Next.js 项目。不要新建文件夹。
+1. 如果已经有 package.json，什么都别做，停下告诉我。
+2. 转换之前，把现在所有的文件和文件夹原样复制到 .before-nextjs 文件夹。以后不要改也不要删这个文件夹。
+3. 版本用 Next.js 16.4.3、React 19.3.1，用 JavaScript 和 app 文件夹方式做。不要用 TypeScript · Tailwind。样式保留模型原来的 CSS。
+   为了能看到接收请求的位置（API），只建一个 app/api/hello/route.js 文件，里面的内容空着。
+4. 我的文档（PRD.md · 09_development_plan.md 这类 .md · .txt 文件）和 mockup 文件夹移到 docs 文件夹。内容不要改。
+5. 把我的模型转换成 Next.js 画面。设计（HTML · CSS）要和模型看起来一模一样，模型的 JS 动作（按钮 · 画面切换 · 输入）改成适合 Next.js 的写法，动起来也一模一样。原件 docs/mockup 不要改。
+   画面文件（.html）有好几个时，转换最新版本：名字里有 v1 · v2 这样的版本就用最高版本，有 old 这类旧版标记的不要，还分不出来就用最近改过的文件。告诉我用了哪个文件。
+   模型用过的库（像 three.js）要能继续用；需要新安装的话，先说名字和理由，得到我的同意。
+6. <span class="keep-ko">AI대화기록.md</span> 和 OpenCode 会话文件移到 chat-logs/opencode-logs。里面如果有 sk- 开头的密钥，改成 sk-*** 遮住，只告诉我遮了几处。
+7. AGENTS.md 保持我定的规则。只把记录对话的位置改成 chat-logs/codex-logs/<span class="keep-ko">AI대화기록.md</span>。只适用于 OpenCode 的规则不要删，告诉我就行。
+8. 在 .gitignore 里加上 node_modules、.next、.env*、.before-nextjs。
+9. 做到 npm install 为止。启动服务等我放好密钥后再另外请你做。
+10. 完成后简短告诉我：改了什么、移到 docs 的东西、模型里属于模拟的地方（刷新就没了的 · 预先放好的示例值 · 按了没反应的按钮）。</pre></div>
 </section>
 
-<section class="page" id="s9">
-<div class="kick"><span class="ko">8. 저장</span><span class="zh">8. 保存</span><b>10-1</b></div>
-<h2 class="title"><span class="ko">화면에 보이는 것만으로는 기억이 아니다</span><span class="zh">画面上看得到，还不等于记住了</span> <span class="badge core"><span class="ko">핵심</span><span class="zh">核心</span></span></h2>
-<p class="lead"><span class="ko">결과가 화면에 보였다고 해서 서비스가 기억한 것은 아닙니다. 저장하지 않는 서비스라면 결과는 브라우저와 실행 중인 서버 안에만 잠깐 있다가, 새로고침하거나 서버를 멈추면 그림의 김 서린 유리창 글씨처럼 사라집니다. 예시 「할 일 정리」는 어떤지 직접 시험해 봅니다.</span><span class="zh">结果显示在画面上，并不代表服务记住了它。不保存的服务，结果只是暂时待在浏览器和正在运行的服务器里，一刷新或停掉服务器，就会像图里起雾玻璃窗上的字一样消失。来亲手试试示例“<b class="keep-ko">할 일 정리</b>”是什么样。</span></p>
+<section class="page" id="m2">
+<div class="kick"><span class="ko">2. 내 프로젝트 변환하기</span><span class="zh">2. 转换自己的项目</span><b>10-1</b></div>
+<h2 class="title"><span class="ko">Codex가 변환하는 동안 — 묻는 카드와 보고를 읽는다</span><span class="zh">Codex 转换时 — 读询问卡片和报告</span> <span class="cont"><span class="ko">(이어서)</span><span class="zh">（续）</span></span></h2>
+<p class="lead"><span class="ko">Codex는 요청에 적힌 순서대로 변환합니다. 원래 파일은 <code>.before-nextjs</code>에 남기고, 목업은 <b>같은 모양의 Next.js 화면</b>으로 바꿉니다. <code>AGENTS.md</code>는 여러분이 만든 규칙 그대로이고 대화 기록을 남기는 곳만 바뀝니다. 몇 분 걸리니 기다리는 동안 3절의 SQLite Viewer를 먼저 설치해도 됩니다.</span><span class="zh">Codex 按请求的顺序转换。原文件留在 <code>.before-nextjs</code>，模型会变成<b>一模一样的 Next.js 画面</b>。<code>AGENTS.md</code> 保持大家自己定的规则，只改对话记录的位置。要花几分钟，等的时候可以先装第 3 节的 SQLite Viewer。</span></p>
+<div class="steps"><div class="st-h"><span class="ko">이럴 때는 이렇게</span><span class="zh">遇到这些就这样做</span></div><ol><li><span class="ko"><code>npm install</code>(인터넷)처럼 묻는 카드가 뜬다. 명령을 읽고 <b>한 번만 허용</b>을 누른다.</span><span class="zh">像 <code>npm install</code>（联网）这样会出现询问卡片。读一下命令，点<b class="keep-ko">한 번만 허용</b>（只允许一次）。</span></li><li><span class="ko">목업이 쓰던 라이브러리(three.js 같은)를 새로 설치하자고 하면 이름과 이유를 읽는다. 목업에서 쓰던 것이면 허락한다.</span><span class="zh">提议新装模型用过的库（像 three.js）时，读名字和理由，是模型里用过的就同意。</span></li><li><span class="ko">끝나면 보고를 읽는다. 어느 화면 파일을 변환했는지, <code>docs</code>로 옮긴 것, 목업에서 <b>흉내였던 곳</b> 목록이 나온다.</span><span class="zh">结束后读报告：转换了哪个画面文件、移到 <code>docs</code> 的东西、模型里<b>模拟的地方</b>清单。</span></li></ol></div>
+<div class="tablewrap"><table class="kv"><thead><tr><th style="width:30%"><span class="ko">변환하면 생기는 것</span><span class="zh">转换后会有的</span></th><th><span class="ko">무엇</span><span class="zh">是什么</span></th></tr></thead><tbody><tr><td><span class="ko"><code>app\</code></span><span class="zh"><code>app\</code></span></td><td><span class="ko">내 목업이 바뀐 <b>Next.js 화면</b>(<code>page.js</code>와 CSS)과 빈 API 자리(<code>api\hello\route.js</code>)</span><span class="zh">模型变成的 <b>Next.js 画面</b>（<code>page.js</code> · CSS）+ 空的 API 位置（<code>api\hello\route.js</code>）</span></td></tr><tr><td><span class="ko"><code>docs\</code></span><span class="zh"><code>docs\</code></span></td><td><span class="ko">내 문서를 모두 모은 곳 — PRD · 계획 · 메모 · 목업 원본</span><span class="zh">自己的文档都放在这里 — PRD · 计划 · 笔记 · 模型原件</span></td></tr><tr><td><span class="ko"><code>package.json</code></span><span class="zh"><code>package.json</code></span></td><td><span class="ko">Next.js 16.4.3 · React 19.3.1처럼 이 프로젝트가 쓰는 것과 버전</span><span class="zh">项目用的东西和版本 · Next.js 16.4.3 · React 19.3.1</span></td></tr><tr><td><span class="ko"><code>chat-logs\</code></span><span class="zh"><code>chat-logs\</code></span></td><td><span class="ko">9회까지의 대화 기록(<code>opencode-logs</code>), Codex 대화 기록(<code>codex-logs</code>)</span><span class="zh">到第 9 次课的记录（<code>opencode-logs</code>）· Codex 记录（<code>codex-logs</code>）</span></td></tr><tr><td><span class="ko"><code>AGENTS.md</code></span><span class="zh"><code>AGENTS.md</code></span></td><td><span class="ko">내가 만든 규칙 그대로 · 대화 기록 위치만 <code>chat-logs</code>로</span><span class="zh">自己定的规则原样 · 只把对话记录位置改到 <code>chat-logs</code></span></td></tr><tr><td><span class="ko"><code>.before-nextjs\</code></span><span class="zh"><code>.before-nextjs\</code></span></td><td><span class="ko">변환 전 원래 파일 그대로 · 제출하지 않는다</span><span class="zh">转换前的原文件原样保存 · 不提交</span></td></tr></tbody></table></div>
+</section>
+
+<section class="page" id="m3">
+<div class="kick"><span class="ko">2. 내 프로젝트 변환하기</span><span class="zh">2. 转换自己的项目</span><b>10-1</b></div>
+<h2 class="title"><span class="ko">변환이 끝나면 가장 먼저 .env 파일을 만든다</span><span class="zh">转换一完成，先建 .env 文件</span> <span class="cont"><span class="ko">(이어서)</span><span class="zh">（续）</span></span></h2>
+<p class="lead"><span class="ko">변환이 끝나면 가장 먼저 키를 넣습니다. Codex 로그인에 쓴 키를 프로젝트의 <code>.env</code> 파일에도 적어 두면, 서비스 안에서 <b>진짜 AI</b>를 쓰고 서비스에 필요한 <b>그림</b>도 Codex에게 만들어 달라고 할 수 있습니다. <code>.env</code>는 이 프로젝트만 쓰는 비밀 설정 파일입니다. 먼저 이 파일을 만듭니다.</span><span class="zh">转换完成后，第一件事是放密钥。把登录 Codex 用的密钥也写进项目的 <code>.env</code> 文件，就能在服务里用<b>真正的 AI</b>，也能让 Codex 帮忙做服务要用的<b>图片</b>。<code>.env</code> 是只给这个项目用的秘密设置文件。先把这个文件建好。</span></p>
+<div class="steps"><div class="st-h"><span class="ko">순서</span><span class="zh">顺序</span></div><ol><li><span class="ko">탐색기 맨 위 내 프로젝트 이름 줄의 <b>새 파일</b> 아이콘을 누르고 이름을 <code>.env</code>로 적은 뒤 Enter. 점으로 시작하는 이름이다.</span><span class="zh">点资源管理器最上方自己项目名那一行的<b>新建文件</b>图标，名字写 <code>.env</code> 后按 Enter。是以点开头的名字。</span></li></ol></div>
 <!-- ═══════════════════════════════════════════════════════════════════════
-     [이미지 생성 요청] 10-1-02-vanished
-     · 영역   : 이 주석 바로 아래 figure — 브라우저에 점선 자리로 보인다
-     · 규격   : 가로 16:9 · 개념 삽화 · assets/img/10-1-02-vanished.png
+     [이미지 생성 요청] 10-1-12-env-file
+     · 영역   : 이 주석 바로 아래 figure
+     · 규격   : 가로 16:9 · ① 화면 · Codex 이미지 생성(실사풍) · assets/img/10-1-12-env-file.png
      ───────────────────────────────────────────────────────────────────────
 
      ── 맥락 (모델에게 그대로 넘겨도 된다) ────────────────────────────
-     장대현중고등학교 「정보와 디지털 문해력」 10회 첫째 차시(10-1) 저장 절에 쓸 그림이다(2026-10-30 11-1에서 옮김).
-     학생은 중3~고2 여덟 명. 10회에 자기 서비스의 핵심 기능을 연결해 화면까지
-     이어 놓았는데, 창을 새로 열었더니 방금 남긴 것이 사라져 있었다.
-     이번 회의 출발점이 그 장면이다. 이 그림은 차시 첫 쪽에 들어가
-     설명 문장 없이 "남긴 것이 다시 왔을 때 없다" 를 먼저 보여 준다.
-     교과서 인쇄물과 교실 스크린 양쪽에 같은 파일이 들어간다.
+     10-1 12쪽 「변환이 끝나면 가장 먼저 .env에 키를 넣는다」에 쓸 그림이다(2026-11-16 선생님 「.env를 만드는 방법도 애들에게 알려줘야해. 이미지로 만들자고」).
+     학생은 VS Code 탐색기에서 프로젝트 맨 위에 .env 파일을 새로 만들고, 받은 OpenAI 키를 한 줄로 적어 저장한다.
+     순서: ① 탐색기 맨 위 프로젝트 이름 줄의 「새 파일」 아이콘 ② 이름 칸에 「.env」를 적고 Enter ③ 열린 .env에 「OPENAI_API_KEY=」 뒤에 키를 붙여 넣고 Ctrl+S.
+     Windows · VS Code 한국어 화면(어두운 테마). 학생은 중·고등학생 초보자다. 진짜 키는 절대 보이지 않게 점으로 가린다.
 
      ── 그릴 것 ────────────────────────────────────────────────────
-     김이 서린 유리창에 손가락으로 무언가를 써 둔 자국이, 물기가 흘러내리면서
-     반쯤 지워져 사라져 가는 장면. 창밖은 흐릿하게만 보인다.
-
-     · 쓴 자국은 **획만** 보이게 한다. 어느 나라 글자인지도 알아볼 수 없어야 한다.
-     · 위쪽 절반은 아직 자국이 남아 있고, 아래쪽으로 갈수록 흘러내려 사라진다.
-     · 주황(#FF5C00)은 아직 남아 있는 획 한 군데에만 아주 조금 쓴다.
-     · 사람은 넣지 않는다. 손끝 하나 정도는 괜찮다.
-     · 차분하고 조용한 장면이다. 슬프거나 극적으로 만들지 않는다.
+     VS Code 창 한 장(어두운 테마, Windows 창 모양). 주황(#FF5C00) 둥근 테두리와 주황 숫자 「①」 「②」 「③」로 세 곳을 표시한다.
+     · 왼쪽 탐색기: 맨 위 굵은 글자 「탐색기」, 그 아래 프로젝트 이름 줄 「내 프로젝트」.
+       그 줄 오른쪽 끝의 작은 아이콘 네 개 중 첫 번째(종이에 + 모양 「새 파일」)에 ① 주황 테두리.
+       목록: 「app」 「chat-logs」 「docs」 「public」(폴더 아이콘), 「AGENTS.md」 「package.json」(파일 아이콘).
+       목록 맨 아래 새 파일 이름 입력칸에 「.env」가 적혀 있고 ② 주황 테두리.
+     · 오른쪽 편집기: 탭 이름 「.env」. 편집기 첫 줄에 고정폭 글꼴로
+         「OPENAI_API_KEY=sk-••••••••••••••••」 — 이 줄에 ③ 주황 테두리.
+       편집기 아래쪽 가운데에 작은 회색 둥근 상자 글자 「Ctrl+S 로 저장」.
 
      ── 지킬 것 ────────────────────────────────────────────────────
-     · 공통 스타일 **A(사실적 삽화)** 를 앞에 붙인다. B(플랫 벡터)를 같이 붙이지 않는다.
-       → 이미지_제작_가이드 「2. 공통 스타일」
-     · 비율 16:9 가로. 밝은 장면으로 만든다. 인쇄물이라 어두운 배경은 쓰지 않는다.
-     · 받은 뒤 확인 — ① 글자로 읽히는 것이 없나 ② 사라져 가는 것이 보이나
-       ③ 주황이 한 군데뿐인가 ④ 인쇄해도 흐릿하지 않나. 어긋나면 다시 만든다.
+     · 화면 안 글자는 「」로 적은 것만 쓴다. 철자 · 띄어쓰기 정확히. 키는 점으로만(진짜처럼 보이는 문자열 금지). 사람 이름 · 다른 글자 넣지 않는다.
+     · Windows 창 모양. macOS 창 단추 금지. 손 · 커서 · 사람 없음. 16:9 가로. 인쇄해도 읽히게 글자를 크게.
+     · 참고 그림(-i)과 같은 VS Code 화면 느낌으로.
+
+     ── 받은 뒤 확인 ────────────────────────────────────────────────
+     ① 「새 파일」 아이콘 ② 「.env」 이름 칸 ③ 「OPENAI_API_KEY=sk-•••」(점으로 가림) ④ 한글 안 깨짐 · 다른 글자 없음
      ═══════════════════════════════════════════════════════════════════════
 -->
-<figure class="fig"><img class="figimg" src="../../assets/img/10-1-02-vanished.png" alt="김이 서린 유리창에 손가락으로 그은 획이 물방울과 함께 흘러내려 사라져 가는 장면." data-id="10-1-02-vanished" data-spec="가로 16:9 · 개념 삽화 · 김 서린 유리창" onerror="window.imgPlaceholder&amp;&amp;imgPlaceholder(this)"><figcaption><span class="ko">그림 10-1-2. 방금 남긴 것이 다시 왔을 때 없다면, 서비스는 기억하지 못한 것이다.</span><span class="zh">图 10-1-2. 刚留下的东西再来时已经没了，就说明服务没记住。</span></figcaption></figure>
-<div class="steps"><div class="st-h"><span class="ko">지금 해 보세요</span><span class="zh">现在就试</span></div><ol><li><span class="ko">브라우저에서 <code>F5</code>로 새로고침한다. 목록이 그대로인지 본다.</span><span class="zh">在浏览器按 <code>F5</code> 刷新。看列表是否还在。</span></li><li><span class="ko">서비스 터미널에서 <code>Ctrl+C</code>로 멈추고, <code>npm run dev</code>로 다시 켠 뒤 새로고침한다.</span><span class="zh">在服务终端按 <code>Ctrl+C</code> 停止，再用 <code>npm run dev</code> 重新启动，然后刷新。</span></li></ol></div>
+<figure class="fig narrow"><img class="figimg" src="../../assets/img/10-1-12-env-file.png" alt="VS Code 탐색기 맨 위 프로젝트 이름 줄의 새 파일 아이콘, 이름 칸에 적은 .env, 열린 .env 편집기의 OPENAI_API_KEY= 줄(키는 점으로 가림)." data-id="10-1-12-env-file" data-spec="가로 16:9 · ① 화면 · Codex 이미지 생성(실사풍) · 새 파일 → .env → 키 한 줄" onerror="window.imgPlaceholder&amp;&amp;imgPlaceholder(this)"><figcaption><span class="ko">그림 10-1-6. ① 새 파일 → ② 이름 .env → ③ OPENAI_API_KEY= 뒤에 키를 붙여 넣고 저장.</span><span class="zh">图 10-1-6. ① 新建文件 → ② 名字 .env → ③ 在 OPENAI_API_KEY= 后粘贴密钥并保存。</span></figcaption></figure>
 </section>
 
-<section class="page" id="s9_2">
-<div class="kick"><span class="ko">8. 저장</span><span class="zh">8. 保存</span><b>10-1</b></div>
-<h2 class="title"><span class="ko">다시 켜도 남는 까닭은 SQLite 파일에 적어 두었기 때문이다</span><span class="zh">重新启动还在，是因为写进了 SQLite 文件</span> <span class="cont"><span class="ko">(이어서)</span><span class="zh">（续）</span></span></h2>
-<p class="lead"><span class="ko">서버를 껐다 켜도 할 일이 남아 있었다면, 예시가 할 일을 <b>파일에 적어 두고</b> 다시 열 때 <b>그 파일에서 읽어 오기</b> 때문입니다. 우리 표준 프로젝트는 그 파일로 <b>SQLite</b>를 씁니다. 7-1에서 데이터베이스를 「서비스의 기억 장소」라고 했는데, SQLite는 그 기억 장소를 프로젝트 폴더 안의 파일 하나로 만든 것입니다.</span><span class="zh">停掉服务器再打开，待办还在的话，是因为示例把待办<b>写进了文件</b>，重新打开时又<b>从那个文件读回来</b>。我们的标准项目用的文件就是 <b>SQLite</b>。7-1 说过，数据库是“服务记忆的地方”，SQLite 把这个地方做成了项目文件夹里的一个文件。</span></p>
-<div class="term"><div class="term-h"><span class="ko"><span class="w">SQLite</span><span class="en">SQL + Lite</span></span><span class="zh"><span class="w">SQLite</span><span class="en">SQL + Lite</span></span></div><dl><dt><span class="ko">현상</span><span class="zh">现象</span></dt><dd><span class="ko">휴대전화의 메모 앱은 회원 가입을 하지 않아도 적은 것이 남아 있습니다. 앱 안 어딘가의 <b>파일</b>에 적어 두기 때문입니다.</span><span class="zh">手机里的备忘录 App 不用注册，写下的东西也会留着。因为它记在了 App 里某个地方的<b>文件</b>中。</span></dd><dt><span class="ko">쉬운 설명</span><span class="zh">通俗说法</span></dt><dd><span class="ko">외부 데이터베이스 계정 없이, <b>파일 하나</b>에 표 · 행 · 열로 기록을 적어 두는 방법입니다.</span><span class="zh">不需要外部数据库账号，用<b>一个文件</b>按表 · 行 · 列记下记录的方法。</span></dd><dt><span class="ko">정확한 정의</span><span class="zh">准确定义</span></dt><dd class="def"><span class="ko">별도의 서버 없이 파일 하나 안에 표 · 행 · 열 구조로 데이터를 저장하고 꺼내 보는 관계형 데이터베이스.</span><span class="zh">不需要另外的服务器，在一个文件里按表 · 行 · 列的结构保存和读取数据的关系型数据库。</span></dd><dt><span class="ko">경계</span><span class="zh">边界</span></dt><dd><span class="ko">7-1의 표 · 행 · 열 · 기본키는 그대로입니다. 다른 점은 위치입니다. 외부 서비스에 접속하지 않고 프로젝트 안의 <code>data\app.db</code>를 씁니다.</span><span class="zh">7-1 的表 · 行 · 列 · 主键都一样。不同的是位置：不连接外部服务，而是用项目里的 <code>data\app.db</code>。</span></dd><dt><span class="ko">문장 속 사용</span><span class="zh">句中用法</span></dt><dd><span class="ko">“할 일 정리의 기록은 SQLite 파일 <code>data\app.db</code>에 저장된다.”</span><span class="zh">“待办整理的记录保存在 SQLite 文件 <code>data\app.db</code> 里。”</span></dd></dl></div>
-<div class="note"><div class="nt"><span class="ko">「저장」과 「다시 불러오기」는 한 짝입니다</span><span class="zh">“保存”和“重新读取”是一对</span></div><p><span class="ko"><code>POST</code>로 저장만 하고 <code>GET</code>으로 다시 불러오지 않으면, 파일 안에는 있어도 사용자는 볼 수 없습니다. 10-2에서 내 서비스에 둘을 함께 연결합니다.</span><span class="zh">只用 <code>POST</code> 保存、不用 <code>GET</code> 重新读取的话，记录虽然在文件里，用户却看不到。10-2 会给自己的服务把两者一起接上。</span></p></div>
+<section class="page" id="m3b">
+<div class="kick"><span class="ko">2. 내 프로젝트 변환하기</span><span class="zh">2. 转换自己的项目</span><b>10-1</b></div>
+<h2 class="title"><span class="ko">.env에 설명과 키 한 줄을 넣고 저장한다</span><span class="zh">在 .env 里放说明和一行密钥，再保存</span> <span class="cont"><span class="ko">(이어서)</span><span class="zh">（续）</span></span></h2>
+<p class="lead"><span class="ko">새로 만든 <code>.env</code>가 편집기에 열려 있습니다. 아래 상자에는 이 파일이 무엇인지 적은 설명 줄(<code>#</code>으로 시작)과 키를 넣을 줄이 함께 들어 있습니다. <code>#</code> 줄은 설명으로만 읽히므로 그대로 둬도 됩니다.</span><span class="zh">新建的 <code>.env</code> 已经在编辑器里打开了。下面的框里有说明这个文件是什么的说明行（以 <code>#</code> 开头），还有放密钥的那一行。<code>#</code> 开头的行只当说明来读，留着也没关系。</span></p>
+<div class="code"><div class="chd"><span class="fn"><span class="ko">.env — 복사해 붙여 넣고 = 뒤에 키</span><span class="zh">.env — 复制粘贴后在 = 后面放密钥</span></span><button class="cp" onclick="copyCode(this)"><span class="ko">복사</span><span class="zh">复制</span></button></div><pre class="ko blk"># .env — 이 프로젝트만 쓰는 비밀 설정 파일이다.
+# 제출하지 않고, 다른 사람에게 보여 주지 않는다.
+# 서비스 안의 진짜 AI와 그림 만들기가 아래 키를 쓴다.
+# = 바로 뒤에 받은 OpenAI 키를 빈칸 · 따옴표 없이 붙여 넣고
+# Ctrl+S로 저장한다.
+OPENAI_API_KEY=</pre><pre class="zh blk"># .env — 只给这个项目用的秘密设置文件。
+# 不提交，也不给别人看。
+# 服务里真正的 AI 和做图片都会用下面的密钥。
+# 在 = 后面直接粘贴拿到的 OpenAI 密钥（不加空格 · 引号），按 Ctrl+S 保存。
+OPENAI_API_KEY=</pre></div>
+<div class="steps"><div class="st-h"><span class="ko">순서</span><span class="zh">顺序</span></div><ol><li><span class="ko">위 상자의 <b>복사</b>를 누르고 <code>.env</code>에 붙여 넣는다.</span><span class="zh">点上面框的<b class="keep-ko">복사</b>（复制），粘贴进 <code>.env</code>。</span></li><li><span class="ko"><code>OPENAI_API_KEY=</code> 바로 뒤에 받은 키를 빈칸 · 따옴표 없이 붙여 넣고 <code>Ctrl+S</code>로 저장한다.</span><span class="zh">在 <code>OPENAI_API_KEY=</code> 后面直接粘贴拿到的密钥（不加空格 · 引号），按 <code>Ctrl+S</code> 保存。</span></li></ol></div>
+<div class="note warn"><div class="nt"><span class="ko">키는 돈과 같습니다</span><span class="zh">密钥就和钱一样</span></div><p><span class="ko">키는 Codex 로그인 칸과 <code>.env</code> 두 곳에만 둡니다. Codex 대화창 · 메신저 · 다른 파일에 붙여 넣지 않습니다. <code>.env</code>는 제출하지 않습니다.</span><span class="zh">密钥只放在 Codex 登录框和 <code>.env</code> 两处。不要贴到 Codex 对话框 · 聊天软件 · 其他文件里。<code>.env</code> 不提交。</span></p></div>
 </section>
 
-<section class="page" id="s9_3">
-<div class="kick"><span class="ko">8. 저장</span><span class="zh">8. 保存</span><b>10-1</b></div>
-<h2 class="title"><span class="ko">SQLite는 프로젝트 안의 파일 하나다</span><span class="zh">SQLite 是项目里的一个文件</span> <span class="cont"><span class="ko">(이어서)</span><span class="zh">（续）</span></span></h2>
-<p class="lead"><span class="ko">그림처럼 기록은 상자 하나에 카드가 쌓이듯 파일 하나에 쌓입니다. 탐색기에서 <code>data</code> 폴더를 열면 예시를 켤 때 저절로 생긴 <code>app.db</code>가 보입니다. 이 파일 안에 7-1에서 본 표가 들어 있습니다. 표는 <code>lib\db.js</code>가 만들고, 10-2에서 AI가 내 서비스의 표로 바꿉니다.</span><span class="zh">就像图里的卡片堆在一个盒子里，记录也堆在一个文件里。在资源管理器打开 <code>data</code> 文件夹，能看到启动示例时自动生成的 <code>app.db</code>。这个文件里装着 7-1 看过的那种表。表由 <code>lib\db.js</code> 来建，10-2 会由 AI 换成自己服务的表。</span></p>
+<section class="page" id="m4">
+<div class="kick"><span class="ko">2. 내 프로젝트 변환하기</span><span class="zh">2. 转换自己的项目</span><b>10-1</b></div>
+<h2 class="title"><span class="ko">Codex에게 서비스를 켜게 하고, 내 화면을 연다</span><span class="zh">让 Codex 启动服务，打开自己的画面</span> <span class="cont"><span class="ko">(이어서)</span><span class="zh">（续）</span></span></h2>
+<p class="lead"><span class="ko">이제 서비스를 켜서 내 목업이 Next.js 화면으로 열리는지 봅니다. Codex는 명령을 <b>샌드박스</b>라는 안전한 칸 안에서 실행하는데, 그 안에서 켠 서비스는 브라우저에서 열리지 않습니다. 그래서 서비스를 켤 때만 샌드박스 밖에서 실행하도록 승인을 요청하게 합니다.</span><span class="zh">现在启动服务，看自己的模型是不是作为 Next.js 画面打开了。Codex 会在叫<b>沙盒</b>的安全空间里执行命令，可在里面启动的服务，浏览器打不开。所以只有启动服务时，让它请求批准在沙盒外运行。</span></p>
+<div class="code"><div class="chd"><span class="fn"><span class="ko">요청 — 서비스 켜기</span><span class="zh">请求 — 启动服务</span></span><button class="cp" onclick="copyCode(this)"><span class="ko">복사</span><span class="zh">复制</span></button></div><pre class="ko blk">서비스를 켜 줘(npm run dev).
+샌드박스 안에서 켜면 브라우저가 열리지 않으니, 샌드박스 밖에서 실행하도록 승인을 요청해 줘.
+대화가 끝나도 꺼지지 않게 켜 두고, localhost:3000이 실제로 열리는지 확인한 뒤 주소를 알려 줘.</pre><pre class="zh blk">请启动服务（npm run dev）。
+在沙盒里启动的话浏览器打不开，所以请请求批准在沙盒外运行。
+对话结束后也别关掉，确认 localhost:3000 真的能打开后，告诉我地址。</pre></div>
+<div class="steps"><div class="st-h"><span class="ko">순서</span><span class="zh">顺序</span></div><ol><li><span class="ko"><code>npm run dev</code>를 샌드박스 밖에서 실행하겠다는 카드가 뜨면 명령이 <code>npm run dev</code>인지 보고 <b>한 번만 허용</b>을 누른다.</span><span class="zh">出现要在沙盒外执行 <code>npm run dev</code> 的卡片时，看清命令是 <code>npm run dev</code>，点<b class="keep-ko">한 번만 허용</b>（只允许一次）。</span></li><li><span class="ko">브라우저에서 <code>localhost:3000</code>을 연다. 내 목업과 같은 화면이 열리고, 버튼이 목업처럼 움직이면 된다.</span><span class="zh">在浏览器打开 <code>localhost:3000</code>。出现和模型一样的画面、按钮像模型一样动就对了。</span></li></ol></div>
+</section>
+
+<section class="page" id="m4b">
+<div class="kick"><span class="ko">2. 내 프로젝트 변환하기</span><span class="zh">2. 转换自己的项目</span><b>10-1</b></div>
+<h2 class="title"><span class="ko">화면이 열리지 않으면 터미널에서 직접 켠다</span><span class="zh">画面打不开时，在终端里自己启动</span> <span class="cont"><span class="ko">(이어서)</span><span class="zh">（续）</span></span></h2>
+<p class="lead"><span class="ko">Codex가 켰다고 했는데 <code>localhost:3000</code>이 열리지 않으면, 서비스를 터미널에서 직접 켭니다. 이때 켠 터미널은 서비스가 쓰고 있으니 그대로 두고, 거기에는 다른 것을 치지 않습니다.</span><span class="zh">Codex 说已经启动了，<code>localhost:3000</code> 却打不开的话，就在终端里自己启动服务。这时启动服务的终端被服务占着，保持不动，不要往里输别的。</span></p>
+<div class="steps"><div class="st-h"><span class="ko">순서</span><span class="zh">顺序</span></div><ol><li><span class="ko">위쪽 메뉴 <b>터미널 → 새 터미널</b>을 누른다.</span><span class="zh">点上方菜单<b class="keep-ko">터미널 → 새 터미널</b>（终端 → 新建终端）。</span></li><li><span class="ko">아래에 열린 터미널에 <code>npm run dev</code>를 입력하고 Enter. <code>Ready</code>가 보이면 브라우저에서 다시 연다.</span><span class="zh">在下面打开的终端里输入 <code>npm run dev</code> 按 Enter。看到 <code>Ready</code> 后在浏览器里再打开。</span></li></ol></div>
 <!-- ═══════════════════════════════════════════════════════════════════════
-     [이미지 생성 요청] 10-1-03-one-file
-     · 영역   : 이 주석 바로 아래 figure — 브라우저에 점선 자리로 보인다
-     · 규격   : 가로 16:9 · 개념 삽화 · assets/img/10-1-03-one-file.png
+     [이미지 생성 요청] 10-1-11-terminal-npm-run-dev
+     · 영역   : 이 주석 바로 아래 figure
+     · 규격   : 가로 16:9 · ① 화면 · Codex 이미지 생성(실사풍) · assets/img/10-1-11-terminal-npm-run-dev.png
      ───────────────────────────────────────────────────────────────────────
 
      ── 맥락 (모델에게 그대로 넘겨도 된다) ────────────────────────────
-     장대현중고등학교 「정보와 디지털 문해력」 10회 첫째 차시(10-1)에 쓸 그림이다(2026-10-30 11-1에서 옮김).
-     학생은 중3~고2 여덟 명. 7-1에서 표·행·열을 배웠고, 이 절에서 SQLite 를 만난다.
-     학생이 흔히 오해하는 것은 데이터베이스가 어딘가 따로 돌아가는 큰 장치라는 것이다.
-     실제로는 프로젝트 폴더 안의 파일 하나다. 이 그림은 그 하나를 보여 준다.
-     교과서 인쇄물과 교실 스크린 양쪽에 같은 파일이 들어간다.
+     10-1 13쪽 「Codex에게 서비스를 켜게 하고, 내 화면을 연다」의 3번 단계에 쓸 그림이다(2026-11-16 선생님 「13page에 3번은 이미지도 하나 만들어줘」).
+     Codex에게 서비스를 켜 달라고 했는데 브라우저에서 화면이 열리지 않으면, 학생이 직접 VS Code 터미널에서 서비스를 켠다.
+     순서: ① 위쪽 메뉴 「터미널」 → 「새 터미널」 ② 아래에 열린 터미널에 「npm run dev」를 입력하고 Enter ③ 「✓ Ready」가 보이면 브라우저에서 다시 연다.
+     Windows · VS Code 한국어 화면(어두운 테마). 학생은 중·고등학생 초보자다.
 
      ── 그릴 것 ────────────────────────────────────────────────────
-     책상 위에 뚜껑을 연 작은 상자 **하나**가 놓여 있고, 그 안에 얇은 카드가
-     가지런히 세워져 빼곡히 들어차 있는 장면. 상자 주변은 비어 있다.
-
-     · 상자는 **하나**다. 두 개 이상 그리면 이 절의 요점이 뒤집힌다.
-     · 상자 옆에 서버 랙·기계·전선·아이콘 같은 것을 절대 넣지 않는다.
-       "따로 돌아가는 장치가 아니다" 가 이 그림의 요점이다.
-     · 카드의 글자는 읽히지 않게 한다. 카드가 여러 장이라는 것만 보이면 된다.
-     · 주황(#FF5C00)은 카드 한 장의 윗머리에만 아주 조금 쓴다.
-     · 손이 상자 옆에 놓여 있어도 좋다. 얼굴은 넣지 않는다.
+     VS Code 창 한 장(어두운 테마, Windows 창 모양). 주황(#FF5C00) 둥근 테두리와 주황 숫자 「①」 「②」 「③」로 세 곳을 표시한다.
+     · 맨 위 메뉴 막대: 「파일」 「편집」 「선택 영역」 「보기」 「이동」 「실행」 「터미널」 「도움말」.
+       「터미널」 메뉴가 펼쳐져 있고 첫 항목 「새 터미널」에 ① 주황 테두리. 펼친 메뉴의 다른 항목은 흐린 회색 줄로만.
+     · 가운데 편집기는 비어 있거나 흐린 회색 줄 몇 개.
+     · 아래쪽 패널: 탭 「터미널」이 선택됨. 터미널 안 글자(고정폭 글꼴, 위에서부터):
+         「PS C:\…\내 프로젝트> npm run dev」 — 이 줄에 ② 주황 테두리
+         「▲ Next.js 16.4.3」
+         「- Local:   http://localhost:3000」
+         「✓ Ready」 — 초록 글자, 이 줄에 ③ 주황 테두리
+     · 오른쪽 위에 Codex 창은 그리지 않는다.
 
      ── 지킬 것 ────────────────────────────────────────────────────
-     · 공통 스타일 **A(사실적 삽화)** 를 앞에 붙인다. B(플랫 벡터)를 같이 붙이지 않는다.
-       → 이미지_제작_가이드 「2. 공통 스타일」
-     · 비율 16:9 가로. 배경은 거의 흰색(#ffffff). 어두운 배경을 쓰지 않는다.
-     · 받은 뒤 확인 — ① 상자가 하나인가 ② 기계·전선이 끼어들지 않았나
-       ③ 글자가 없나 ④ 주황이 한 군데뿐인가. 어긋나면 다시 만든다.
+     · 화면 안 글자는 「」로 적은 것만 쓴다. 철자 · 띄어쓰기 정확히. 사람 이름 · 다른 폴더 이름 · 다른 메뉴 글자를 넣지 않는다.
+     · Windows 창 모양. macOS 창 단추 금지. 손 · 커서 · 사람 없음. 16:9 가로. 인쇄해도 읽히게 터미널 글자를 크게.
+     · 참고 그림(-i)과 같은 VS Code 화면 느낌으로.
+
+     ── 받은 뒤 확인 ────────────────────────────────────────────────
+     ① 「터미널 → 새 터미널」 ② 「npm run dev」 줄 ③ 초록 「✓ Ready」 ④ 한글 안 깨짐 · 다른 글자 없음
      ═══════════════════════════════════════════════════════════════════════
 -->
-<figure class="fig"><img class="figimg" src="../../assets/img/10-1-03-one-file.png" alt="책상 위에 뚜껑을 연 상자 하나가 있고, 그 안에 얇은 카드가 빼곡히 세워져 있다. 카드 한 장의 윗머리만 주황색이다." data-id="10-1-03-one-file" data-spec="가로 16:9 · 개념 삽화 · 카드 상자 하나" onerror="window.imgPlaceholder&amp;&amp;imgPlaceholder(this)"><figcaption><span class="ko">그림 10-1-3. 따로 돌아가는 장치가 아니라, 폴더 안의 파일 하나다.</span><span class="zh">图 10-1-3. 不是另外运行的装置，而是文件夹里的一个文件。</span></figcaption></figure>
-<div class="note warn"><div class="nt"><span class="ko">그냥 클릭하면 깨진 글자가 보입니다</span><span class="zh">直接点开会看到乱码</span></div><p><span class="ko"><code>app.db</code>는 글자 파일이 아니라서 VS Code 기본 편집기로 열면 알아볼 수 없는 기호가 보입니다. 고장이 아닙니다. 다음 절에서 설치할 <b>SQLite Viewer</b>로 열어야 표와 행이 보입니다. 기본 편집기로 열었다면 고치지 말고 그대로 닫습니다.</span><span class="zh"><code>app.db</code> 不是文字文件，用 VS Code 默认编辑器打开会看到认不出的符号。这不是坏了。要用下一节安装的 <b>SQLite Viewer</b> 打开，才能看到表和行。如果用默认编辑器打开了，什么都别改，直接关掉。</span></p></div>
+<figure class="fig narrow"><img class="figimg" src="../../assets/img/10-1-11-terminal-npm-run-dev.png" alt="VS Code 위쪽 메뉴 터미널 → 새 터미널, 아래 터미널에 npm run dev를 입력한 줄과 Next.js 16.4.3, localhost:3000, 초록 Ready." data-id="10-1-11-terminal-npm-run-dev" data-spec="가로 16:9 · ① 화면 · Codex 이미지 생성(실사풍) · 터미널 → 새 터미널 → npm run dev → Ready" onerror="window.imgPlaceholder&amp;&amp;imgPlaceholder(this)"><figcaption><span class="ko">그림 10-1-7. ① 터미널 → 새 터미널 ② npm run dev ③ Ready가 보이면 다시 연다.</span><span class="zh">图 10-1-7. ① 终端 → 新建终端 ② npm run dev ③ 出现 Ready 后再打开。</span></figcaption></figure>
 </section>
 
 <section class="page" id="s10">
-<div class="kick"><span class="ko">9. SQLite Viewer</span><span class="zh">9. SQLite Viewer</span><b>10-1</b></div>
-<h2 class="title"><span class="ko">VS Code에 SQLite Viewer를 설치한다</span><span class="zh">在 VS Code 里安装 SQLite Viewer</span> <span class="badge lab"><span class="ko">실습</span><span class="zh">实践</span></span></h2>
-<p class="lead"><span class="ko"><code>app.db</code>는 기본 편집기로 읽을 수 없으니, 표와 행을 보여 주는 확장을 설치합니다. 2회에 Python 확장을 설치한 것과 같은 방법입니다. 다만 검색하면 이름이 비슷한 확장이 여럿 나오므로 아래 그림의 주황 테두리처럼 <b>확장 ID</b>를 꼭 확인합니다.</span><span class="zh"><code>app.db</code> 用默认编辑器读不了，所以要安装一个能显示表和行的扩展。方法和第 2 次课安装 Python 扩展一样。不过搜索时会出现好几个名字相似的扩展，一定要像下图橙色框那样确认<b>扩展 ID</b>。</span></p>
+<div class="kick"><span class="ko">3. 설정 · SQLite Viewer</span><span class="zh">3. 设置 · SQLite Viewer</span><b>10-1</b></div>
+<h2 class="title"><span class="ko">10-2에서 쓸 SQLite Viewer를 미리 설치해 둔다</span><span class="zh">提前装好 10-2 要用的 SQLite Viewer</span> <span class="badge lab"><span class="ko">실습</span><span class="zh">实践</span></span></h2>
+<p class="lead"><span class="ko">내 서비스의 기록은 <code>data\app.db</code> 파일에 쌓입니다. 이 파일은 기본 편집기로 읽을 수 없으니, 표와 행을 보여 주는 확장을 오늘 미리 설치합니다. 2회에 Python 확장을 설치한 것과 같은 방법입니다. 다만 검색하면 이름이 비슷한 확장이 여럿 나오므로 아래 그림의 주황 테두리처럼 <b>확장 ID</b>를 꼭 확인합니다.</span><span class="zh">自己服务的记录会存进 <code>data\app.db</code> 文件。这个文件用默认编辑器读不了，所以今天先装好一个能显示表和行的扩展。方法和第 2 次课安装 Python 扩展一样。不过搜索时会出现好几个名字相似的扩展，一定要像下图橙色框那样确认<b>扩展 ID</b>。</span></p>
 <div class="steps"><div class="st-h"><span class="ko">설치 순서</span><span class="zh">安装顺序</span></div><ol><li><span class="ko">VS Code 왼쪽 활동 막대에서 <b>확장</b>(네모 네 개 모양, <code>Ctrl+Shift+X</code>)을 연다.</span><span class="zh">在 VS Code 左侧活动栏打开<b>扩展</b>（四个小方块的图标，<code>Ctrl+Shift+X</code>）。</span></li><li><span class="ko">검색칸에 <code>SQLite Viewer</code>를 입력하고 목록에서 SQLite Viewer를 누른다.</span><span class="zh">在搜索框输入 <code>SQLite Viewer</code>，在列表里点 SQLite Viewer。</span></li><li><span class="ko">설명 화면의 <b>식별자</b>(Identifier)가 <code>qwtel.sqlite-viewer</code>인지 보고 <b>설치</b>(Install)를 누른다. 단추가 <b>제거</b>로 바뀌면 끝이다.</span><span class="zh">确认说明画面里的 <b class="keep-ko">식별자</b>（Identifier，扩展 ID）是 <code>qwtel.sqlite-viewer</code>，再点 <b class="keep-ko">설치</b>（Install，安装）。按钮变成 <b class="keep-ko">제거</b>（卸载）就完成了。</span></li></ol></div>
 <!-- ═══════════════════════════════════════════════════════════════════════
      [이미지 생성 요청] 10-1-04-viewer-install
@@ -345,93 +448,117 @@ const res = await fetch("/api/tasks", {
      ③ 선택된 줄이 Florian Klampfer 의 SQLite Viewer 인가 ④ 주황 테두리가 세 곳뿐이고 한글이 깨지지 않았나
      ═══════════════════════════════════════════════════════════════════════
 -->
-<figure class="fig"><img class="figimg" src="../../assets/img/10-1-04-viewer-install.png" alt="VS Code 확장 화면에서 SQLite Viewer를 검색해 설명 화면을 연 모습. 확장 ID qwtel.sqlite-viewer와 Install 단추가 보인다." data-id="10-1-04-viewer-install" data-spec="가로 16:9 · ① 화면 · ChatGPT 실사풍 · VS Code 확장 화면" onerror="window.imgPlaceholder&amp;&amp;imgPlaceholder(this)"><figcaption><span class="ko">그림 10-1-4. 검색칸 → SQLite Viewer → 확장 ID 확인 → 설치.</span><span class="zh">图 10-1-4. 搜索框 → SQLite Viewer → 确认扩展 ID → 安装。</span></figcaption></figure>
+<figure class="fig"><img class="figimg" src="../../assets/img/10-1-04-viewer-install.png" alt="VS Code 확장 화면에서 SQLite Viewer를 검색해 설명 화면을 연 모습. 확장 ID qwtel.sqlite-viewer와 Install 단추가 보인다." data-id="10-1-04-viewer-install" data-spec="가로 16:9 · ① 화면 · ChatGPT 실사풍 · VS Code 확장 화면" onerror="window.imgPlaceholder&amp;&amp;imgPlaceholder(this)"><figcaption><span class="ko">그림 10-1-8. 검색칸 → SQLite Viewer → 확장 ID 확인 → 설치.</span><span class="zh">图 10-1-8. 搜索框 → SQLite Viewer → 确认扩展 ID → 安装。</span></figcaption></figure>
 </section>
 
-<section class="page" id="s10_2">
-<div class="kick"><span class="ko">9. SQLite Viewer</span><span class="zh">9. SQLite Viewer</span><b>10-1</b></div>
-<h2 class="title"><span class="ko">Viewer로 열면 방금 추가한 할 일이 행으로 보인다</span><span class="zh">用 Viewer 打开，刚添加的待办会以行的形式出现</span></h2>
-<p class="lead"><span class="ko">탐색기에서 <code>data\app.db</code>를 누르면 이제 Viewer로 열립니다. 왼쪽에 표 이름 <code>tasks</code>가, 오른쪽에 열과 행이 나옵니다. 7절에서 추가한 할 일이 한 행씩 들어 있는지 봅니다. 7-1처럼 「이 표의 한 행은 무엇인가?」를 물으면 답은 「할 일 하나」입니다. Viewer로는 보기만 하고 값을 고치거나 지우지 않습니다.</span><span class="zh">现在在资源管理器里点 <code>data\app.db</code>，就会用 Viewer 打开。左边是表名 <code>tasks</code>，右边是列和行。看看第 7 节添加的待办是不是一行一行地在里面。像 7-1 那样问“这张表的一行是什么？”，答案是“一条待办”。Viewer 只用来看，不改值也不删值。</span></p>
-<!-- ═══════════════════════════════════════════════════════════════════════
-     [이미지 생성 요청] 10-1-05-viewer-table
-     · 영역   : 이 주석 바로 아래 figure — 브라우저에 점선 자리로 보인다
-     · 규격   : 가로 16:9 · ① 화면 · ChatGPT 실사풍 · assets/img/10-1-05-viewer-table.png
-     ───────────────────────────────────────────────────────────────────────
-
-     ── 맥락 (모델에게 그대로 넘겨도 된다) ────────────────────────────
-     장대현중고등학교 「정보와 디지털 문해력」 10회 첫째 차시(10-1)에 쓸 그림이다(2026-10-30 11-1에서 옮김).
-     학생은 중3~고2 여덟 명, 비개발자다. 학교 컴퓨터는 Windows, VS Code는 한국어 화면이다.
-     7-1에서 표·행·열·기본키를 배웠고, 이 절에서 SQLite 파일 data/app.db 를 SQLite Viewer로
-     열면 무엇이 보이는지 처음 본다. 교과서는 「표 이름 tasks · 열 id·text·created_at · 한 행 = 할 일 하나」로 읽게 한다.
-     그림의 표 값은 바로 앞 쪽 교과서 표와 똑같아야 한다.
-     교과서 인쇄물과 교실 스크린 양쪽에 같은 파일이 들어간다.
-
-     ── 그릴 것 ────────────────────────────────────────────────────
-     Windows에서 연 VS Code 창 전체를 실제 화면 캡처처럼 그린다. 밝은 테마(Light Modern).
-     · 왼쪽 탐색기 머리 「탐색기」, 그 아래 폴더 「10」이 펼쳐져 있고 차례로
-       「app」 「data」 「docs」 「lib」 「scripts」 폴더, 「AGENTS.md」 「package.json」 「README.md」 파일.
-       「data」는 펼쳐져 있고 그 안에 「app.db」 하나가 선택되어 있다.
-     · 오른쪽 편집 영역에 탭 「app.db」가 열려 있고, SQLite Viewer 화면이다.
-         Viewer 왼쪽 좁은 칸에 표 이름 「tasks」 하나(선택됨).
-         Viewer 오른쪽 격자: 열 머리 「id」 「text」 「created_at」, 그 아래 행 정확히 세 줄
-           1 | 수학 숙제 23쪽까지     | 2026-11-05 08:41
-           2 | 영어 단어 20개 외우기  | 2026-11-05 08:42
-           3 | 과학 보고서 표 그리기  | 2026-11-05 08:44
-     · 주황(#FF5C00) 둥근 테두리를 세 곳에만 친다: ① 탐색기의 app.db ② 표 이름 tasks ③ 2번 행 한 줄.
-
-     ── 지킬 것 ────────────────────────────────────────────────────
-     · 화면 안 글자는 위에 「」와 표로 적은 것만 쓰고 철자·숫자를 정확히 지킨다. 행을 더 만들지 않는다.
-     · 사람 이름·연락처 같은 개인정보를 넣지 않는다.
-     · Windows 창 모양으로 그린다. macOS 창 단추를 쓰지 않는다.
-     · 손·마우스 커서·사람은 그리지 않는다. 비율 16:9 가로. 인쇄해도 표 글자가 읽히게 크게.
-
-     ── 받은 뒤 확인 ────────────────────────────────────────────────
-     ① 탐색기에서 data 안의 app.db 가 보이나 ② 표 이름 tasks 와 열 id · text · created_at 이 읽히나
-     ③ 행이 정확히 세 줄이고 값이 교과서 표와 같나(한글 깨짐 없음) ④ 주황 테두리가 세 곳뿐인가
-     ═══════════════════════════════════════════════════════════════════════
--->
-<figure class="fig"><img class="figimg" src="../../assets/img/10-1-05-viewer-table.png" alt="VS Code 탐색기에 data/app.db가 보이고, SQLite Viewer에서 tasks 표의 열 id · text · created_at과 행 세 줄이 보이는 화면." data-id="10-1-05-viewer-table" data-spec="가로 16:9 · ① 화면 · ChatGPT 실사풍 · SQLite Viewer로 연 data/app.db" onerror="window.imgPlaceholder&amp;&amp;imgPlaceholder(this)"><figcaption><span class="ko">그림 10-1-5. 표 이름 tasks, 열 세 개, 행 세 줄. 한 행이 할 일 하나다.</span><span class="zh">图 10-1-5. 表名 tasks，三列，三行。一行就是一条待办。</span></figcaption></figure>
-<div class="tablewrap"><table class="kv"><thead><tr><th style="width:34%"><span class="ko">이름</span><span class="zh">名称</span></th><th><span class="ko">뜻</span><span class="zh">意思</span></th></tr></thead><tbody><tr><td><span class="ko"><code>id</code> · 기본키</span><span class="zh"><code>id</code> · 主键</span></td><td><span class="ko">행 하나를 딱 집어내는 번호. 저장할 때 1, 2, 3… 저절로 붙는다</span><span class="zh">精确找出一行的编号。保存时自动编上 1, 2, 3…</span></td></tr><tr><td><span class="ko"><code>text</code> · 열</span><span class="zh"><code>text</code> · 列</span></td><td><span class="ko">사용자가 입력한 할 일 내용</span><span class="zh">用户输入的待办内容</span></td></tr><tr><td><span class="ko"><code>created_at</code> · 열</span><span class="zh"><code>created_at</code> · 列</span></td><td><span class="ko">추가한 시각. 저장할 때 저절로 적힌다</span><span class="zh">添加时间。保存时自动写入</span></td></tr></tbody></table></div>
+<section class="page" id="s7m">
+<div class="kick"><span class="ko">4. 폴더가 곧 주소</span><span class="zh">4. 文件夹就是地址</span><b>10-1</b></div>
+<h2 class="title"><span class="ko">프레임워크의 약속이 눈에 보인다 — 폴더가 곧 사이트 주소다</span><span class="zh">看得见的框架约定 — 文件夹就是网站地址</span> <span class="badge core"><span class="ko">핵심</span><span class="zh">核心</span></span></h2>
+<p class="lead"><span class="ko">1절에서 프레임워크는 「무엇을 어디에 두는지」 정해 둔 약속이라고 했습니다. Next.js에서는 그 약속이 눈에 보입니다. <code>app</code> 폴더 안에 파일을 어느 폴더에 두느냐가 곧 브라우저 <b>주소</b>가 됩니다. 주소를 따로 정하지 않아도, 약속된 자리에 두면 Next.js가 알아서 잇습니다. 앞으로 AI가 「○○ 파일을 고치겠습니다」라고 하면 이 표에서 그 파일이 어느 주소인지 찾습니다.</span><span class="zh">第 1 节说过，框架是定好“什么放在哪里”的约定。在 Next.js 里，这个约定看得见：文件放在 <code>app</code> 里的哪个文件夹，就是浏览器里的哪个<b>地址</b>。不用另外定地址，放在约定的位置，Next.js 就会自己接上。以后 AI 说“我要改 ○○ 文件”时，就在这张表里找那个文件对应哪个地址。</span></p>
+<div class="tablewrap"><table class="kv"><thead><tr><th style="width:36%"><span class="ko">폴더 · 파일</span><span class="zh">文件夹 · 文件</span></th><th style="width:30%"><span class="ko">브라우저 주소</span><span class="zh">浏览器地址</span></th><th><span class="ko">하는 일</span><span class="zh">做什么</span></th></tr></thead><tbody><tr><td><span class="ko"><code>app\page.js</code></span><span class="zh"><code>app\page.js</code></span></td><td><span class="ko"><code>localhost:3000</code></span><span class="zh"><code>localhost:3000</code></span></td><td><span class="ko"><b>화면</b> — 내 목업을 변환한 첫 화면</span><span class="zh"><b>画面</b> — 由模型转换来的首页</span></td></tr><tr><td><span class="ko"><code>app\api\hello\route.js</code></span><span class="zh"><code>app\api\hello\route.js</code></span></td><td><span class="ko">아직 빈 파일</span><span class="zh">还是空文件</span></td><td><span class="ko"><b>요청을 받는 곳(API)</b> 자리 — 10-2에서 채운다</span><span class="zh"><b>接收请求的地方（API）</b>的位置 — 10-2 来填</span></td></tr><tr><td><span class="ko"><code>app\<i>이름</i>\page.js</code>를 만들면</span><span class="zh">建了 <code>app\<i>名字</i>\page.js</code> 的话</span></td><td><span class="ko"><code>localhost:3000/<i>이름</i></code></span><span class="zh"><code>localhost:3000/<i>名字</i></code></span></td><td><span class="ko">새 화면이 그 주소에 생긴다</span><span class="zh">新画面会出现在那个地址</span></td></tr><tr><td><span class="ko"><code>lib\db.js</code> → <code>data\app.db</code></span><span class="zh"><code>lib\db.js</code> → <code>data\app.db</code></span></td><td><span class="ko">주소 없음</span><span class="zh">没有地址</span></td><td><span class="ko"><b>저장</b> — 10-2에서 만든다</span><span class="zh"><b>保存</b> — 10-2 来做</span></td></tr><tr><td><span class="ko"><code>docs\</code> · <code>chat-logs\</code></span><span class="zh"><code>docs\</code> · <code>chat-logs\</code></span></td><td><span class="ko">주소 없음</span><span class="zh">没有地址</span></td><td><span class="ko">내 문서 · 대화 기록</span><span class="zh">自己的文档 · 对话记录</span></td></tr></tbody></table></div>
+<div class="note ok"><div class="nt"><span class="ko">버전과 구조는 바꾸지 않습니다</span><span class="zh">版本和结构不改</span></div><p><span class="ko"><code>package.json</code>에는 변환할 때 맞춘 버전(Next.js 16.4.3 · React 19.3.1)이 적혀 있습니다. 모두 같은 버전이어야 같은 방법으로 실행하고 확인할 수 있습니다. AI가 버전을 올리거나 TypeScript · 새 폴더 구조로 바꾸자고 하면 「지금 버전과 구조 그대로 해 줘」라고 말합니다.</span><span class="zh"><code>package.json</code> 里写着转换时定好的版本（Next.js 16.4.3 · React 19.3.1）。大家版本一样，才能用同样的方法运行和确认。AI 要升级版本、改成 TypeScript 或重搭文件夹结构时，就说“<b class="keep-ko">지금 버전과 구조 그대로 해 줘</b>”（照现在的版本和结构做）。</span></p></div>
 </section>
 
-<section class="page" id="s11">
-<div class="kick"><span class="ko">10. 내 약속표</span><span class="zh">10. 我的约定表</span><b>10-1</b></div>
-<h2 class="title"><span class="ko">내 서비스의 API 약속표를 쓴다</span><span class="zh">写自己服务的 API 约定表</span> <span class="badge lab"><span class="ko">실습</span><span class="zh">实践</span></span></h2>
-<p class="lead"><span class="ko">이제 내 서비스의 핵심 행동 하나를 API 약속으로 적습니다. <code>docs\10_api_promise.md</code>를 열고 <b>1. 핵심 행동의 약속</b> 표를 채웁니다. 요청 주소와 방법은 비워 두거나 짐작만 적어도 됩니다. 10-2에서 AI의 제안을 확인한 뒤 고칩니다.</span><span class="zh">现在把自己服务的一个核心动作写成 API 约定。打开 <code>docs\10_api_promise.md</code>，填好 <b>1. <b class="keep-ko">핵심 행동의 약속</b></b>（核心动作的约定）表。请求地址和方法可以空着，或者只写个猜测，到 10-2 确认过 AI 的提议后再改。</span></p>
-<div class="tablewrap"><table class="kv"><thead><tr><th style="width:34%"><span class="ko">칸</span><span class="zh">格</span></th><th><span class="ko">이렇게 찾는다</span><span class="zh">这样找</span></th></tr></thead><tbody><tr><td><span class="ko">사용자의 핵심 행동</span><span class="zh">用户的核心动作</span></td><td><span class="ko"><code>09_development_plan.md</code> 2항 대표 흐름에서 버튼을 누르는 단계</span><span class="zh"><code>09_development_plan.md</code> 第 2 项代表流程里按按钮的那一步</span></td></tr><tr><td><span class="ko">보낼 데이터</span><span class="zh">发送的数据</span></td><td><span class="ko">그 단계에서 사용자가 입력하거나 고른 것</span><span class="zh">那一步里用户输入或选择的东西</span></td></tr><tr><td><span class="ko">성공하면 받을 데이터</span><span class="zh">成功时收回的数据</span></td><td><span class="ko">그다음 단계에서 화면에 보여야 할 결과</span><span class="zh">下一步画面上要显示的结果</span></td></tr><tr><td><span class="ko">실패하면 받을 안내</span><span class="zh">失败时收回的提示</span></td><td><span class="ko">4항 예외 흐름의 안내 문장</span><span class="zh">第 4 项例外流程里的提示句</span></td></tr><tr><td><span class="ko">응답 뒤 화면에 보여 줄 것</span><span class="zh">响应后画面显示的</span></td><td><span class="ko">결과가 어디에 어떻게 나타나는지</span><span class="zh">结果在哪里、以什么样子出现</span></td></tr></tbody></table></div>
-<div class="note warn"><div class="nt"><span class="ko">핵심 행동은 하나만 적습니다</span><span class="zh">核心动作只写一个</span></div><p><span class="ko">버튼이 여러 개인 서비스도 오늘은 핵심 결과를 만드는 버튼 하나만 적습니다. 나머지 기능은 개발 계획 5항의 순서대로 11회부터 붙입니다.</span><span class="zh">就算服务里有好几个按钮，今天也只写产生核心结果的那一个。其余功能按开发计划第 5 项的顺序，从第 11 次课起再加。</span></p></div>
+<section class="page" id="s7m2">
+<div class="kick"><span class="ko">4. 폴더가 곧 주소</span><span class="zh">4. 文件夹就是地址</span><b>10-1</b></div>
+<h2 class="title"><span class="ko">AI에게 화면 하나를 만들게 하고, 새 주소가 생기는 것을 본다</span><span class="zh">让 AI 做一个画面，看看多出的新地址</span> <span class="cont"><span class="ko">(이어서)</span><span class="zh">（续）</span></span></h2>
+<p class="lead"><span class="ko">표로 본 약속을 직접 확인합니다. 먼저 아직 없는 주소를 열어 보고, Codex에게 그 주소의 폴더에 작은 화면 하나를 만들게 합니다. 무엇을 만들지 요청에 정확히 적었기 때문에 모두 같은 화면이 나옵니다. 폴더 하나를 만들었을 뿐인데 주소가 생기는 것이 프레임워크의 약속입니다.</span><span class="zh">直接确认表里看到的约定。先打开一个还不存在的地址，再让 Codex 在那个地址的文件夹里做一个小画面。要做什么在请求里写得很清楚，所以大家会看到一样的画面。只是建了一个文件夹，地址就出现了 — 这就是框架的约定。</span></p>
+<div class="steps"><div class="st-h"><span class="ko">지금 해 보세요</span><span class="zh">现在试试</span></div><ol><li><span class="ko">브라우저 주소창에 <code>localhost:3000/hello</code>를 연다. 아직 그런 폴더가 없으니 「404」가 나온다.</span><span class="zh">在浏览器地址栏打开 <code>localhost:3000/hello</code>。还没有这个文件夹，所以会出现“404”。</span></li><li><span class="ko">아래 요청을 읽고 Codex에 보낸다. 탐색기에 <code>app\hello\page.js</code>가 생기면 같은 주소를 새로 고침한다.</span><span class="zh">读完下面的请求发给 Codex。资源管理器里出现 <code>app\hello\page.js</code> 后，刷新同一个地址。</span></li></ol></div>
+<div class="code"><div class="chd"><span class="fn"><span class="ko">요청 — 새 주소에 화면 하나 만들기</span><span class="zh">请求 — 在新地址做一个画面</span></span><button class="cp" onclick="copyCode(this)"><span class="ko">복사</span><span class="zh">复制</span></button></div><pre class="ko blk">app/hello/page.js에 작은 화면 하나를 만들어 줘. 다른 파일은 고치지 마.
+- 가운데에 큰 제목: 폴더가 곧 주소
+- 그 아래 글: 이 화면은 app/hello/page.js 파일에서 왔습니다.
+- 그 아래 버튼: 눌러 보기 — 누를 때마다 버튼 옆 숫자가 1씩 커진다(처음은 0).
+꾸밈은 간단하게, 모두 가운데 정렬로 해 줘.</pre><pre class="zh blk">请在 app/hello/page.js 做一个小画面。其他文件不要改。
+- 中间是大标题：<span class="keep-ko">폴더가 곧 주소</span>（文件夹就是地址）
+- 下面一行字：<span class="keep-ko">이 화면은 app/hello/page.js 파일에서 왔습니다.</span>（这个画面来自 app/hello/page.js 文件。）
+- 再下面一个按钮：<span class="keep-ko">눌러 보기</span>（按一下）— 每按一次，按钮旁边的数字加 1（一开始是 0）。
+装饰简单一点，全部居中。</pre></div>
+<div class="steps"><div class="st-h"><span class="ko">결과 보기</span><span class="zh">看结果</span></div><ol><li><span class="ko">「폴더가 곧 주소」 화면이 열리고, 「눌러 보기」를 누를 때마다 숫자가 커지면 된다. 옆 사람 화면도 같은지 본다.</span><span class="zh">打开“<b class="keep-ko">폴더가 곧 주소</b>”画面，每按一次“<b class="keep-ko">눌러 보기</b>”数字就变大就对了。看看旁边同学的画面是不是一样。</span></li></ol></div>
 </section>
 
-<section class="page" id="s11_2">
-<div class="kick"><span class="ko">10. 내 약속표</span><span class="zh">10. 我的约定表</span><b>10-1</b></div>
-<h2 class="title"><span class="ko">저장할 기록은 9회 계획에서 옮겨 온다</span><span class="zh">要保存的记录从第 9 次课的计划里搬过来</span> <span class="cont"><span class="ko">(이어서)</span><span class="zh">（续）</span></span></h2>
-<p class="lead"><span class="ko">같은 파일의 <b>3. 저장과 다시 보기</b>를 채웁니다. 무엇을 기억할지는 9-2에서 이미 정했습니다. <code>docs\09_development_plan.md</code>를 옆에 열고 3항 「기억할 기록과 표」와 2항 대표 흐름에서 옮겨 적습니다. 주소와 방법은 예시 「할 일 정리」처럼 짐작해서 적고, 10-2에서 AI의 제안과 맞춰 고칩니다.</span><span class="zh">填同一个文件里的 <b>3. <b class="keep-ko">저장과 다시 보기</b></b>（保存与再次查看）。要记住什么，9-2 已经定好了。把 <code>docs\09_development_plan.md</code> 在旁边打开，从第 3 项“<b class="keep-ko">기억할 기록과 표</b>”和第 2 项代表流程里照着搬过来。地址和方法像示例“<b class="keep-ko">할 일 정리</b>”那样先猜着写，到 10-2 再和 AI 的提议对照修改。</span></p>
-<div class="tablewrap"><table class="kv"><thead><tr><th style="width:26%"><span class="ko">3항의 칸</span><span class="zh">第 3 项的格</span></th><th style="width:36%"><span class="ko">어디서 옮기나</span><span class="zh">从哪里搬</span></th><th><span class="ko">예시 「할 일 정리」라면</span><span class="zh">示例“待办整理”的话</span></th></tr></thead><tbody><tr><td><span class="ko">저장할 핵심 기록</span><span class="zh">要保存的核心记录</span></td><td><span class="ko">3항의 기록</span><span class="zh">第 3 项的记录</span></td><td><span class="ko">사용자가 추가한 할 일</span><span class="zh">用户添加的待办</span></td></tr><tr><td><span class="ko">저장하는 요청</span><span class="zh">保存的请求</span></td><td><span class="ko">2항에서 기록이 생기는 단계의 버튼</span><span class="zh">第 2 项里产生记录那一步的按钮</span></td><td><span class="ko"><code>POST /api/tasks</code></span><span class="zh"><code>POST /api/tasks</code></span></td></tr><tr><td><span class="ko">다시 불러오는 요청</span><span class="zh">重新读取的请求</span></td><td><span class="ko">2항에서 기록을 다시 보는 단계</span><span class="zh">第 2 项里再次查看记录的那一步</span></td><td><span class="ko"><code>GET /api/tasks</code></span><span class="zh"><code>GET /api/tasks</code></span></td></tr><tr><td><span class="ko">표 이름과 열</span><span class="zh">表名和列</span></td><td><span class="ko">3항의 표 이름과 열</span><span class="zh">第 3 项的表名和列</span></td><td><span class="ko"><code>tasks</code> · id · text · created_at</span><span class="zh"><code>tasks</code> · id · text · created_at</span></td></tr><tr><td><span class="ko">화면에서 다시 보는 곳</span><span class="zh">画面上再次查看的地方</span></td><td><span class="ko">2항에서 기록을 다시 보는 단계의 화면</span><span class="zh">第 2 项里再次查看记录那一步的画面</span></td><td><span class="ko">입력칸 아래 목록</span><span class="zh">输入框下面的列表</span></td></tr></tbody></table></div>
-<div class="note ok"><div class="nt"><span class="ko">2항과 4항은 10-2에서 채웁니다</span><span class="zh">第 2 项和第 4 项在 10-2 填</span></div><p><span class="ko">2항 「실행해 본 결과」와 4항 「세 번 확인」은 AI가 내 서비스를 연결한 뒤에 직접 해 보고 적는 칸입니다. 오늘은 비워 둡니다.</span><span class="zh">第 2 项“<b class="keep-ko">실행해 본 결과</b>”（运行结果）和第 4 项“<b class="keep-ko">세 번 확인</b>”（三次确认），是等 AI 接好自己的服务后亲自试过再写的格。今天先空着。</span></p></div>
+<section class="page" id="d1">
+<div class="kick"><span class="ko">5. 계획서 규칙</span><span class="zh">5. 计划书规则</span><b>10-1</b></div>
+<h2 class="title"><span class="ko">AGENTS.md에 「계획서에 먼저 쓴다」 규칙을 더한다</span><span class="zh">在 AGENTS.md 里加上“先写进计划书”的规则</span> <span class="badge lab"><span class="ko">실습</span><span class="zh">实践</span></span></h2>
+<p class="lead"><span class="ko">다음 시간부터 Codex가 내 프로젝트의 코드를 고칩니다. 9-2에서 계획을 문서로 남기면 지금 어디까지 왔는지, 무엇을 바꿨는지가 남는다고 했습니다. 그래서 Codex도 고치기 전에 계획서에 먼저 쓰게 합니다. 8-2에서 <code>AGENTS.md</code>에 규칙을 적었던 것처럼, 이 규칙을 내 <code>AGENTS.md</code>에 더합니다. 서비스를 켤 때와 그림을 만들 때의 약속도 함께 적어 두면 다음부터는 「서비스를 켜 줘」 · 「그림을 만들어 줘」만 보내면 됩니다. 보내기 전에 한 줄씩 읽습니다.</span><span class="zh">从下一课时起，Codex 要改自己项目的代码了。9-2 说过，把计划写成文档，就能留下现在走到哪里、改了什么。所以也让 Codex 改之前先写进计划书。就像 8-2 在 <code>AGENTS.md</code> 里写规则那样，把这条规则加进自己的 <code>AGENTS.md</code>。把启动服务和做图片时的约定也一起写上，以后只发“<b class="keep-ko">서비스를 켜 줘</b>”“<b class="keep-ko">그림을 만들어 줘</b>”就行。发之前一行一行读。</span></p>
+<div class="code"><div class="chd"><span class="fn"><span class="ko">요청 — AGENTS.md에 규칙 더하기</span><span class="zh">请求 — 在 AGENTS.md 里加规则</span></span><button class="cp" onclick="copyCode(this)"><span class="ko">복사</span><span class="zh">复制</span></button></div><pre class="ko blk">AGENTS.md 맨 아래에 아래 세 칸을 더해 줘. 위에 있는 내 규칙은 고치지 마.
+## 계획서에 먼저 쓴다
+- 코드나 화면을 고치는 일을 받으면 바로 고치지 않는다. docs/09_development_plan.md 「5. 개발 순서」 맨 아래에
+  「### &lt;회차&gt;회 작업 — &lt;이름&gt;」으로 요청 · 고칠 파일 · 바꿀 내용 · 확인 방법 · 상태(계획)를 쉬운 말로 적고 멈춘다.
+- 내가 「계획서대로 진행해」라고 하면 적힌 대로만 고치고, 상태를 「완료」로 바꾼다.
+- 내가 고쳐 적으라고 하면 그 작업 계획만 고치고 다시 멈춘다.
+- 서비스 방향이 바뀌는 일이면 고칠 파일에 docs/PRD.md도 넣는다.
+- 7항 「내가 바꾸거나 거절한 것」은 내가 직접 쓴다. 고치지 않는다.
+- 찾기 · 설명 · 질문은 계획서에 쓰지 않고 대화창에서 답한다.
+- 「되돌려 줘」는 바로 되돌리고, 상태를 「되돌림 — 이유」로 바꾼다.
+## 서비스 켜기
+- 서비스를 켜거나 다시 켤 때(npm run dev)는 샌드박스 밖에서 실행하도록 승인을 요청한다. 샌드박스 안에서 켜면 브라우저가 열리지 않는다.
+- 대화가 끝나도 꺼지지 않게 켜고, localhost:3000이 실제로 열리는지 확인한 뒤 알려 준다.
+## 그림 만들기
+- 서비스에 쓸 그림은 .env의 OPENAI_API_KEY로 OpenAI 이미지 생성(imagegen 스킬의 CLI 방식)을 써서 만든다. 키는 .env에서 읽어 그 명령에만 넣고, 화면 · 답 · 다른 파일에 키 값을 쓰지 않는다.</pre><pre class="zh blk">请在 AGENTS.md 最下面加上下面三部分。上面我自己的规则不要改。
+## 先写进计划书
+- 接到要改代码或画面的事，不要马上改。先在 docs/09_development_plan.md “5. 开发顺序”最下面，
+  用“### 第&lt;次&gt;次课作业 — &lt;名称&gt;”把请求 · 要改的文件 · 要改的内容 · 确认方法 · 状态（计划）用简单的话写好，然后停下。
+- 我说“照计划书进行”（<span class="keep-ko">계획서대로 진행해</span>）时，只按写好的改，并把状态改成“完成”。
+- 我让你改写时，只改那一条工作计划，然后再停下。
+- 会改变服务方向的事，要改的文件里也放上 docs/PRD.md。
+- 第 7 项“我改动或拒绝的”由我自己写。你不要改。
+- 查找 · 说明 · 提问不写进计划书，在对话框里回答。
+- “改回去”就马上改回去，并把状态改成“改回 — 理由”。
+## 启动服务
+- 启动或重启服务（npm run dev）时，请求批准在沙盒外运行。在沙盒里启动的话，浏览器打不开。
+- 启动后对话结束也不要关掉，确认 localhost:3000 真的能打开后再告诉我。
+## 做图片
+- 服务要用的图片，用 .env 里的 OPENAI_API_KEY 调 OpenAI 图片生成（imagegen 技能的 CLI 方式）来做。密钥从 .env 读出，只放进那条命令里，不要把密钥的值写到画面 · 回答 · 其他文件里。</pre></div>
+<div class="steps"><div class="st-h"><span class="ko">보낸 뒤 확인</span><span class="zh">发送后确认</span></div><ol><li><span class="ko"><code>AGENTS.md</code>를 열고 맨 아래에 <b>## 계획서에 먼저 쓴다</b> · <b>## 서비스 켜기</b> · <b>## 그림 만들기</b>가 생겼는지, 위에 있던 내 규칙이 그대로인지 본다.</span><span class="zh">打开 <code>AGENTS.md</code>，看最下面是否多了 <b>## <b class="keep-ko">계획서에 먼저 쓴다</b></b> · <b>## <b class="keep-ko">서비스 켜기</b></b> · <b>## <b class="keep-ko">그림 만들기</b></b>，上面自己的规则是否原样还在。</span></li></ol></div>
+</section>
+
+<section class="page" id="d1b">
+<div class="kick"><span class="ko">5. 계획서 규칙</span><span class="zh">5. 计划书规则</span><b>10-1</b></div>
+<h2 class="title"><span class="ko">첫 계획서 작업 — AI 기능을 진짜로 만들도록 계획을 고친다</span><span class="zh">第一个计划书任务 — 把计划改成真正做出 AI 功能</span> <span class="cont"><span class="ko">(이어서)</span><span class="zh">（续）</span></span></h2>
+<p class="lead"><span class="ko">9-2에서는 외부 AI를 쓰는 기능을 「수업에서는 흉내 낸다」로 정했습니다. 이제 각자 받은 키로 진짜 AI와 그림 만들기를 쓸 수 있으니 그 결정을 바꿉니다. 방금 더한 규칙대로 Codex는 계획서 5항 아래에 작업 계획을 먼저 쓰고 멈춥니다. 계획서를 <code>Ctrl+Shift+V</code>로 읽고, 맞으면 「계획서대로 진행해」를 보냅니다.</span><span class="zh">9-2 时把用外部 AI 的功能定成了“<b class="keep-ko">수업에서는 흉내 낸다</b>”（课上模拟）。现在每个人都能用拿到的密钥使用真正的 AI 和做图片，所以要改这个决定。按刚加的规则，Codex 会先在计划书第 5 项下面写工作计划，然后停下。用 <code>Ctrl+Shift+V</code> 读计划书，对了就发“<b class="keep-ko">계획서대로 진행해</b>”。</span></p>
+<div class="code"><div class="chd"><span class="fn"><span class="ko">요청 — 계획 고치기 · 계획서에 먼저</span><span class="zh">请求 — 修改计划 · 先写进计划书</span></span><button class="cp" onclick="copyCode(this)"><span class="ko">복사</span><span class="zh">复制</span></button></div><pre class="ko blk">9-2에서는 외부 AI를 쓰는 기능을 「수업에서는 흉내 낸다」로 정했어. 이제 .env의 키로 진짜 AI와 그림 만들기를 쓸 수 있어서, AI 기능도 수업에서 진짜로 만들기로 바뀌었어.
+docs/09_development_plan.md와 docs/PRD.md를 읽고, AI나 그림 만들기 때문에 「흉내 낸다」나 「13회 뒤 스스로」로 정한 기능을 찾아 줘.
+그 기능을 「수업에서 만든다」로 바꾸고 5항 개발 순서에서 언제 만들지 다시 정하는 일을, 작업 계획으로 계획서 5항 아래에 적고 멈춰 줘.
+- 10회의 핵심 흐름은 그대로 두고, AI 기능은 11회부터의 순서에 넣어 줘.
+- 고칠 파일에 docs/PRD.md도 넣어 줘. 7항은 고치지 마.
+- 그런 기능이 없으면 없다고만 알려 줘.</pre><pre class="zh blk">9-2 时把用外部 AI 的功能定成了“课上模拟”。现在能用 .env 里的密钥接上真正的 AI 和做图片了，所以 AI 功能也改成在课上真正做出来。
+请读 docs/09_development_plan.md 和 docs/PRD.md，找出因为 AI 或做图片而定成“课上模拟”或“第 13 次课后自己做”的功能。
+把这些功能改成“课上做”，并在第 5 项开发顺序里重新定什么时候做，把这件事作为工作计划写在计划书第 5 项下面，然后停下。
+- 第 10 次课的核心流程保持不变，AI 功能放进第 11 次课以后的顺序里。
+- 要改的文件里也放上 docs/PRD.md。第 7 项不要改。
+- 没有这样的功能，就只告诉我没有。</pre></div>
+<div class="steps"><div class="st-h"><span class="ko">진행한 뒤 확인</span><span class="zh">开始后确认</span></div><ol><li><span class="ko">계획서 1항에서 AI 기능이 「수업에서 만든다」로 바뀌고, 5항 개발 순서에 11회 이후로 들어갔는가?</span><span class="zh">计划书第 1 项里 AI 功能改成“<b class="keep-ko">수업에서 만든다</b>”（课上做）了吗？第 5 项开发顺序里放进第 11 次课以后了吗？</span></li><li><span class="ko"><code>PRD.md</code> 맨 아래 「바뀐 기록」에 한 줄이 남고, 이번 작업 계획의 상태가 「완료」인가?</span><span class="zh"><code>PRD.md</code> 最下面“<b class="keep-ko">바뀐 기록</b>”（修改记录）里留了一行，这次工作计划的状态是“完成”吗？</span></li></ol></div>
 </section>
 
 <section class="page" id="s13">
-<div class="kick"><span class="ko">11. 확인</span><span class="zh">11. 确认</span><b>10-1</b></div>
+<div class="kick"><span class="ko">6. 확인</span><span class="zh">6. 确认</span><b>10-1</b></div>
 <h2 class="title"><span class="ko">흔한 오해와 확인 문제</span><span class="zh">常见误解与确认题</span> <span class="badge core"><span class="ko">확인</span><span class="zh">确认</span></span></h2>
-<p class="lead"><span class="ko">오늘 배운 말을 정리합니다. 오해 두 가지를 먼저 읽고, 확인 문제에 답을 먼저 말한 뒤 해설을 엽니다. 막히는 문제가 있으면 그 절로 돌아가 다시 읽습니다.</span><span class="zh">整理一下今天学的说法。先读两个误解，再对确认题先说出答案，然后打开解析。答不上来的，就回到那一节再读一遍。</span></p>
-<div class="myth"><div class="m x"><div class="tag"><span class="ko">오해</span><span class="zh">误解</span></div><div class="txt"><span class="ko">“API는 다른 회사가 만든 서비스를 말한다.”</span><span class="zh">“API 指的是别家公司做的服务。”</span></div></div><div class="m o"><div class="tag"><span class="ko">사실</span><span class="zh">事实</span></div><div class="txt"><span class="ko">내 프로젝트 안의 화면과 기능 사이에도 API가 있습니다. 오늘 본 <code>/api/tasks</code>가 그렇습니다.</span><span class="zh">自己项目里画面和功能之间也有 API。今天看到的 <code>/api/tasks</code> 就是。</span></div></div><div class="m x"><div class="tag"><span class="ko">오해</span><span class="zh">误解</span></div><div class="txt"><span class="ko">“잘될 때만 응답하면 된다.”</span><span class="zh">“只在顺利时回答就行。”</span></div></div><div class="m o"><div class="tag"><span class="ko">사실</span><span class="zh">事实</span></div><div class="txt"><span class="ko">실패 응답이 없으면 사용자는 무엇이 잘못됐는지 모른 채 멈춥니다. 개발 계획 4항의 예외 흐름이 실패 응답으로 만들어집니다.</span><span class="zh">没有失败响应，用户就会不知道哪里出错而卡住。开发计划第 4 项的例外流程就是用失败响应做出来的。</span></div></div></div>
-<div class="quiz"><div class="q"><div class="qq"><span class="ko">요청에 담기는 세 가지는 무엇인가?</span><span class="zh">请求里装着哪三样？</span></div><details><summary><span class="ko">해설 보기</span><span class="zh">查看解析</span></summary><div class="a"><p><span class="ko"><b>어디로</b>(요청 주소), <b>어떻게</b>(GET 또는 POST), <b>무엇을</b>(함께 보내는 데이터)입니다.</span><span class="zh"><b>往哪里</b>（请求地址）、<b>怎么做</b>（GET 或 POST）、<b>送什么</b>（一起发送的数据）。</span></p></div></details></div><div class="q"><div class="qq"><span class="ko">입력한 할 일을 추가하는 요청은 GET과 POST 중 무엇인가?</span><span class="zh">添加输入的待办，用 GET 还是 POST？</span></div><details><summary><span class="ko">해설 보기</span><span class="zh">查看解析</span></summary><div class="a"><p><span class="ko"><b>POST</b>입니다. 사용자가 입력한 데이터를 보내 처리해 달라는 요청이기 때문입니다.</span><span class="zh"><b>POST</b>。因为这是发送用户输入的数据、请它处理的请求。</span></p></div></details></div><div class="q"><div class="qq"><span class="ko">서버를 껐다 켜도 할 일 목록이 남은 까닭은?</span><span class="zh">停掉服务器再打开，待办列表还在，原因是什么？</span></div><details><summary><span class="ko">해설 보기</span><span class="zh">查看解析</span></summary><div class="a"><p><span class="ko">할 일을 SQLite 파일 <code>data\app.db</code>에 <b>저장</b>해 두었고, 화면을 열 때 <code>GET</code>으로 그 파일에서 <b>다시 불러오기</b> 때문입니다.</span><span class="zh">因为待办<b>保存</b>在 SQLite 文件 <code>data\app.db</code> 里，打开画面时又用 <code>GET</code> 从那个文件<b>重新读取</b>。</span></p></div></details></div></div>
+<p class="lead"><span class="ko">오늘 한 일을 정리합니다. 오해 두 가지를 먼저 읽고, 확인 문제에 답을 먼저 말한 뒤 해설을 엽니다. 막히는 문제가 있으면 그 절로 돌아가 다시 읽습니다.</span><span class="zh">整理一下今天做的事。先读两个误解，再对确认题先说出答案，然后打开解析。答不上来的，就回到那一节再读一遍。</span></p>
+<div class="myth"><div class="m x"><div class="tag"><span class="ko">오해</span><span class="zh">误解</span></div><div class="txt"><span class="ko">“Next.js로 변환하면 목업을 새로 만들어야 한다.”</span><span class="zh">“转换成 Next.js 就得重做模型。”</span></div></div><div class="m o"><div class="tag"><span class="ko">사실</span><span class="zh">事实</span></div><div class="txt"><span class="ko">Codex가 목업을 <b>같은 모양</b>의 Next.js 화면으로 변환합니다. 원본은 <code>docs\mockup</code>에 그대로 있습니다. 앞으로 바뀌는 것은 화면 뒤에서 기록을 받고 남기는 부분입니다.</span><span class="zh">Codex 会把模型转换成<b>一模一样</b>的 Next.js 画面。原件原样留在 <code>docs\mockup</code>。以后要变的是画面背后接收、保存记录的部分。</span></div></div><div class="m x"><div class="tag"><span class="ko">오해</span><span class="zh">误解</span></div><div class="txt"><span class="ko">“키는 Codex에게 알려 주면 알아서 넣는다.”</span><span class="zh">“把密钥告诉 Codex，它会自己放好。”</span></div></div><div class="m o"><div class="tag"><span class="ko">사실</span><span class="zh">事实</span></div><div class="txt"><span class="ko">키는 여러분이 직접 Codex 로그인 칸과 <code>.env</code>에만 넣습니다. 대화창에 붙여 넣으면 기록에 남습니다.</span><span class="zh">密钥由大家自己只放进 Codex 登录框和 <code>.env</code>。贴到对话框里就会留在记录中。</span></div></div></div>
+<div class="quiz"><div class="q"><div class="qq"><span class="ko"><code>localhost:3000/hello</code> 화면은 어느 파일에서 왔나?</span><span class="zh"><code>localhost:3000/hello</code> 的画面来自哪个文件？</span></div><details><summary><span class="ko">해설 보기</span><span class="zh">查看解析</span></summary><div class="a"><p><span class="ko"><code>app\hello\page.js</code>입니다. 폴더 이름이 그대로 주소가 됩니다. 이것이 Next.js라는 프레임워크의 약속입니다.</span><span class="zh">是 <code>app\hello\page.js</code>。文件夹名字直接成了地址。这就是 Next.js 这个框架的约定。</span></p></div></details></div></div>
 </section>
 
 <section class="page" id="s14">
-<div class="kick"><span class="ko">12. 정리</span><span class="zh">12. 小结</span><b>10-1</b></div>
-<h2 class="title"><span class="ko">버튼 하나 뒤에 요청과 응답이 있다</span><span class="zh">一个按钮背后有请求与响应</span></h2>
-<p class="lead"><span class="ko">오늘은 13회까지 쓸 <code>10</code> 프로젝트를 받아 설치하고, 예시 「할 일 정리」로 요청과 응답이 오가고 기록이 SQLite 파일에 남는 것을 직접 봤습니다. 그리고 내 서비스의 핵심 행동과 저장할 기록을 <code>docs\10_api_promise.md</code>에 약속으로 적었습니다. 다음 차시에는 AI가 이 약속대로 내 서비스의 API와 저장을 연결합니다.</span><span class="zh">今天拿到并安装了用到第 13 次课的 <code>10</code> 项目，用示例“<b class="keep-ko">할 일 정리</b>”亲眼看到了请求与响应的来回，以及记录留在 SQLite 文件里。还把自己服务的核心动作和要保存的记录作为约定写进了 <code>docs\10_api_promise.md</code>。下一课时，AI 会照这个约定给自己的服务接上 API 和保存。</span></p>
-<div class="recap"><div class="rt"><span class="ko">이번 차시에서 남길 것</span><span class="zh">本课时要记住的</span></div><ul class="blist"><li><span class="ko">API는 화면과 기능이 부탁하고 답하는 <b>약속된 창구</b>다.</span><span class="zh">API 是画面和功能互相请求、答复的<b>约定好的窗口</b>。</span></li><li><span class="ko">요청에는 <b>어디로 · 어떻게 · 무엇을</b>이, 응답에는 <b>성공했는지와 보여 줄 결과</b>가 담긴다.</span><span class="zh">请求里有<b>往哪里 · 怎么做 · 送什么</b>，响应里有<b>是否成功和要显示的结果</b>。</span></li><li><span class="ko">실패 응답은 사용자가 <b>고쳐서 다시 할 방법</b>을 알려 준다.</span><span class="zh">失败响应要告诉用户<b>怎么改好再试</b>。</span></li><li><span class="ko">기록은 SQLite 파일 <code>data\app.db</code>에 <b>저장</b>하고 <code>GET</code>으로 <b>다시 불러와야</b> 다시 켜도 남는다. 표와 행은 SQLite Viewer로 본다.</span><span class="zh">记录要<b>保存</b>到 SQLite 文件 <code>data\app.db</code>，再用 <code>GET</code> <b>重新读取</b>，重新启动后才会还在。表和行用 SQLite Viewer 看。</span></li><li><span class="ko">서비스를 켜는 명령은 <code>npm run dev</code>, 멈추는 것은 <code>Ctrl+C</code>.</span><span class="zh">启动服务的命令是 <code>npm run dev</code>，停止用 <code>Ctrl+C</code>。</span></li></ul></div>
-<div class="bridge"><div class="bt"><span class="ko">다음 차시로</span><span class="zh">进入下一课时</span></div><p><span class="ko">다음 차시에는 OpenCode를 <b>plan 모드</b>로 바꿔 <code>docs</code>의 문서를 먼저 읽히고, 코드보다 <b>약속과 표를 먼저 설명</b>하게 합니다. 약속이 맞으면 <b>build 모드</b>로 바꿔 연결을 맡기고, 화면 · SQLite Viewer · 껐다 켜기의 세 번으로 직접 확인합니다.</span><span class="zh">下一课时，先把 OpenCode 切换到 <b>plan 模式</b>，让它读 <code>docs</code> 里的文档，<b>先讲约定和表</b>，而不是先写代码。约定对了，再切换到 <b>build 模式</b>让它去接上，然后用画面 · SQLite Viewer · 重新启动这三次亲自确认。</span></p><a class="next" href="../../10/textbook/10-2.html"><span class="ko">10-2. AI와 API·저장 연결하기 →</span><span class="zh">10-2. 与 AI 一起接上 API 与保存 →</span></a></div>
-<div class="lessonnav"><a href="../../09/textbook/09-2.html"><span class="d"><span class="ko">← 이전</span><span class="zh">← 上一课时</span></span><span class="t"><span class="ko">9-2. 현실적인 목표와 구체화</span><span class="zh">9-2. 现实的目标与具体化</span></span></a><a href="../../index.html"><span class="d"><span class="ko">목차</span><span class="zh">目录</span></span><span class="t"><span class="ko">전체 목차로</span><span class="zh">回到总目录</span></span></a><a href="../../10/textbook/10-2.html"><span class="d"><span class="ko">다음 →</span><span class="zh">下一课时 →</span></span><span class="t"><span class="ko">10-2. AI와 API·저장 연결하기</span><span class="zh">10-2. 与 AI 一起接上 API 与保存</span></span></a></div>
+<div class="kick"><span class="ko">7. 정리</span><span class="zh">7. 小结</span><b>10-1</b></div>
+<h2 class="title"><span class="ko">도구와 틀은 준비됐다 — 다음은 API로 기록을 남긴다</span><span class="zh">工具和框架都准备好了 — 接下来用 API 留下记录</span></h2>
+<p class="lead"><span class="ko">오늘은 Codex를 설치하고 프레임워크라는 약속을 본 뒤, 직접 읽고 보낸 변환 요청으로 6~9회에 만든 내 프로젝트를 Next.js 프로젝트로 변환했습니다. 바로 <code>.env</code>에 키를 넣고, 폴더가 곧 주소가 되는 것을 직접 보고, <code>AGENTS.md</code>에 계획서 규칙을 더한 뒤, 그 규칙대로 AI 기능을 진짜로 만들도록 계획을 고쳤습니다. 다음 시간에 쓸 SQLite Viewer도 설치해 두었습니다.</span><span class="zh">今天装好了 Codex，看了框架这个约定，再用自己读过才发的转换请求，把第 6~9 次课做的自己的项目转换成了 Next.js 项目。马上把密钥写进 <code>.env</code>，亲眼看了文件夹就是地址，在 <code>AGENTS.md</code> 里加上了计划书规则，再按这条规则把计划改成真正做出 AI 功能。还装好了下一课时要用的 SQLite Viewer。</span></p>
+<div class="recap"><div class="rt"><span class="ko">이번 차시에서 남길 것</span><span class="zh">本课时要记住的</span></div><ul class="blist"><li><span class="ko">13회까지 이 프로젝트 폴더에서 만든다. 서비스는 Codex에게 「서비스를 켜 줘」(샌드박스 밖 승인은 이때만), 안 되면 터미널에서 <code>npm run dev</code>.</span><span class="zh">到第 13 次课都在这个项目文件夹里做。服务请 Codex“<b class="keep-ko">서비스를 켜 줘</b>”（沙盒外批准只在这时），不行就在终端里输入 <code>npm run dev</code>。</span></li><li><span class="ko">Codex는 계획서 5항에 <b>작업 계획</b>을 먼저 쓰게 하고, 읽고 맞으면 「계획서대로 진행해」.</span><span class="zh">让 Codex 先在计划书第 5 项写<b>工作计划</b>，读过觉得对再发“<b class="keep-ko">계획서대로 진행해</b>”。</span></li><li><span class="ko">내 문서는 <code>docs</code>, 대화 기록은 <code>chat-logs</code>. 방향이 바뀌면 PRD도 고치게 한다.</span><span class="zh">自己的文档放 <code>docs</code>，对话记录放 <code>chat-logs</code>。方向变了就让它也改 PRD。</span></li><li><span class="ko">키는 Codex 로그인과 <code>.env</code> 두 곳에만 둔다.</span><span class="zh">密钥只放在 Codex 登录和 <code>.env</code> 两处。</span></li></ul></div>
+<div class="bridge"><div class="bt"><span class="ko">다음 차시로</span><span class="zh">进入下一课时</span></div><p><span class="ko">다음 차시에는 <b>API</b>라는 창구를 배우고, Codex에게 내 서비스가 기억할 <b>표</b>를 만들게 한 뒤, 내 버튼 하나가 그 창구로 표에 기록을 남기게 합니다. 그리고 오늘 설치한 <b>SQLite Viewer</b>로 표 안에 행이 생기는 것을 직접 봅니다.</span><span class="zh">下一课时学习 <b>API</b> 这个窗口，让 Codex 建好自己服务要记住的<b>表</b>，再让自己的一个按钮通过这个窗口把记录留进表里。然后用今天装好的 <b>SQLite Viewer</b> 亲眼看表里多出的行。</span></p><a class="next" href="../../10/textbook/10-2.html"><span class="ko">10-2. API와 DB 연결하기 →</span><span class="zh">10-2. 连接 API 与数据库 →</span></a></div>
+<div class="lessonnav"><a href="../../09/textbook/09-2.html"><span class="d"><span class="ko">← 이전</span><span class="zh">← 上一课时</span></span><span class="t"><span class="ko">9-2. 현실적인 목표와 구체화</span><span class="zh">9-2. 现实的目标与具体化</span></span></a><a href="../../index.html"><span class="d"><span class="ko">목차</span><span class="zh">目录</span></span><span class="t"><span class="ko">전체 목차로</span><span class="zh">回到总目录</span></span></a><a href="../../10/textbook/10-2.html"><span class="d"><span class="ko">다음 →</span><span class="zh">下一课时 →</span></span><span class="t"><span class="ko">10-2. API와 DB 연결하기</span><span class="zh">10-2. 连接 API 与数据库</span></span></a></div>
 </section>
 
 <section class="page" id="s15">
 <div class="kick"><span class="ko">부록 · 막힐 때</span><span class="zh">附录 · 卡住时</span><b>10-1</b></div>
 <h2 class="title"><span class="ko">이럴 때는 이렇게 한다</span><span class="zh">遇到这些情况就这样做</span> <span class="badge ext"><span class="ko">필요할 때</span><span class="zh">需要时</span></span></h2>
-<p class="lead"><span class="ko">오늘 막히는 자리는 대개 설치와 실행, 확장 설치입니다. 터미널에 나온 마지막 몇 줄을 읽고, 내 상황과 같은 줄을 찾아 오른쪽대로 해 봅니다. 그래도 안 되면 터미널 화면을 그대로 둔 채 손을 듭니다.</span><span class="zh">今天卡住的地方，大多在安装、运行和安装扩展上。读终端最后几行，找到和自己情况一样的那行，照右边做。还不行，就保持终端画面不动，举手。</span></p>
-<div class="trouble"><div class="th"><span class="ko">이런 상황이라면</span><span class="zh">如果是这些情况</span></div><table><tr><td><span class="ko"><code>npm</code>을 찾을 수 없다고 나온다</span><span class="zh">提示找不到 <code>npm</code></span></td><td><span class="ko">2-1에서 설치한 Node.js가 없는 것입니다. PowerShell에 <code>node --version</code>을 입력해 숫자가 나오는지 보고, 안 나오면 손을 듭니다.</span><span class="zh">是 2-1 安装的 Node.js 没有了。在 PowerShell 输入 <code>node --version</code>，看有没有数字，没有就举手。</span></td></tr><tr><td><span class="ko"><code>npm install</code>이 오래 멈춰 있다</span><span class="zh"><code>npm install</code> 停了很久</span></td><td><span class="ko">교실 인터넷이 느린 것입니다. 5분까지는 기다립니다. 그동안 교과서를 읽습니다.</span><span class="zh">是教室网络慢。等到 5 分钟。这段时间读课本。</span></td></tr><tr><td><span class="ko"><code>npm run dev</code>에서 <code>Missing script</code>가 나온다</span><span class="zh"><code>npm run dev</code> 出现 <code>Missing script</code></span></td><td><span class="ko">터미널이 <code>10</code> 폴더가 아닌 곳에 있습니다. 줄 끝이 <code>…\10&gt;</code>인지 보고, 아니면 <b>파일 → 폴더 열기</b>로 <code>10</code>을 다시 엽니다.</span><span class="zh">终端不在 <code>10</code> 文件夹里。看行末是不是 <code>…\10&gt;</code>，不是的话就用 <b class="keep-ko">파일 → 폴더 열기</b> 重新打开 <code>10</code>。</span></td></tr><tr><td><span class="ko"><code>Port 3000 is in use</code>가 나온다</span><span class="zh">出现 <code>Port 3000 is in use</code></span></td><td><span class="ko">다른 터미널에서 이미 켜져 있습니다. 그 터미널에서 <code>Ctrl+C</code>로 멈추거나, 나온 주소(예: <code>localhost:3001</code>)로 엽니다.</span><span class="zh">另一个终端里已经开着了。在那个终端按 <code>Ctrl+C</code> 停掉，或者打开提示的地址（例：<code>localhost:3001</code>）。</span></td></tr><tr><td><span class="ko"><code>data</code> 폴더에 <code>app.db</code>가 없다</span><span class="zh"><code>data</code> 文件夹里没有 <code>app.db</code></span></td><td><span class="ko">예시에서 할 일을 하나 추가한 뒤 탐색기 위쪽의 새로 고침 단추를 누릅니다. 그래도 없으면 터미널 화면을 그대로 두고 손을 듭니다.</span><span class="zh">在示例里添加一条待办，再点资源管理器上方的刷新按钮。还是没有，就保持终端画面不动，举手。</span></td></tr><tr><td><span class="ko">확장 검색에 SQLite Viewer가 여러 개 나온다</span><span class="zh">扩展搜索出现好几个 SQLite Viewer</span></td><td><span class="ko">하나씩 눌러 설명 화면의 확장 ID를 봅니다. <code>qwtel.sqlite-viewer</code>만 설치합니다. 다른 것을 이미 설치했다면 그 확장의 <b>제거</b>(Uninstall)를 누릅니다.</span><span class="zh">逐个点开，看说明画面里的扩展 ID。只安装 <code>qwtel.sqlite-viewer</code>。已经装了别的，就点那个扩展的 <b class="keep-ko">제거</b>（Uninstall，卸载）。</span></td></tr><tr><td><span class="ko">브라우저에 「사이트에 연결할 수 없음」이 나온다</span><span class="zh">浏览器显示“无法访问此网站”</span></td><td><span class="ko">서비스가 꺼져 있습니다. 터미널에 <code>Ready</code>가 보이는지 확인하고, 없으면 <code>npm run dev</code>를 다시 입력합니다.</span><span class="zh">服务没开着。确认终端里有没有 <code>Ready</code>，没有就重新输入 <code>npm run dev</code>。</span></td></tr></table></div>
+<p class="lead"><span class="ko">오늘 막히는 자리는 대개 프로젝트 변환, 설치와 실행, 확장 설치입니다. 터미널에 나온 마지막 몇 줄을 읽고, 내 상황과 같은 줄을 찾아 오른쪽대로 해 봅니다. 그래도 안 되면 터미널 화면을 그대로 둔 채 손을 듭니다.</span><span class="zh">今天卡住的地方，大多在转换项目、安装、运行和安装扩展上。读终端最后几行，找到和自己情况一样的那行，照右边做。还不行，就保持终端画面不动，举手。</span></p>
+<div class="trouble"><div class="th"><span class="ko">이런 상황이라면</span><span class="zh">如果是这些情况</span></div><table><tr><td><span class="ko">변환한 화면이 목업과 다르게 보이거나 버튼이 목업처럼 움직이지 않는다</span><span class="zh">转换后的画面和模型看起来不一样，或按钮不像模型那样动</span></td><td><span class="ko">다른 곳을 하나씩 짚어 보냅니다. 「___이 목업과 달라. docs/mockup의 원본처럼 고쳐 줘」. 한 번에 하나씩 고치고 다시 봅니다.</span><span class="zh">把不一样的地方一个个指出来发：“<b class="keep-ko">___이 목업과 달라. docs/mockup의 원본처럼 고쳐 줘</b>”（___和模型不一样，照 docs/mockup 原件改）。一次改一处，再看。</span></td></tr><tr><td><span class="ko"><code>npm</code>을 찾을 수 없다고 나온다</span><span class="zh">提示找不到 <code>npm</code></span></td><td><span class="ko">2-1에서 설치한 Node.js가 없는 것입니다. PowerShell에 <code>node --version</code>을 입력해 숫자가 나오는지 보고, 안 나오면 손을 듭니다.</span><span class="zh">是 2-1 安装的 Node.js 没有了。在 PowerShell 输入 <code>node --version</code>，看有没有数字，没有就举手。</span></td></tr><tr><td><span class="ko"><code>npm install</code>이 오래 멈춰 있다</span><span class="zh"><code>npm install</code> 停了很久</span></td><td><span class="ko">교실 인터넷이 느린 것입니다. 5분까지는 기다립니다. 그동안 교과서를 읽습니다.</span><span class="zh">是教室网络慢。等到 5 分钟。这段时间读课本。</span></td></tr><tr><td><span class="ko"><code>npm run dev</code>에서 <code>Missing script</code>가 나온다</span><span class="zh"><code>npm run dev</code> 出现 <code>Missing script</code></span></td><td><span class="ko">터미널이 내 프로젝트 폴더가 아닌 곳에 있습니다. VS Code에서 연 폴더가 평소 작업하던 폴더인지 보고, 아니면 <b>파일 → 폴더 열기</b>로 다시 엽니다.</span><span class="zh">终端不在自己的项目文件夹里。看 VS Code 打开的是不是平时做的文件夹，不是的话就用 <b class="keep-ko">파일 → 폴더 열기</b> 重新打开。</span></td></tr><tr><td><span class="ko"><code>Port 3000 is in use</code>가 나온다</span><span class="zh">出现 <code>Port 3000 is in use</code></span></td><td><span class="ko">다른 터미널에서 이미 켜져 있습니다. 그 터미널에서 <code>Ctrl+C</code>로 멈추거나, 나온 주소(예: <code>localhost:3001</code>)로 엽니다.</span><span class="zh">另一个终端里已经开着了。在那个终端按 <code>Ctrl+C</code> 停掉，或者打开提示的地址（例：<code>localhost:3001</code>）。</span></td></tr><tr><td><span class="ko">확장 검색에 SQLite Viewer가 여러 개 나온다</span><span class="zh">扩展搜索出现好几个 SQLite Viewer</span></td><td><span class="ko">하나씩 눌러 설명 화면의 확장 ID를 봅니다. <code>qwtel.sqlite-viewer</code>만 설치합니다. 다른 것을 이미 설치했다면 그 확장의 <b>제거</b>(Uninstall)를 누릅니다.</span><span class="zh">逐个点开，看说明画面里的扩展 ID。只安装 <code>qwtel.sqlite-viewer</code>。已经装了别的，就点那个扩展的 <b class="keep-ko">제거</b>（Uninstall，卸载）。</span></td></tr><tr><td><span class="ko">브라우저에 「사이트에 연결할 수 없음」이 나온다</span><span class="zh">浏览器显示“无法访问此网站”</span></td><td><span class="ko">서비스가 꺼져 있습니다. Codex에 「서비스를 켜 줘」를 보내고, 그래도 안 되면 터미널에서 <code>npm run dev</code>를 직접 입력해 <code>Ready</code>를 기다립니다.</span><span class="zh">服务没开着。给 Codex 发“<b class="keep-ko">서비스를 켜 줘</b>”（启动服务），还不行就在终端里自己输入 <code>npm run dev</code>，等 <code>Ready</code> 出现。</span></td></tr></table></div>
+</section>
+
+<section class="page" id="s15_2">
+<div class="kick"><span class="ko">부록 · 막힐 때</span><span class="zh">附录 · 卡住时</span><b>10-1</b></div>
+<h2 class="title"><span class="ko">Codex에서 막힐 때</span><span class="zh">在 Codex 里卡住时</span> <span class="cont"><span class="ko">(이어서)</span><span class="zh">（续）</span></span></h2>
+<p class="lead"><span class="ko">Codex 창에서 막히면 내 PC를 고치려 하지 말고, 아래에서 같은 줄을 찾아 오른쪽대로 합니다. 키나 결제와 관계된 것은 선생님만 고칠 수 있습니다.</span><span class="zh">在 Codex 窗口里卡住时，不要自己去修电脑，在下面找到一样的那行，照右边做。和密钥、付款有关的，只有老师能处理。</span></p>
+<div class="trouble"><div class="th"><span class="ko">이런 상황이라면</span><span class="zh">如果是这些情况</span></div><table><tr><td><span class="ko">Codex가 「이미 변환된 프로젝트」라며 멈춘다</span><span class="zh">Codex 说“已经是转换过的项目”而停下</span></td><td><span class="ko"><code>package.json</code>이 이미 있는 것입니다. 아무것도 지우지 말고 손을 듭니다. 선생님이 함께 봅니다.</span><span class="zh">是已经有 <code>package.json</code> 了。什么都别删，举手。老师会一起看。</span></td></tr><tr><td><span class="ko"><code>localhost:3000</code>에 내 목업이 아니라 Next.js 기본 화면이 나온다</span><span class="zh"><code>localhost:3000</code> 出现的是 Next.js 默认画面而不是自己的模型</span></td><td><span class="ko">목업 변환이 덜 된 것입니다. Codex에 「docs/mockup의 첫 화면을 같은 모양의 Next.js 화면으로 변환해서 localhost:3000에 나오게 해 줘」를 보냅니다.</span><span class="zh">是模型还没转换好。给 Codex 发“<b class="keep-ko">docs/mockup의 첫 화면을 같은 모양의 Next.js 화면으로 변환해서 localhost:3000에 나오게 해 줘</b>”。</span></td></tr><tr><td><span class="ko">설치했는데 Codex 아이콘이 안 보인다</span><span class="zh">装好了却看不到 Codex 图标</span></td><td><span class="ko">왼쪽 활동 막대가 아니라 편집기 창 <b>오른쪽 위</b>에 있습니다. 그래도 없으면 <code>Ctrl+Shift+P</code>를 누르고 <code>Codex: Open Codex Sidebar</code>를 고릅니다. 오른쪽 창에 「채팅」이 보이면 옆의 <b>Codex</b> 탭을 누릅니다.</span><span class="zh">它不在左侧活动栏，而在编辑器窗口<b>右上角</b>。还是没有，就按 <code>Ctrl+Shift+P</code>，选 <code>Codex: Open Codex Sidebar</code>。右侧窗口显示“<b class="keep-ko">채팅</b>”的话，点旁边的 <b>Codex</b> 标签。</span></td></tr><tr><td><span class="ko">Codex 로그인에서 키가 틀렸다고 나온다</span><span class="zh">Codex 登录时提示密钥不对</span></td><td><span class="ko">앞뒤에 빈칸이 붙었거나 일부만 복사된 것입니다. 받은 키를 처음부터 끝까지 다시 복사해 붙여 넣습니다. 그래도 안 되면 손을 듭니다.</span><span class="zh">是前后带了空格，或者只复制了一部分。把拿到的密钥从头到尾重新复制粘贴。还不行就举手。</span></td></tr><tr><td><span class="ko">「Windows 설정을 마치세요」 카드가 계속 남아 있다</span><span class="zh">“请完成 Windows 设置”卡片一直不消失</span></td><td><span class="ko">Windows 설정이 끝나지 않은 것입니다. 카드의 <b>계속</b> 또는 <b>설정 재시도</b>를 누르고, 「사용자 계정 컨트롤」 창에서 <b>예</b>를 누릅니다. 관리자 암호를 물으면 손을 들고, <b>관리자 액세스 없이 계속</b>이 보이면 그것을 누릅니다.</span><span class="zh">是 Windows 设置还没完成。点卡片上的 <b class="keep-ko">계속</b> 或 <b class="keep-ko">설정 재시도</b>（重试设置），在“<b class="keep-ko">사용자 계정 컨트롤</b>”窗口点 <b class="keep-ko">예</b>。要求管理员密码就举手；出现 <b class="keep-ko">관리자 액세스 없이 계속</b> 就点它。</span></td></tr><tr><td><span class="ko">Codex가 「한도」나 「결제」 때문에 멈췄다고 한다</span><span class="zh">Codex 说因为“额度”或“付款”停下了</span></td><td><span class="ko">내 잘못이 아닙니다. 화면을 그대로 두고 손을 듭니다. 선생님이 키를 확인합니다.</span><span class="zh">不是自己的错。保持画面不动，举手。老师会检查密钥。</span></td></tr></table></div>
 </section>
 
 </main>

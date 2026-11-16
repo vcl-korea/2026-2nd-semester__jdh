@@ -179,8 +179,8 @@
     '<div class="toc-part"><span class="ko">4부 · AI와 서비스 개발</span><span class="zh">第 4 部 · 与 AI 开发服务</span></div>',
     courseLink('../../09/textbook/09-1.html', '09-1', '만들기 전에 점검하기', '动手之前先检查'),
     courseLink('../../09/textbook/09-2.html', '09-2', '현실적인 목표와 구체화', '现实的目标与具体化'),
-    courseLink('../../10/textbook/10-1.html', '10-1', 'API와 요청·응답, 그리고 저장', 'API、请求·响应与保存'),
-    courseLink('../../10/textbook/10-2.html', '10-2', 'AI와 API·저장 연결하기', '与 AI 一起接上 API 与保存'),
+    courseLink('../../10/textbook/10-1.html', '10-1', '프레임워크란?', '什么是框架？'),
+    courseLink('../../10/textbook/10-2.html', '10-2', 'API와 DB 연결하기', '连接 API 与数据库'),
     courseLink('../../11/textbook/11.html', '11', '서비스 개발하기', '开发服务'),
     courseLink('../../12/textbook/12-1.html', '12-1', '사용자 흐름으로 서비스 테스트하기', '按用户流程测试服务'),
     courseLink('../../12/textbook/12-2.html', '12-2', '사용자 흐름 테스트와 시험 제출', '用户流程测试与考试提交'),
@@ -258,7 +258,8 @@
     var lang = document.body.classList.contains('lang-zh') ? 'zh' : 'ko';
     var pre = card ? (card.querySelector('pre.' + lang) || card.querySelector('pre')) : null;
     if (!pre) return;
-    var text = pre.innerText;
+    // 접힌 긴 글(.fold)은 innerText가 빈 글이 되므로 textContent로 복사한다
+    var text = pre.closest('details.fold') ? pre.textContent : pre.innerText;
     var done = function () {
       if (!btn.dataset.origHtml) btn.dataset.origHtml = btn.innerHTML;
       btn.textContent = lang === 'zh' ? '已复制' : '복사됨';
@@ -432,7 +433,7 @@
     // 인쇄할 때는 확인 문제 해설을 모두 펼친다 (인쇄본은 접을 수 없으므로)
     var reopened = [];
     window.addEventListener('beforeprint', function () {
-      reopened = $$('details:not([open])');
+      reopened = $$('details:not([open]):not(.fold)');  // 긴 복사 글(.fold)은 인쇄에서도 접어 둔다
       reopened.forEach(function (d) { d.open = true; });
     });
     window.addEventListener('afterprint', function () {

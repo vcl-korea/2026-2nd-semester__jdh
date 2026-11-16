@@ -487,6 +487,10 @@ ol.nlist li{font-size:18px; line-height:1.6; color:var(--ink-2); margin:7px 0 0}
 .code .cp:hover{background:var(--vcl-orange); color:#fff; border-color:var(--vcl-orange)}
 .code pre{margin:0; padding:14px 17px; font-family:var(--mono); font-size:15.5px; line-height:1.68; overflow-x:auto; white-space:pre; color:var(--ink)}
 .code pre code{white-space:pre-wrap; word-break:break-word; background:none; border:0; padding:0; font-size:inherit; color:inherit; border-radius:0}
+/* 아주 긴 복사 글은 접어 둔다 — 복사 단추는 접힌 채로 전체를 복사한다(2026-11-16 10-1 준비 AGENTS.md) */
+.code details.fold > summary{padding:12px 17px; cursor:pointer; font-size:14.5px; line-height:1.6; color:var(--muted)}
+.code details.fold[open] > pre{max-height:420px; overflow:auto; border-top:1px solid var(--line)}
+@media print{.code details.fold > pre.blk{display:none !important}}
 .code.term{background:var(--vcl-carbon); border-color:var(--vcl-carbon)}
 .code.term .chd{background:var(--vcl-carbon); border-bottom-color:#33373D}
 .code.term .fn{color:#8A8F98}
